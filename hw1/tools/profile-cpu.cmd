@@ -1,5 +1,8 @@
 @echo off
 setlocal
-echo CPU profiling placeholder.
-echo Use: dotnet-trace collect --project benchmarks\Hw1.Benchmarks\Hw1.Benchmarks.csproj
+if "%~1"=="" (
+  echo Usage: tools\profile-cpu.cmd ^<pid^>
+  exit /B 1
+)
+dotnet-trace collect --process-id %1 --format Speedscope --output report\artifacts\cpu-trace.nettrace
 endlocal

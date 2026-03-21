@@ -11,7 +11,9 @@
 - Perfect hash API includes only `Build` and `TryGet`.
 - Implemented text MinHash + LSH index with `BuildIndex`, `AddDocument`, candidate lookup, and full-scan baseline.
 - Added randomized and deterministic functional tests for all three algorithms.
+- Added BenchmarkDotNet suite for all algorithms with baseline comparisons and shuffled keys each iteration.
+- Added profiling scripts for CPU (`dotnet-trace`) and memory (`dotnet-gcdump`).
 
 ## Next
-- Add baseline benchmarks and profiling scripts.
-- Run full test suite on .NET 10 SDK environment.
+- Run test and benchmark suites on machine with .NET 10 SDK installed.
+- Export benchmark tables/graphs into `report/artifacts`.

@@ -10,3 +10,5 @@
 `make build`
 `make test`
 `make bench`
+`make bench-collect`
+`make report`
