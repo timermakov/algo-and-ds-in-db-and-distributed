@@ -1,4 +1,3 @@
-using FsCheck;
 using FsCheck.Xunit;
 using Hw1.Algorithms.FileHashing;
 
@@ -7,12 +6,12 @@ namespace Hw1.Algorithms.Tests;
 public sealed class FileBucketHashTableTests
 {
     [Property(MaxTest = 40)]
-    public Property InsertAndTryGetRandomKeys(NonEmptyArray<ulong> keys)
+    public bool InsertAndTryGetRandomKeys(ulong[] keys)
     {
-        var uniqueKeys = keys.Get.Distinct().Take(200).ToArray();
+        var uniqueKeys = keys.Distinct().Take(200).ToArray();
         if (uniqueKeys.Length == 0)
         {
-            return true.ToProperty();
+            return true;
         }
 
         var path = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}.bin");
@@ -30,11 +29,11 @@ public sealed class FileBucketHashTableTests
         {
             if (!table.TryGet(pair.Key, out var actual) || actual != pair.Value)
             {
-                return false.ToProperty();
+                return false;
             }
         }
 
-        return true.ToProperty();
+        return true;
     }
 
     [Fact]

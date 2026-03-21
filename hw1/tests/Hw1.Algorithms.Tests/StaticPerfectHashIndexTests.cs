@@ -1,4 +1,3 @@
-using FsCheck;
 using FsCheck.Xunit;
 using Hw1.Algorithms.PerfectHashing;
 
@@ -7,9 +6,9 @@ namespace Hw1.Algorithms.Tests;
 public sealed class StaticPerfectHashIndexTests
 {
     [Property(MaxTest = 40)]
-    public Property BuildAndLookupRandomEntries(NonEmptyArray<int> values)
+    public bool BuildAndLookupRandomEntries(int[] values)
     {
-        var data = values.Get
+        var data = values
             .Select((value, idx) => new KeyValuePair<string, long>($"key-{idx}-{Math.Abs(value)}", value))
             .DistinctBy(x => x.Key)
             .Take(500)
@@ -17,7 +16,7 @@ public sealed class StaticPerfectHashIndexTests
 
         if (data.Length == 0)
         {
-            return true.ToProperty();
+            return true;
         }
 
         var index = StaticPerfectHashIndex.Build(data);
@@ -25,11 +24,11 @@ public sealed class StaticPerfectHashIndexTests
         {
             if (!index.TryGet(pair.Key, out var actual) || actual != pair.Value)
             {
-                return false.ToProperty();
+                return false;
             }
         }
 
-        return true.ToProperty();
+        return true;
     }
 
     [Fact]

@@ -1,21 +1,26 @@
 SOLUTION=Hw1.sln
+DOTNET=dotnet
+
+ifeq ($(wildcard .dotnet/dotnet.exe),.dotnet/dotnet.exe)
+DOTNET=.\\.dotnet\\dotnet.exe
+endif
 
 .PHONY: check-sdk restore build test bench bench-collect profile-cpu profile-memory report clean
 
 check-sdk:
-	@cmd /C "dotnet --version | findstr /R \"^10\\.\" >NUL || (echo .NET 10 SDK required && exit /B 1)"
+	@powershell -NoProfile -Command "$$v = & '$(DOTNET)' --version; if ($$v -notmatch '^10\.') { Write-Host '.NET 10 SDK required'; exit 1 }"
 
 restore: check-sdk
-	@dotnet restore $(SOLUTION)
+	@$(DOTNET) restore $(SOLUTION)
 
 build: check-sdk
-	@dotnet build $(SOLUTION) -c Release
+	@$(DOTNET) build $(SOLUTION) -c Release
 
 test: check-sdk
-	@dotnet test $(SOLUTION) -c Release
+	@$(DOTNET) test $(SOLUTION) -c Release
 
 bench: check-sdk
-	@dotnet run --project benchmarks/Hw1.Benchmarks/Hw1.Benchmarks.csproj -c Release --
+	@$(DOTNET) run --project benchmarks/Hw1.Benchmarks/Hw1.Benchmarks.csproj -c Release --
 
 bench-collect: check-sdk
 	@cmd /C "tools\\collect-bench.cmd"
@@ -31,4 +36,4 @@ report:
 	@cmd /C "echo Report artifacts dir: report\\artifacts"
 
 clean:
-	@dotnet clean $(SOLUTION)
+	@$(DOTNET) clean $(SOLUTION)
