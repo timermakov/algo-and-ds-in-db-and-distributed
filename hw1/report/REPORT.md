@@ -7,8 +7,10 @@
 - Added concise `README.md` with assignment parts and run instructions.
 - Implemented file-based hash table with fixed buckets on `MemoryMappedFile`.
 - Added API operations: `Insert`, `Update`, `Delete`, `TryGet`, plus bucket warmup.
+- Implemented static perfect hash index with two-level collision-free construction.
+- Perfect hash API includes only `Build` and `TryGet`.
 
 ## Next
 - Add randomized functional tests for file-based table.
-- Implement static perfect hash index.
+- Implement MinHash + LSH index for text duplicates.
 - Add baseline benchmarks and profiling scripts.
