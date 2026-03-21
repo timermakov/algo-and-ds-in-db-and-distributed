@@ -9,8 +9,8 @@
 - Added API operations: `Insert`, `Update`, `Delete`, `TryGet`, plus bucket warmup.
 - Implemented static perfect hash index with two-level collision-free construction.
 - Perfect hash API includes only `Build` and `TryGet`.
+- Implemented text MinHash + LSH index with `BuildIndex`, `AddDocument`, candidate lookup, and full-scan baseline.
 
 ## Next
-- Add randomized functional tests for file-based table.
-- Implement MinHash + LSH index for text duplicates.
+- Add randomized functional tests across all three algorithms.
 - Add baseline benchmarks and profiling scripts.
