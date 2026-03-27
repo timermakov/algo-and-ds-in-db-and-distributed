@@ -12,3 +12,17 @@
 `make bench`
 `make bench-collect`
 `make report`
+
+## Бенчмаркинг
+Бенчмарки настроены через `StableBenchmarkConfig` в проекте `benchmarks/Hw1.Benchmarks`.
+Текущая конфигурация использует `LaunchCount=1`, `WarmupCount=15`, `IterationCount=40`.
+Внутри benchmark-методов применяются батчи операций (`OperationsPerInvoke`), чтобы снизить шум таймера и накладных расходов инфраструктуры.
+Для каждого benchmark-класса используется 10 логарифмических значений `N`.
+После `make bench-collect` формируется `report/artifacts/benchmark_quality.md` с фактическими значениями `Mean`, `StdDev` и `CV` по всем точкам.
+
+## Профайлинг
+CPU-трассировка `make profile-cpu PID=<pid>`.
+дамп managed-кучи `make profile-memory PID=<pid>`.
+async-профилирование `make profile-async PID=<pid>` с сохранением `async-counters.csv` и `async-trace.nettrace`.
+flame graph `make profile-flamegraph PID=<pid>`, после чего `report/artifacts/cpu-flamegraph.speedscope.json` в [speedscope](https://www.speedscope.app).
+Для полного набора артефактов `make profile-all PID=<pid>`.

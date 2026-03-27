@@ -1,14 +1,15 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 using Hw1.Algorithms.Lsh;
 
 namespace Hw1.Benchmarks;
 
-[MemoryDiagnoser]
-[SimpleJob(warmupCount: 5, iterationCount: 20)]
+[Config(typeof(StableBenchmarkConfig))]
 public class TextLshBenchmarks
 {
-    [Params(1_000, 10_000)]
+    private const int LshOperationsPerInvoke = 1_536;
+    private const int FullScanOperationsPerInvoke = 1_024;
+
+    [Params(1_000, 1_292, 1_668, 2_154, 2_783, 3_594, 4_641, 5_995, 7_743, 10_000)]
     public int N;
 
     private TextLshIndex _index = null!;
@@ -21,28 +22,40 @@ public class TextLshBenchmarks
         _index = new TextLshIndex(new LshConfig(NumHashes: 64, Bands: 8, ShingleSize: 2, SimilarityThreshold: 0.8));
         var docs = BuildDocs(N);
         _index.BuildIndex(docs);
-        _queries = docs.Take(Math.Min(500, docs.Count)).Select(x => x.Text).ToArray();
+        var fixedQuery = docs[docs.Count / 2].Text;
+        _queries = Enumerable.Repeat(fixedQuery, Math.Min(500, docs.Count)).ToArray();
     }
 
     [IterationSetup]
     public void IterationSetup()
     {
         _cursor = 0;
-        Shuffle(_queries);
     }
 
-    [Benchmark]
+    [Benchmark(OperationsPerInvoke = LshOperationsPerInvoke)]
     public int QueryLsh()
     {
-        var query = _queries[_cursor++ % _queries.Length];
-        return _index.FindDuplicatesLsh(query, threshold: 0.75).Count;
+        var total = 0;
+        for (var i = 0; i < LshOperationsPerInvoke; i++)
+        {
+            var query = _queries[_cursor++ % _queries.Length];
+            total += _index.FindDuplicatesLsh(query, threshold: 0.75).Count;
+        }
+
+        return total;
     }
 
-    [Benchmark(Baseline = true)]
+    [Benchmark(Baseline = true, OperationsPerInvoke = FullScanOperationsPerInvoke)]
     public int QueryFullScan()
     {
-        var query = _queries[_cursor++ % _queries.Length];
-        return _index.FindDuplicatesFullScan(query, threshold: 0.75).Count;
+        var total = 0;
+        for (var i = 0; i < FullScanOperationsPerInvoke; i++)
+        {
+            var query = _queries[_cursor++ % _queries.Length];
+            total += _index.FindDuplicatesFullScan(query, threshold: 0.75).Count;
+        }
+
+        return total;
     }
 
     private static List<TextDocument> BuildDocs(int count)
@@ -58,14 +71,5 @@ public class TextLshBenchmarks
         }
 
         return docs;
-    }
-
-    private static void Shuffle<T>(T[] array)
-    {
-        for (var i = array.Length - 1; i > 0; i--)
-        {
-            var j = Random.Shared.Next(i + 1);
-            (array[i], array[j]) = (array[j], array[i]);
-        }
     }
 }
