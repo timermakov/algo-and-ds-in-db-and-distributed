@@ -1,14 +1,15 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 using Hw1.Algorithms.PerfectHashing;
 
 namespace Hw1.Benchmarks;
 
-[MemoryDiagnoser]
-[SimpleJob(warmupCount: 5, iterationCount: 20)]
+[Config(typeof(StableBenchmarkConfig))]
 public class StaticPerfectHashBenchmarks
 {
-    [Params(10_000, 100_000)]
+    private const int PerfectHashOperationsPerInvoke = 1_000_000;
+    private const int DictionaryOperationsPerInvoke = 4_194_304;
+
+    [Params(10_000, 12_915, 16_681, 21_544, 27_826, 35_938, 46_416, 59_948, 77_426, 100_000)]
     public int N;
 
     private StaticPerfectHashIndex _index = null!;
@@ -29,29 +30,37 @@ public class StaticPerfectHashBenchmarks
     public void IterationSetup()
     {
         _cursor = 0;
-        Shuffle(_keys);
     }
 
-    [Benchmark]
-    public bool LookupPerfectHash()
+    [Benchmark(OperationsPerInvoke = PerfectHashOperationsPerInvoke)]
+    public int LookupPerfectHash()
     {
-        var key = _keys[_cursor++ % _keys.Length];
-        return _index.TryGet(key, out _);
-    }
-
-    [Benchmark(Baseline = true)]
-    public bool LookupDictionary()
-    {
-        var key = _keys[_cursor++ % _keys.Length];
-        return _baseline.TryGetValue(key, out _);
-    }
-
-    private static void Shuffle<T>(T[] array)
-    {
-        for (var i = array.Length - 1; i > 0; i--)
+        var found = 0;
+        for (var i = 0; i < PerfectHashOperationsPerInvoke; i++)
         {
-            var j = Random.Shared.Next(i + 1);
-            (array[i], array[j]) = (array[j], array[i]);
+            var key = _keys[_cursor++ % _keys.Length];
+            if (_index.TryGet(key, out _))
+            {
+                found++;
+            }
         }
+
+        return found;
+    }
+
+    [Benchmark(Baseline = true, OperationsPerInvoke = DictionaryOperationsPerInvoke)]
+    public int LookupDictionary()
+    {
+        var found = 0;
+        for (var i = 0; i < DictionaryOperationsPerInvoke; i++)
+        {
+            var key = _keys[_cursor++ % _keys.Length];
+            if (_baseline.TryGetValue(key, out _))
+            {
+                found++;
+            }
+        }
+
+        return found;
     }
 }

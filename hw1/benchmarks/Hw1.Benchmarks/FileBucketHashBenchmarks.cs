@@ -1,14 +1,15 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 using Hw1.Algorithms.FileHashing;
 
 namespace Hw1.Benchmarks;
 
-[MemoryDiagnoser]
-[SimpleJob(warmupCount: 5, iterationCount: 20)]
+[Config(typeof(StableBenchmarkConfig))]
 public class FileBucketHashBenchmarks
 {
-    [Params(10_000, 100_000)]
+    private const int FileHashOperationsPerInvoke = 524_288;
+    private const int DictionaryOperationsPerInvoke = 16_777_216;
+
+    [Params(10_000, 12_915, 16_681, 21_544, 27_826, 35_938, 46_416, 59_948, 77_426, 100_000)]
     public int N;
 
     private string _filePath = string.Empty;
@@ -23,36 +24,40 @@ public class FileBucketHashBenchmarks
         _filePath = Path.Combine(Path.GetTempPath(), $"hw1-file-hash-{Guid.NewGuid():N}.bin");
         _keys = Enumerable.Range(0, N).Select(i => (ulong)(i + 1)).ToArray();
 
-        _table = FileBucketHashTable.Open(_filePath, new FileBucketHashOptions(BucketCount: NextPow2(N), SlotsPerBucket: 4));
+        _table = FileBucketHashTable.Open(_filePath, new FileBucketHashOptions(BucketCount: NextPow2(N * 4), SlotsPerBucket: 16));
         _baseline = new Dictionary<ulong, long>(N);
+
+        foreach (var key in _keys)
+        {
+            _table.Insert(key, (long)key);
+            _baseline[key] = (long)key;
+        }
     }
 
     [IterationSetup]
     public void IterationSetup()
     {
         _cursor = 0;
-        Shuffle(_keys);
     }
 
-    [Benchmark]
+    [Benchmark(OperationsPerInvoke = FileHashOperationsPerInvoke)]
     public void InsertFileHash()
     {
-        var key = _keys[_cursor++ % _keys.Length];
-        try
+        for (var i = 0; i < FileHashOperationsPerInvoke; i++)
         {
-            _table.Insert(key, (long)key);
-        }
-        catch (InvalidOperationException)
-        {
-            _table.Update(key, (long)key);
+            var key = _keys[_cursor++ % _keys.Length];
+            _table.Update(key, (long)key + i);
         }
     }
 
-    [Benchmark(Baseline = true)]
+    [Benchmark(Baseline = true, OperationsPerInvoke = DictionaryOperationsPerInvoke)]
     public void InsertDictionary()
     {
-        var key = _keys[_cursor++ % _keys.Length];
-        _baseline[key] = (long)key;
+        for (var i = 0; i < DictionaryOperationsPerInvoke; i++)
+        {
+            var key = _keys[_cursor++ % _keys.Length];
+            _baseline[key] = (long)key + i;
+        }
     }
 
     [GlobalCleanup]
@@ -74,14 +79,5 @@ public class FileBucketHashBenchmarks
         }
 
         return value;
-    }
-
-    private static void Shuffle<T>(T[] array)
-    {
-        for (var i = array.Length - 1; i > 0; i--)
-        {
-            var j = Random.Shared.Next(i + 1);
-            (array[i], array[j]) = (array[j], array[i]);
-        }
     }
 }
