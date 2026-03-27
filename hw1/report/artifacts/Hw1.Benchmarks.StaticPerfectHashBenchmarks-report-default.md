@@ -1,0 +1,41 @@
+
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8039/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
+.NET SDK 10.0.201
+  [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+  Stable : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+
+Job=Stable  InvocationCount=1  IterationCount=40  
+LaunchCount=1  UnrollFactor=1  WarmupCount=15  
+
+ Method            | N      | Mean      | Error     | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
+------------------ |------- |----------:|----------:|----------:|------:|--------:|-------:|----------:|------------:|
+ **LookupPerfectHash** | **10000**  | **108.53 ns** |  **5.934 ns** | **10.236 ns** |  **8.01** |    **1.03** | **0.0080** |      **52 B** |          **NA** |
+ LookupDictionary  | 10000  |  13.65 ns |  0.708 ns |  1.258 ns |  1.01 |    0.13 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **12915**  | **119.90 ns** |  **7.293 ns** | **12.580 ns** |  **6.51** |    **0.87** | **0.0080** |      **55 B** |          **NA** |
+ LookupDictionary  | 12915  |  18.55 ns |  0.921 ns |  1.589 ns |  1.01 |    0.12 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **16681**  | **135.02 ns** |  **8.120 ns** | **13.566 ns** |  **6.28** |    **0.73** | **0.0090** |      **57 B** |          **NA** |
+ LookupDictionary  | 16681  |  21.57 ns |  0.759 ns |  1.310 ns |  1.00 |    0.09 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **21544**  | **172.12 ns** | **26.541 ns** | **46.484 ns** |  **7.55** |    **2.06** | **0.0090** |      **59 B** |          **NA** |
+ LookupDictionary  | 21544  |  22.86 ns |  0.768 ns |  1.303 ns |  1.00 |    0.08 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **27826**  | **184.02 ns** | **20.842 ns** | **37.046 ns** |  **8.67** |    **1.83** | **0.0090** |      **61 B** |          **NA** |
+ LookupDictionary  | 27826  |  21.33 ns |  0.896 ns |  1.569 ns |  1.01 |    0.10 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **35938**  | **184.11 ns** | **10.204 ns** | **17.872 ns** |  **6.67** |    **0.94** | **0.0090** |      **62 B** |          **NA** |
+ LookupDictionary  | 35938  |  27.92 ns |  1.705 ns |  3.031 ns |  1.01 |    0.15 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **46416**  | **264.55 ns** | **27.591 ns** | **49.044 ns** | **12.60** |    **2.51** | **0.0090** |      **62 B** |          **NA** |
+ LookupDictionary  | 46416  |  21.12 ns |  0.920 ns |  1.611 ns |  1.01 |    0.11 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **59948**  | **244.69 ns** | **17.938 ns** | **31.885 ns** | **10.89** |    **1.51** | **0.0100** |      **63 B** |          **NA** |
+ LookupDictionary  | 59948  |  22.54 ns |  0.702 ns |  1.211 ns |  1.00 |    0.07 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **77426**  | **299.43 ns** | **20.876 ns** | **37.107 ns** | **11.17** |    **1.56** | **0.0100** |      **64 B** |          **NA** |
+ LookupDictionary  | 77426  |  26.92 ns |  1.069 ns |  1.786 ns |  1.00 |    0.09 |      - |         - |          NA |
+                   |        |           |           |           |       |         |        |           |             |
+ **LookupPerfectHash** | **100000** | **346.96 ns** | **28.990 ns** | **51.529 ns** | **10.38** |    **1.90** | **0.0100** |      **64 B** |          **NA** |
+ LookupDictionary  | 100000 |  33.82 ns |  2.127 ns |  3.782 ns |  1.01 |    0.16 |      - |         - |          NA |
