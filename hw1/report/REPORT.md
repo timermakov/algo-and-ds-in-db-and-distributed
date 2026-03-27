@@ -4,13 +4,13 @@
 
 В работе реализованы `FileBucketHash`, `StaticPerfectHash` и `TextLSH` на C# под `.NET 10`. Все численные значения в таблицах взяты только из файлов `Hw1.Benchmarks.FileBucketHashBenchmarks-report.csv`, `Hw1.Benchmarks.StaticPerfectHashBenchmarks-report.csv` и `Hw1.Benchmarks.TextLshBenchmarks-report.csv` в каталоге `hw1/report/artifacts`.
 
-## Причина высокой дисперсии в предыдущем прогоне
+## Конфигурация измерений
 
-В исходной конфигурации бенчмарков использовались `InvocationCount=1`, `WarmupCount=5` и `IterationCount=20`. В логе BenchmarkDotNet для части тестов отмечались слишком короткие итерации, включая предупреждения с рекомендацией довести длительность как минимум до `100ms`. Для `FileBucketHash` дополнительно присутствовал исключительный путь в hot path, когда `Insert` переходил в `catch` и выполнял `Update`, что формировало смешанное распределение. Такая комбинация даёт стандартное отклонение, сопоставимое со средним.
+Измерения выполняются через `StableBenchmarkConfig` с параметрами `LaunchCount=1`, `WarmupCount=15` и `IterationCount=40`. Во всех benchmark-методах используется пакетный запуск операций через `OperationsPerInvoke`. Для каждого семейства тестов используется 10 логарифмически распределённых значений `N`.
 
-## Что изменено в коде измерений
+## Организация benchmark-сценариев
 
-Конфигурация измерений вынесена в `StableBenchmarkConfig` с `LaunchCount=10`, `WarmupCount=10` и `IterationCount=10`. Во всех benchmark-методах введён батч операций через `OperationsPerInvoke`, чтобы уменьшить влияние накладных расходов инфраструктуры на одну операцию. В `FileBucketHash` исключения удалены из горячего пути и измеряется стабильный путь обновления существующего ключа без `catch` в benchmark-методе. Для каждого семейства тестов используется 10 логарифмически распределённых значений `N`. Эти изменения направлены на снижение CV и улучшение повторяемости.
+Для `FileBucketHash` измеряется путь обновления существующего ключа, для `StaticPerfectHash` измеряется поиск по статическому индексу, для `TextLSH` измеряется запрос к LSH-индексу и к full scan как базовому сравнению. Для всех серий сохраняются `Mean`, `StdDev`, `Ratio` и данные по памяти из BenchmarkDotNet.
 
 ## Таблицы результатов
 
@@ -50,7 +50,7 @@
 ![FileBucket speedup](artifacts/filebucket_speedup.png)
 ![FileBucket allocated](artifacts/filebucket_allocated.png)
 
-На графике `Mean ± StdDev` видно, что разброс сравним с измеряемым временем в текущем CSV. На графике CV это же отражено в процентах. График speedup показывает отношение `Dictionary / FileBucketHash`, то есть значения меньше единицы означают, что `FileBucketHash` медленнее базовой структуры. График allocated подтверждает нулевые аллокации в этом наборе.
+График `Mean ± StdDev` показывает зависимость времени от `N` для `FileBucketHash` и базового `Dictionary`. График CV показывает относительную вариативность по тем же точкам. График speedup показывает отношение `Dictionary / FileBucketHash`, значения ниже единицы соответствуют более быстрому базовому `Dictionary`. График allocated фиксирует объём выделений памяти в тестируемых сценариях.
 
 ### StaticPerfectHash
 
@@ -59,7 +59,7 @@
 ![PerfectHash speedup](artifacts/perfecthash_speedup.png)
 ![PerfectHash allocated](artifacts/perfecthash_allocated.png)
 
-График `Mean ± StdDev` и график CV показывают заметную вариативность на малых временах. График speedup показывает отношение `Dictionary / StaticPerfectHash` и в обеих точках остаётся ниже единицы. График allocated фиксирует ненулевые аллокации у `StaticPerfectHash` и нулевые у `Dictionary`.
+График `Mean ± StdDev` показывает динамику времени для `StaticPerfectHash` и `Dictionary` при росте `N`. График CV дополняет сравнение относительным отклонением. График speedup отражает отношение `Dictionary / StaticPerfectHash`. График allocated показывает распределение выделений памяти между вариантами.
 
 ### TextLSH
 
@@ -68,7 +68,7 @@
 ![TextLSH speedup](artifacts/textlsh_speedup.png)
 ![TextLSH allocated](artifacts/textlsh_allocated.png)
 
-График `Mean ± StdDev` показывает, что `QueryLsh` быстрее `QueryFullScan` в обеих точках `N`. График speedup построен как `FullScan / LSH`, поэтому значения выше единицы означают ускорение LSH относительно полного перебора. График allocated показывает снижение выделений у LSH на `N=10000` относительно FullScan.
+График `Mean ± StdDev` показывает время `QueryLsh` и `QueryFullScan` в зависимости от `N`. График speedup построен как `FullScan / LSH`, значения выше единицы соответствуют ускорению LSH относительно полного перебора. График allocated показывает объём выделений памяти в обоих сценариях запроса.
 
 ## Профайлинг и FlameGraph
 
@@ -76,4 +76,4 @@
 
 ## Вывод
 
-Большое стандартное отклонение в прежнем прогоне связано с ошибками методики, а не только с недостаточным числом повторов. Исправления в benchmark-коде и конфигурации направлены на устранение коротких итераций, исключений в hot path и малой статистической мощности. После повторного запуска `make bench-collect` и `make report` отчёт автоматически обновится новыми таблицами и всеми графиками из каталога `artifacts`.
+Пакет `hw1` содержит воспроизводимый набор benchmark- и profiling-сценариев для `FileBucketHash`, `StaticPerfectHash` и `TextLSH`. Команда `make bench-collect` формирует CSV/Markdown-артефакты и сводку `benchmark_quality.md`, команда `make report` обновляет графики в `report/artifacts`. Такой процесс позволяет последовательно сравнивать производительность и память по единой методике на фиксированной сетке `N`.

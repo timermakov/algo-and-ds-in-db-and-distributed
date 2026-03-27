@@ -15,7 +15,7 @@
 
 ## Бенчмаркинг
 Бенчмарки настроены через `StableBenchmarkConfig` в проекте `benchmarks/Hw1.Benchmarks`.
-Конфигурация повышенной повторяемости использует не менее 10 запусков (`LaunchCount=10`) и увеличенные warmup/measurement итерации.
+Текущая конфигурация использует `LaunchCount=1`, `WarmupCount=15`, `IterationCount=40`.
 Внутри benchmark-методов применяются батчи операций (`OperationsPerInvoke`), чтобы снизить шум таймера и накладных расходов инфраструктуры.
 Для каждого benchmark-класса используется 10 логарифмических значений `N`.
 После `make bench-collect` формируется `report/artifacts/benchmark_quality.md` с фактическими значениями `Mean`, `StdDev` и `CV` по всем точкам.
