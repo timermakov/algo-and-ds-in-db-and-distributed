@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Hw2.Benchmarks.GeoKdTreeKnnBenchmarks-20260327-213855</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8039/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
+.NET SDK 10.0.201
+  [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+  Stable : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>Job=Stable  InvocationCount=1  IterationCount=40  
+LaunchCount=1  UnrollFactor=1  WarmupCount=15  
+</code></pre>
+
+<table>
+<thead><tr><th>Method    </th><th>N</th><th>K</th><th>Mean </th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>QueryKdTreeKnn</td><td>10000</td><td>1</td><td>20.84 &mu;s</td><td>4.816 &mu;s</td><td>8.435 &mu;s</td><td>22.59 &mu;s</td><td>0.03</td><td>0.01</td><td>6.36 KB</td><td>0.08</td>
+</tr><tr><td>QueryFullScanKnn</td><td>10000</td><td>1</td><td>802.14 &mu;s</td><td>54.397 &mu;s</td><td>93.833 &mu;s</td><td>799.74 &mu;s</td><td>1.01</td><td>0.16</td><td>78.18 KB</td><td>1.00</td>
+</tr><tr><td>QueryKdTreeKnn</td><td>10000</td><td>20</td><td>53.94 &mu;s</td><td>5.485 &mu;s</td><td>9.750 &mu;s</td><td>51.77 &mu;s</td><td>0.07</td><td>0.02</td><td>13.92 KB</td><td>0.18</td>
+</tr><tr><td>QueryFullScanKnn</td><td>10000</td><td>20</td><td>758.71 &mu;s</td><td>51.069 &mu;s</td><td>90.776 &mu;s</td><td>742.52 &mu;s</td><td>1.01</td><td>0.17</td><td>78.18 KB</td><td>1.00</td>
+</tr><tr><td>QueryKdTreeKnn</td><td>21544</td><td>1</td><td>14.27 &mu;s</td><td>0.356 &mu;s</td><td>0.604 &mu;s</td><td>14.13 &mu;s</td><td>0.009</td><td>0.00</td><td>8.54 KB</td><td>0.05</td>
+</tr><tr><td>QueryFullScanKnn</td><td>21544</td><td>1</td><td>1,582.37 &mu;s</td><td>45.059 &mu;s</td><td>80.093 &mu;s</td><td>1,590.80 &mu;s</td><td>1.002</td><td>0.07</td><td>168.37 KB</td><td>1.00</td>
+</tr><tr><td>QueryKdTreeKnn</td><td>21544</td><td>20</td><td>45.06 &mu;s</td><td>1.579 &mu;s</td><td>2.766 &mu;s</td><td>44.54 &mu;s</td><td>0.03</td><td>0.00</td><td>17.11 KB</td><td>0.10</td>
+</tr><tr><td>QueryFullScanKnn</td><td>21544</td><td>20</td><td>1,690.98 &mu;s</td><td>61.880 &mu;s</td><td>109.992 &mu;s</td><td>1,680.69 &mu;s</td><td>1.00</td><td>0.09</td><td>168.37 KB</td><td>1.00</td>
+</tr><tr><td>QueryKdTreeKnn</td><td>35938</td><td>1</td><td>30.07 &mu;s</td><td>10.032 &mu;s</td><td>17.832 &mu;s</td><td>19.66 &mu;s</td><td>0.01</td><td>0.01</td><td>10.7 KB</td><td>0.04</td>
+</tr><tr><td>QueryFullScanKnn</td><td>35938</td><td>1</td><td>2,726.87 &mu;s</td><td>77.375 &mu;s</td><td>131.389 &mu;s</td><td>2,718.49 &mu;s</td><td>1.00</td><td>0.07</td><td>280.82 KB</td><td>1.00</td>
+</tr><tr><td>QueryKdTreeKnn</td><td>35938</td><td>20</td><td>89.01 &mu;s</td><td>31.996 &mu;s</td><td>56.872 &mu;s</td><td>52.50 &mu;s</td><td>0.03</td><td>0.02</td><td>19.11 KB</td><td>0.07</td>
+</tr><tr><td>QueryFullScanKnn</td><td>35938</td><td>20</td><td>3,025.31 &mu;s</td><td>217.753 &mu;s</td><td>357.775 &mu;s</td><td>2,903.22 &mu;s</td><td>1.01</td><td>0.16</td><td>280.82 KB</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>
