@@ -29,4 +29,30 @@ Async-профилирование `make profile-async PID=<pid>` с сохра�
 Flame graph `make profile-flamegraph PID=<pid>`, после чего `report/artifacts/cpu-flamegraph.speedscope.json` можно открыть в [speedscope](https://www.speedscope.app).
 Для полного набора артефактов `make profile-all PID=<pid>`.
 
-[Report](report/REPORT.md)
+### Flamegraph
+
+`make profile-flamegraph-bench FILTER=*GeoKdTreeRadiusBenchmarks.QueryKdTreeRadius*`
+
+`make profile-flamegraph-bench FILTER=*GeoKdTree*`
+
+`make profile-flamegraph-bench FILTER=*GeoKdTree* DURATION=00:00:45`
+
+### Полный bench-профайлинг
+CPU trace:
+`make profile-cpu-bench FILTER=*GeoKdTree*`
+
+Memory gcdump:
+`make profile-memory-bench FILTER=*GeoKdTree*`
+
+Async counters + trace:
+`make profile-async-bench FILTER=*GeoKdTree*`
+
+Все артефакты за один прогон:
+`make profile-all-bench FILTER=*GeoKdTree*`
+
+Рекомендуемый неинтерактивный режим:
+`make profile-all-bench FILTER=*GeoKdTree* DURATION=00:00:45`
+
+# Отчёт о работе
+
+[Ссылка на отчёт](report/REPORT.md)

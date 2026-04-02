@@ -74,9 +74,16 @@
 
 ## Профайлинг памяти и CPU
 
+CPU Flamegraph:
+![CPU Flamegraph](hw2/report/artifacts/cpu-flamegraph.png)
+
+Выделение памяти:
+![Memory bench](hw2/report/artifacts/memory-bench.png)
+
 Бенчмарки запускались с `MemoryDiagnoser`, что дало профиль аллокаций по операциям в таблицах выше.
 
-Скрипты для внешнего профилинга доступны и готовы к запуску:
+
+`make profile-all-bench FILTER=*GeoKdTree* DURATION=00:00:45`
 
 - `make profile-cpu PID=<pid>` -> `cpu-trace.nettrace`
 - `make profile-memory PID=<pid>` -> `memory.gcdump`
