@@ -75,13 +75,13 @@
 ## Профайлинг памяти и CPU
 
 CPU Flamegraph Radius:
-![CPU Flamegraph Radius](hw2/report/artifacts/cpu-flamegraph-hotpath-radius.png)
+![CPU Flamegraph Radius](artifacts/cpu-flamegraph-hotpath-radius.png)
 
 CPU Flamegraph kNN:
-![CPU Flamegraph kNN](hw2/report/artifacts/cpu-flamegraph-hotpath-knn.png)
+![CPU Flamegraph kNN](artifacts/cpu-flamegraph-hotpath-knn.png)
 
 Выделение памяти:
-![Memory bench](hw2/report/artifacts/memory-bench.png)
+![Memory bench](artifacts/memory-bench.png)
 
 Бенчмарки запускались с `MemoryDiagnoser`, что дало профиль аллокаций по операциям в таблицах выше.
 
