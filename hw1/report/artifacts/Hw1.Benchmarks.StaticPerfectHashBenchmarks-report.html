@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Hw1.Benchmarks.StaticPerfectHashBenchmarks-20260327-201856</title>
+<title>Hw1.Benchmarks.StaticPerfectHashBenchmarks-20260403-201306</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -13,7 +13,7 @@
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8039/25H2/2025Update/HudsonValley2)
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8117/25H2/2025Update/HudsonValley2)
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
@@ -24,28 +24,28 @@ LaunchCount=1  UnrollFactor=1  WarmupCount=15
 </code></pre>
 
 <table>
-<thead><tr><th>Method     </th><th>N</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+<thead><tr><th>Method     </th><th>N</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
 </tr>
-</thead><tbody><tr><td>LookupPerfectHash</td><td>10000</td><td>108.53 ns</td><td>5.934 ns</td><td>10.236 ns</td><td>8.01</td><td>1.03</td><td>0.0080</td><td>52 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>10000</td><td>13.65 ns</td><td>0.708 ns</td><td>1.258 ns</td><td>1.01</td><td>0.13</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>12915</td><td>119.90 ns</td><td>7.293 ns</td><td>12.580 ns</td><td>6.51</td><td>0.87</td><td>0.0080</td><td>55 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>12915</td><td>18.55 ns</td><td>0.921 ns</td><td>1.589 ns</td><td>1.01</td><td>0.12</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>16681</td><td>135.02 ns</td><td>8.120 ns</td><td>13.566 ns</td><td>6.28</td><td>0.73</td><td>0.0090</td><td>57 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>16681</td><td>21.57 ns</td><td>0.759 ns</td><td>1.310 ns</td><td>1.00</td><td>0.09</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>21544</td><td>172.12 ns</td><td>26.541 ns</td><td>46.484 ns</td><td>7.55</td><td>2.06</td><td>0.0090</td><td>59 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>21544</td><td>22.86 ns</td><td>0.768 ns</td><td>1.303 ns</td><td>1.00</td><td>0.08</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>27826</td><td>184.02 ns</td><td>20.842 ns</td><td>37.046 ns</td><td>8.67</td><td>1.83</td><td>0.0090</td><td>61 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>27826</td><td>21.33 ns</td><td>0.896 ns</td><td>1.569 ns</td><td>1.01</td><td>0.10</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>35938</td><td>184.11 ns</td><td>10.204 ns</td><td>17.872 ns</td><td>6.67</td><td>0.94</td><td>0.0090</td><td>62 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>35938</td><td>27.92 ns</td><td>1.705 ns</td><td>3.031 ns</td><td>1.01</td><td>0.15</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>46416</td><td>264.55 ns</td><td>27.591 ns</td><td>49.044 ns</td><td>12.60</td><td>2.51</td><td>0.0090</td><td>62 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>46416</td><td>21.12 ns</td><td>0.920 ns</td><td>1.611 ns</td><td>1.01</td><td>0.11</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>59948</td><td>244.69 ns</td><td>17.938 ns</td><td>31.885 ns</td><td>10.89</td><td>1.51</td><td>0.0100</td><td>63 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>59948</td><td>22.54 ns</td><td>0.702 ns</td><td>1.211 ns</td><td>1.00</td><td>0.07</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>77426</td><td>299.43 ns</td><td>20.876 ns</td><td>37.107 ns</td><td>11.17</td><td>1.56</td><td>0.0100</td><td>64 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>77426</td><td>26.92 ns</td><td>1.069 ns</td><td>1.786 ns</td><td>1.00</td><td>0.09</td><td>-</td><td>-</td><td>NA</td>
-</tr><tr><td>LookupPerfectHash</td><td>100000</td><td>346.96 ns</td><td>28.990 ns</td><td>51.529 ns</td><td>10.38</td><td>1.90</td><td>0.0100</td><td>64 B</td><td>NA</td>
-</tr><tr><td>LookupDictionary</td><td>100000</td><td>33.82 ns</td><td>2.127 ns</td><td>3.782 ns</td><td>1.01</td><td>0.16</td><td>-</td><td>-</td><td>NA</td>
+</thead><tbody><tr><td>LookupPerfectHash</td><td>10000</td><td>35.39 ns</td><td>1.621 ns</td><td>2.838 ns</td><td>34.39 ns</td><td>2.76</td><td>0.31</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>10000</td><td>12.90 ns</td><td>0.583 ns</td><td>1.021 ns</td><td>12.83 ns</td><td>1.01</td><td>0.11</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>12915</td><td>36.13 ns</td><td>0.610 ns</td><td>0.985 ns</td><td>35.93 ns</td><td>2.69</td><td>0.13</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>12915</td><td>13.46 ns</td><td>0.329 ns</td><td>0.549 ns</td><td>13.38 ns</td><td>1.00</td><td>0.06</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>16681</td><td>39.96 ns</td><td>3.588 ns</td><td>5.895 ns</td><td>37.23 ns</td><td>2.59</td><td>0.39</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>16681</td><td>15.43 ns</td><td>0.347 ns</td><td>0.608 ns</td><td>15.40 ns</td><td>1.00</td><td>0.05</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>21544</td><td>42.56 ns</td><td>1.066 ns</td><td>1.896 ns</td><td>42.29 ns</td><td>2.49</td><td>0.14</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>21544</td><td>17.14 ns</td><td>0.377 ns</td><td>0.670 ns</td><td>17.06 ns</td><td>1.00</td><td>0.05</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>27826</td><td>47.61 ns</td><td>1.814 ns</td><td>3.129 ns</td><td>47.26 ns</td><td>2.78</td><td>0.38</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>27826</td><td>17.37 ns</td><td>1.167 ns</td><td>2.012 ns</td><td>17.82 ns</td><td>1.01</td><td>0.17</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>35938</td><td>57.59 ns</td><td>4.602 ns</td><td>7.561 ns</td><td>56.57 ns</td><td>2.78</td><td>0.59</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>35938</td><td>21.45 ns</td><td>2.548 ns</td><td>4.326 ns</td><td>20.17 ns</td><td>1.03</td><td>0.27</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>46416</td><td>67.04 ns</td><td>2.148 ns</td><td>3.589 ns</td><td>66.82 ns</td><td>3.73</td><td>0.53</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>46416</td><td>18.28 ns</td><td>1.425 ns</td><td>2.420 ns</td><td>18.33 ns</td><td>1.02</td><td>0.19</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>59948</td><td>94.82 ns</td><td>8.764 ns</td><td>15.118 ns</td><td>90.24 ns</td><td>5.02</td><td>0.89</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>59948</td><td>19.01 ns</td><td>0.937 ns</td><td>1.591 ns</td><td>19.00 ns</td><td>1.01</td><td>0.12</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>77426</td><td>101.50 ns</td><td>5.309 ns</td><td>8.420 ns</td><td>100.47 ns</td><td>5.10</td><td>0.50</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>77426</td><td>19.95 ns</td><td>0.683 ns</td><td>1.123 ns</td><td>19.78 ns</td><td>1.00</td><td>0.08</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupPerfectHash</td><td>100000</td><td>108.79 ns</td><td>4.943 ns</td><td>8.258 ns</td><td>106.36 ns</td><td>4.97</td><td>0.55</td><td>-</td><td>NA</td>
+</tr><tr><td>LookupDictionary</td><td>100000</td><td>22.03 ns</td><td>1.050 ns</td><td>1.867 ns</td><td>21.65 ns</td><td>1.01</td><td>0.12</td><td>-</td><td>NA</td>
 </tr></tbody></table>
 </body>
 </html>

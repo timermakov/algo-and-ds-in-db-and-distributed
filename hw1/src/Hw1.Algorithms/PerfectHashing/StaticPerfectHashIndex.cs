@@ -1,15 +1,17 @@
-using System.Text;
-
 namespace Hw1.Algorithms.PerfectHashing;
 
 public sealed class StaticPerfectHashIndex
 {
+    private const ulong SecondaryBaseSeed = 0x1f83d9abfb41bd6bUL;
+
     private readonly Bucket[] _buckets;
+    private readonly int _bucketMask;
     private readonly ulong _primarySeed;
 
-    private StaticPerfectHashIndex(Bucket[] buckets, ulong primarySeed)
+    private StaticPerfectHashIndex(Bucket[] buckets, int bucketMask, ulong primarySeed)
     {
         _buckets = buckets;
+        _bucketMask = bucketMask;
         _primarySeed = primarySeed;
     }
 
@@ -34,14 +36,17 @@ public sealed class StaticPerfectHashIndex
             }
         }
 
-        var bucketCount = unique.Count;
+        var bucketCount = NextPowerOfTwo(unique.Count);
+        var bucketMask = bucketCount - 1;
         var primarySeed = 0x6a09e667f3bcc909UL;
-        var grouped = new List<KeyValuePair<string, long>>[bucketCount];
+        var grouped = new List<BuildEntry>[bucketCount];
         foreach (var pair in unique)
         {
-            var index = (int)(Hash(pair.Key, primarySeed) % (uint)bucketCount);
+            var primaryHash = Hash(pair.Key, primarySeed);
+            var secondaryHash = Mix64(primaryHash ^ SecondaryBaseSeed);
+            var index = (int)(primaryHash & (uint)bucketMask);
             grouped[index] ??= [];
-            grouped[index].Add(pair);
+            grouped[index].Add(new BuildEntry(pair.Key, pair.Value, primaryHash, secondaryHash));
         }
 
         var result = new Bucket[bucketCount];
@@ -56,28 +61,31 @@ public sealed class StaticPerfectHashIndex
 
             if (group.Count == 1)
             {
-                var pair = group[0];
-                result[bucketId] = Bucket.Single(pair.Key, pair.Value);
+                var entry = group[0];
+                result[bucketId] = Bucket.Single(entry.Key, entry.Value, entry.PrimaryHash, entry.SecondaryHash);
                 continue;
             }
 
             result[bucketId] = BuildSecondary(group);
         }
 
-        return new StaticPerfectHashIndex(result, primarySeed) { Count = unique.Count };
+        return new StaticPerfectHashIndex(result, bucketMask, primarySeed) { Count = unique.Count };
     }
 
     public bool TryGet(string key, out long value)
     {
         ArgumentException.ThrowIfNullOrEmpty(key);
-        var bucketId = (int)(Hash(key, _primarySeed) % (uint)_buckets.Length);
+        var primaryHash = Hash(key, _primarySeed);
+        var secondaryHash = Mix64(primaryHash ^ SecondaryBaseSeed);
+        var bucketId = (int)(primaryHash & (uint)_bucketMask);
         var bucket = _buckets[bucketId];
-        return bucket.TryGet(key, out value);
+        return bucket.TryGet(key, primaryHash, secondaryHash, out value);
     }
 
-    private static Bucket BuildSecondary(IReadOnlyList<KeyValuePair<string, long>> group)
+    private static Bucket BuildSecondary(IReadOnlyList<BuildEntry> group)
     {
-        var size = checked(group.Count * group.Count);
+        var size = NextPowerOfTwo(checked(group.Count * group.Count));
+        var slotMask = (uint)(size - 1);
         var seed = 0x9e3779b97f4a7c15UL;
         var maxAttempts = 10_000;
 
@@ -88,19 +96,19 @@ public sealed class StaticPerfectHashIndex
 
             foreach (var pair in group)
             {
-                var slot = (int)(Hash(pair.Key, seed) % (uint)size);
+                var slot = (int)(Mix64(pair.SecondaryHash ^ seed) & slotMask);
                 if (table[slot].HasValue)
                 {
                     collision = true;
                     break;
                 }
 
-                table[slot] = new SecondarySlot(true, pair.Key, pair.Value);
+                table[slot] = new SecondarySlot(true, pair.PrimaryHash, pair.Key, pair.Value);
             }
 
             if (!collision)
             {
-                return Bucket.Multi(seed, table);
+                return Bucket.Multi(seed, slotMask, table);
             }
 
             seed = Mix64(seed + (ulong)(attempt + 1));
@@ -111,14 +119,14 @@ public sealed class StaticPerfectHashIndex
 
     private static ulong Hash(string text, ulong seed)
     {
-        var bytes = Encoding.UTF8.GetBytes(text);
         var hash = seed ^ 1469598103934665603UL;
-        foreach (var b in bytes)
+        foreach (var ch in text)
         {
-            hash ^= b;
+            hash ^= (byte)ch;
+            hash *= 1099511628211UL;
+            hash ^= (byte)(ch >> 8);
             hash *= 1099511628211UL;
         }
-
         return Mix64(hash);
     }
 
@@ -132,39 +140,63 @@ public sealed class StaticPerfectHashIndex
         return x;
     }
 
+    private static int NextPowerOfTwo(int value)
+    {
+        var result = 1;
+        while (result < value)
+        {
+            result <<= 1;
+        }
+
+        return result;
+    }
+
     private readonly struct Bucket
     {
         private Bucket(
             bool hasSingle,
             string singleKey,
             long singleValue,
+            ulong singlePrimaryHash,
+            ulong singleSecondaryHash,
             ulong seed,
+            uint slotMask,
             SecondarySlot[] table)
         {
             HasSingle = hasSingle;
             SingleKey = singleKey;
             SingleValue = singleValue;
+            SinglePrimaryHash = singlePrimaryHash;
+            SingleSecondaryHash = singleSecondaryHash;
             Seed = seed;
+            SlotMask = slotMask;
             Table = table;
         }
 
-        public static Bucket Empty => new(false, string.Empty, 0L, 0UL, []);
+        public static Bucket Empty => new(false, string.Empty, 0L, 0UL, 0UL, 0UL, 0U, []);
 
         public bool HasSingle { get; }
         public string SingleKey { get; }
         public long SingleValue { get; }
+        public ulong SinglePrimaryHash { get; }
+        public ulong SingleSecondaryHash { get; }
         public ulong Seed { get; }
+        public uint SlotMask { get; }
         public SecondarySlot[] Table { get; }
 
-        public static Bucket Single(string key, long value) => new(true, key, value, 0UL, []);
+        public static Bucket Single(string key, long value, ulong primaryHash, ulong secondaryHash) =>
+            new(true, key, value, primaryHash, secondaryHash, 0UL, 0U, []);
 
-        public static Bucket Multi(ulong seed, SecondarySlot[] table) => new(false, string.Empty, 0L, seed, table);
+        public static Bucket Multi(ulong seed, uint slotMask, SecondarySlot[] table) =>
+            new(false, string.Empty, 0L, 0UL, 0UL, seed, slotMask, table);
 
-        public bool TryGet(string key, out long value)
+        public bool TryGet(string key, ulong primaryHash, ulong secondaryHash, out long value)
         {
             if (HasSingle)
             {
-                if (string.Equals(SingleKey, key, StringComparison.Ordinal))
+                if (SinglePrimaryHash == primaryHash &&
+                    SingleSecondaryHash == secondaryHash &&
+                    (ReferenceEquals(SingleKey, key) || string.Equals(SingleKey, key, StringComparison.Ordinal)))
                 {
                     value = SingleValue;
                     return true;
@@ -180,9 +212,11 @@ public sealed class StaticPerfectHashIndex
                 return false;
             }
 
-            var slot = (int)(Hash(key, Seed) % (uint)Table.Length);
+            var slot = (int)(Mix64(secondaryHash ^ Seed) & SlotMask);
             var stored = Table[slot];
-            if (!stored.HasValue || !string.Equals(stored.Key, key, StringComparison.Ordinal))
+            if (!stored.HasValue ||
+                stored.PrimaryHash != primaryHash ||
+                (!ReferenceEquals(stored.Key, key) && !string.Equals(stored.Key, key, StringComparison.Ordinal)))
             {
                 value = default;
                 return false;
@@ -193,5 +227,21 @@ public sealed class StaticPerfectHashIndex
         }
     }
 
-    private readonly record struct SecondarySlot(bool HasValue, string Key, long Value);
+    private readonly record struct BuildEntry(string Key, long Value, ulong PrimaryHash, ulong SecondaryHash);
+
+    private readonly struct SecondarySlot
+    {
+        public SecondarySlot(bool hasValue, ulong primaryHash, string key, long value)
+        {
+            HasValue = hasValue;
+            PrimaryHash = primaryHash;
+            Key = key;
+            Value = value;
+        }
+
+        public bool HasValue { get; }
+        public ulong PrimaryHash { get; }
+        public string Key { get; }
+        public long Value { get; }
+    }
 }
