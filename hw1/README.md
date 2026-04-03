@@ -26,3 +26,20 @@ CPU-трассировка `make profile-cpu PID=<pid>`.
 async-профилирование `make profile-async PID=<pid>` с сохранением `async-counters.csv` и `async-trace.nettrace`.
 flame graph `make profile-flamegraph PID=<pid>`, после чего `report/artifacts/cpu-flamegraph.speedscope.json` в [speedscope](https://www.speedscope.app).
 Для полного набора артефактов `make profile-all PID=<pid>`.
+
+### Hotpath-профайлинг (без запускателя BenchmarkDotNet)
+Чтобы измерять именно алгоритмы, а не обертку BenchmarkDotNet/CLI:
+
+`make profile-flamegraph-hotpath MODE=filehash DURATION=00:02:00 N=100000`
+
+`make profile-flamegraph-hotpath MODE=perfecthash DURATION=00:02:00 N=100000`
+
+`make profile-flamegraph-hotpath MODE=lsh DURATION=00:02:00 N=10000`
+
+Полный набор артефактов hotpath:
+
+`make profile-all-hotpath MODE=filehash DURATION=00:02:00 N=100000`
+
+`make profile-all-hotpath MODE=perfecthash DURATION=00:02:00 N=100000`
+
+`make profile-all-hotpath MODE=lsh DURATION=00:02:00 N=10000`
