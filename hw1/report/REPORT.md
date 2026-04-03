@@ -23,28 +23,28 @@
 
 | Method | N | Mean | Error | StdDev | Median | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| InsertFileHash | 10000 | 175.906 ns | 23.8168 ns | 42.3344 ns | 156.032 ns | 33.69 | 8.43 | 0 B | NA |
-| InsertDictionary | 10000 | 5.251 ns | 0.2335 ns | 0.4089 ns | 5.221 ns | 1.01 | 0.11 | 0 B | NA |
-| InsertFileHash | 100000 | 216.092 ns | 8.0404 ns | 13.6531 ns | 215.317 ns | 38.93 | 3.20 | 0 B | NA |
-| InsertDictionary | 100000 | 5.567 ns | 0.1822 ns | 0.3095 ns | 5.537 ns | 1.00 | 0.08 | 0 B | NA |
+| InsertFileHash | 10000 | 110.845 ns | 3.0050 ns | 5.1027 ns | 110.366 ns | 25.88 | 1.81 | 0 B | NA |
+| InsertDictionary | 10000 | 4.295 ns | 0.1314 ns | 0.2301 ns | 4.314 ns | 1.00 | 0.08 | 0 B | NA |
+| InsertFileHash | 100000 | 146.956 ns | 2.7643 ns | 4.7682 ns | 145.087 ns | 35.66 | 1.65 | 0 B | NA |
+| InsertDictionary | 100000 | 4.126 ns | 0.0842 ns | 0.1430 ns | 4.088 ns | 1.00 | 0.05 | 0 B | NA |
 
 ### StaticPerfectHash
 
 | Method | N | Mean | Error | StdDev | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| LookupPerfectHash | 10000 | 108.53 ns | 5.934 ns | 10.236 ns | 8.01 | 1.03 | 52 B | NA |
-| LookupDictionary | 10000 | 13.65 ns | 0.708 ns | 1.258 ns | 1.01 | 0.13 | 0 B | NA |
-| LookupPerfectHash | 100000 | 346.96 ns | 28.990 ns | 51.529 ns | 10.38 | 1.90 | 64 B | NA |
-| LookupDictionary | 100000 | 33.82 ns | 2.127 ns | 3.782 ns | 1.01 | 0.16 | 0 B | NA |
+| LookupPerfectHash | 10000 | 35.39 ns | 1.621 ns | 2.838 ns | 2.76 | 0.31 | 0 B | NA |
+| LookupDictionary | 10000 | 12.90 ns | 0.583 ns | 1.021 ns | 1.01 | 0.11 | 0 B | NA |
+| LookupPerfectHash | 100000 | 108.79 ns | 4.943 ns | 8.258 ns | 4.97 | 0.55 | 0 B | NA |
+| LookupDictionary | 100000 | 22.03 ns | 1.050 ns | 1.867 ns | 1.01 | 0.12 | 0 B | NA |
 
 ### TextLSH
 
 | Method | N | Mean | Error | StdDev | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| QueryLsh | 1000 | 35.824 μs | 3.9134 μs | 6.9560 μs | 0.34 | 0.11 | 19.48 KB | 1.72 |
-| QueryFullScan | 1000 | 111.474 μs | 14.7661 μs | 26.2467 μs | 1.06 | 0.37 | 11.3 KB | 1.00 |
-| QueryLsh | 10000 | 465.513 μs | 12.1036 μs | 20.5528 μs | 0.80 | 0.19 | 134.16 KB | 1.64 |
-| QueryFullScan | 10000 | 626.534 μs | 106.1442 μs | 188.6713 μs | 1.08 | 0.42 | 81.86 KB | 1.00 |
+| QueryLsh | 1000 | 28.718 μs | 1.7609 μs | 2.9902 μs | 0.53 | 0.06 | 19.48 KB | 1.72 |
+| QueryFullScan | 1000 | 54.167 μs | 2.0247 μs | 3.3827 μs | 1.00 | 0.09 | 11.3 KB | 1.00 |
+| QueryLsh | 10000 | 693.278 μs | 30.5748 μs | 53.5494 μs | 0.73 | 0.09 | 134.16 KB | 1.64 |
+| QueryFullScan | 10000 | 955.971 μs | 59.7404 μs | 103.0493 μs | 1.01 | 0.15 | 81.86 KB | 1.00 |
 
 ## Графики по бенчмаркам
 
@@ -77,8 +77,14 @@
 
 ## Профайлинг и FlameGraph
 
-Для CPU трассировки используется `make profile-cpu PID=<pid>` с сохранением `cpu-trace.nettrace`. Для памяти используется `make profile-memory PID=<pid>` с сохранением `memory.gcdump`. Для async-профилирования используется `make profile-async PID=<pid>` с сохранением `async-counters.csv` и `async-trace.nettrace`. Для flame graph используется `make profile-flamegraph PID=<pid>` с сохранением `cpu-flamegraph.speedscope.json`, который открывается в `speedscope`. После `make bench-collect` автоматически формируется `benchmark_quality.md` с фактическими значениями `Mean`, `StdDev` и `CV` по всем точкам.
+Базовые PID-скрипты (`profile-cpu`, `profile-memory`, `profile-async`, `profile-flamegraph`) сохраняют артефакты в `report/artifacts`.
+Добавлен hotpath-режим:
+- `make profile-flamegraph-hotpath MODE=filehash DURATION=00:02:00 N=100000`
+- `make profile-flamegraph-hotpath MODE=perfecthash DURATION=00:02:00 N=100000`
+- `make profile-flamegraph-hotpath MODE=lsh DURATION=00:02:00 N=10000`
+
+По актуальным артефактам hotpath (`cpu-flamegraph-hotpath-filehash.speedscope.json`) в основном времени доминируют `Hw1.Algorithms.FileHashing.FileBucketHashTable.Insert` и связанные `MemoryMappedViewAccessor.Write/Read`, что указывает на I/O и системные вызовы как основной bottleneck в file-backed hash table.
 
 ## Вывод
 
-Текущие артефакты показывают, что в сценариях `FileBucketHash` и `StaticPerfectHash` baseline `Dictionary` заметно быстрее по latency, тогда как для `TextLSH` наблюдается ускорение относительно full scan на части диапазона `N` при более высокой стоимости по памяти.
+`FileBucketHash` по-прежнему медленный из-за работы с и baseline `Dictionary` остаётся быстрее по latency, а `TextLSH` в среднем быстрее `FullScan` на ряде точек, но требует больше памяти. Hotpath-профилирование дополнительно показало, что для file-backed структуры ключевым ограничением являются операции записи/чтения через memory-mapped I/O, а не чистая вычислительная часть хеширования.
