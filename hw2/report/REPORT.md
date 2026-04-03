@@ -74,8 +74,11 @@
 
 ## Профайлинг памяти и CPU
 
-CPU Flamegraph:
-![CPU Flamegraph](hw2/report/artifacts/cpu-flamegraph.png)
+CPU Flamegraph Radius:
+![CPU Flamegraph Radius](hw2/report/artifacts/cpu-flamegraph-hotpath-radius.png)
+
+CPU Flamegraph kNN:
+![CPU Flamegraph kNN](hw2/report/artifacts/cpu-flamegraph-hotpath-knn.png)
 
 Выделение памяти:
 ![Memory bench](hw2/report/artifacts/memory-bench.png)

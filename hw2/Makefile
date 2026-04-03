@@ -5,7 +5,7 @@ ifeq ($(wildcard .dotnet/dotnet.exe),.dotnet/dotnet.exe)
 DOTNET=.\\.dotnet\\dotnet.exe
 endif
 
-.PHONY: check-sdk restore build test bench bench-collect profile-cpu profile-memory profile-async profile-flamegraph profile-cpu-bench profile-memory-bench profile-async-bench profile-flamegraph-bench profile-all profile-all-bench report clean
+.PHONY: check-sdk restore build test bench bench-collect profile-cpu profile-memory profile-async profile-flamegraph profile-cpu-bench profile-memory-bench profile-async-bench profile-flamegraph-bench profile-flamegraph-hotpath profile-all profile-all-bench report clean
 
 check-sdk:
 	@powershell -NoProfile -Command "$$v = & '$(DOTNET)' --version; if ($$v -notmatch '^10\.') { Write-Host '.NET 10 SDK required'; exit 1 }"
@@ -48,6 +48,9 @@ profile-async-bench:
 
 profile-flamegraph-bench:
 	@cmd /C "tools\\profile-flamegraph-bench.cmd %FILTER% %DURATION%"
+
+profile-flamegraph-hotpath:
+	@cmd /C "tools\\profile-flamegraph-hotpath.cmd %MODE% %DURATION% %N%"
 
 profile-all:
 	@cmd /C "tools\\profile-cpu.cmd %PID%"

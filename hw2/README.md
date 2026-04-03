@@ -37,6 +37,15 @@ Flame graph `make profile-flamegraph PID=<pid>`, после чего `report/art
 
 `make profile-flamegraph-bench FILTER=*GeoKdTree* DURATION=00:00:45`
 
+### Hotpath flamegraph
+Radius hotpath:
+`make profile-flamegraph-hotpath MODE=radius DURATION=00:02:00 N=100000`
+
+kNN hotpath:
+`make profile-flamegraph-hotpath MODE=knn DURATION=00:02:00 N=100000`
+
+Эти команды запускают `tools/Hw2.ProfileRunner` и дают чистый профиль `GeoKdTreeIndex`/`GeoDistance`.
+
 ### Полный bench-профайлинг
 CPU trace:
 `make profile-cpu-bench FILTER=*GeoKdTree*`
@@ -50,7 +59,7 @@ Async counters + trace:
 Все артефакты за один прогон:
 `make profile-all-bench FILTER=*GeoKdTree*`
 
-Рекомендуемый неинтерактивный режим:
+Неинтерактивный режим:
 `make profile-all-bench FILTER=*GeoKdTree* DURATION=00:00:45`
 
 # Отчёт о работе
