@@ -5,6 +5,8 @@ set MODE=%~1
 if "%MODE%"=="" set MODE=filehash
 set DURATION=%~2
 if "%DURATION%"=="" set DURATION=00:02:00
+echo %DURATION% | find ":" >nul
+if errorlevel 1 set DURATION=00:00:%DURATION%
 set N=%~3
 if "%N%"=="" set N=100000
 
