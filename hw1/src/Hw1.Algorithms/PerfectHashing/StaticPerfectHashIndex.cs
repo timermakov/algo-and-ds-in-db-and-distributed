@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Hw1.Algorithms.PerfectHashing;
 
 public sealed class StaticPerfectHashIndex
@@ -111,11 +109,12 @@ public sealed class StaticPerfectHashIndex
 
     private static ulong Hash(string text, ulong seed)
     {
-        var bytes = Encoding.UTF8.GetBytes(text);
         var hash = seed ^ 1469598103934665603UL;
-        foreach (var b in bytes)
+        foreach (var ch in text)
         {
-            hash ^= b;
+            hash ^= (byte)ch;
+            hash *= 1099511628211UL;
+            hash ^= (byte)(ch >> 8);
             hash *= 1099511628211UL;
         }
 
