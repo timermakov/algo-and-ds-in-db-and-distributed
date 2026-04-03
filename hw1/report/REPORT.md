@@ -2,7 +2,12 @@
 
 ## Цель и источник данных
 
-В работе реализованы `FileBucketHash`, `StaticPerfectHash` и `TextLSH` на C# под `.NET 10`. Все численные значения в таблицах взяты только из файлов `Hw1.Benchmarks.FileBucketHashBenchmarks-report.csv`, `Hw1.Benchmarks.StaticPerfectHashBenchmarks-report.csv` и `Hw1.Benchmarks.TextLshBenchmarks-report.csv` в каталоге `hw1/report/artifacts`.
+В работе реализованы `FileBucketHash`, `StaticPerfectHash` и `TextLSH` на C# под `.NET 10`.
+Все численные значения ниже взяты из текущих файлов в `hw1/report/artifacts`:
+- `Hw1.Benchmarks.FileBucketHashBenchmarks-report.csv`
+- `Hw1.Benchmarks.StaticPerfectHashBenchmarks-report.csv`
+- `Hw1.Benchmarks.TextLshBenchmarks-report.csv`
+- `benchmark_quality.md`
 
 ## Конфигурация измерений
 
@@ -18,28 +23,28 @@
 
 | Method | N | Mean | Error | StdDev | Median | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| InsertFileHash | 10000 | 61.725 μs | 42.8517 μs | 49.3481 μs | 28.700 μs | 36.75 | 32.69 | 0 B | NA |
-| InsertDictionary | 10000 | 1.856 μs | 0.5328 μs | 0.5701 μs | 1.800 μs | 1.10 | 0.51 | 0 B | NA |
-| InsertFileHash | 100000 | 107.090 μs | 31.3502 μs | 36.1029 μs | 109.400 μs | 19.88 | 19.62 | 0 B | NA |
-| InsertDictionary | 100000 | 7.205 μs | 2.4294 μs | 2.7003 μs | 7.800 μs | 1.34 | 1.35 | 0 B | NA |
+| InsertFileHash | 10000 | 175.906 ns | 23.8168 ns | 42.3344 ns | 156.032 ns | 33.69 | 8.43 | 0 B | NA |
+| InsertDictionary | 10000 | 5.251 ns | 0.2335 ns | 0.4089 ns | 5.221 ns | 1.01 | 0.11 | 0 B | NA |
+| InsertFileHash | 100000 | 216.092 ns | 8.0404 ns | 13.6531 ns | 215.317 ns | 38.93 | 3.20 | 0 B | NA |
+| InsertDictionary | 100000 | 5.567 ns | 0.1822 ns | 0.3095 ns | 5.537 ns | 1.00 | 0.08 | 0 B | NA |
 
 ### StaticPerfectHash
 
 | Method | N | Mean | Error | StdDev | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| LookupPerfectHash | 10000 | 9.616 μs | 1.406 μs | 1.563 μs | 1.73 | 0.57 | 64 B | NA |
-| LookupDictionary | 10000 | 5.990 μs | 1.443 μs | 1.662 μs | 1.08 | 0.43 | 0 B | NA |
-| LookupPerfectHash | 100000 | 11.111 μs | 2.065 μs | 2.295 μs | 1.55 | 0.42 | 80 B | NA |
-| LookupDictionary | 100000 | 7.421 μs | 1.309 μs | 1.455 μs | 1.03 | 0.27 | 0 B | NA |
+| LookupPerfectHash | 10000 | 108.53 ns | 5.934 ns | 10.236 ns | 8.01 | 1.03 | 52 B | NA |
+| LookupDictionary | 10000 | 13.65 ns | 0.708 ns | 1.258 ns | 1.01 | 0.13 | 0 B | NA |
+| LookupPerfectHash | 100000 | 346.96 ns | 28.990 ns | 51.529 ns | 10.38 | 1.90 | 64 B | NA |
+| LookupDictionary | 100000 | 33.82 ns | 2.127 ns | 3.782 ns | 1.01 | 0.16 | 0 B | NA |
 
 ### TextLSH
 
 | Method | N | Mean | Error | StdDev | Ratio | RatioSD | Allocated | Alloc Ratio |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| QueryLsh | 1000 | 222.9 μs | 93.55 μs | 107.73 μs | 0.37 | 0.18 | 14.17 KB | 1.24 |
-| QueryFullScan | 1000 | 605.8 μs | 38.26 μs | 42.52 μs | 1.00 | 0.10 | 11.44 KB | 1.00 |
-| QueryLsh | 10000 | 3,251.0 μs | 1,656.01 μs | 1,840.65 μs | 0.66 | 0.37 | 11.38 KB | 0.14 |
-| QueryFullScan | 10000 | 4,918.1 μs | 225.25 μs | 250.36 μs | 1.00 | 0.07 | 82.62 KB | 1.00 |
+| QueryLsh | 1000 | 35.824 μs | 3.9134 μs | 6.9560 μs | 0.34 | 0.11 | 19.48 KB | 1.72 |
+| QueryFullScan | 1000 | 111.474 μs | 14.7661 μs | 26.2467 μs | 1.06 | 0.37 | 11.3 KB | 1.00 |
+| QueryLsh | 10000 | 465.513 μs | 12.1036 μs | 20.5528 μs | 0.80 | 0.19 | 134.16 KB | 1.64 |
+| QueryFullScan | 10000 | 626.534 μs | 106.1442 μs | 188.6713 μs | 1.08 | 0.42 | 81.86 KB | 1.00 |
 
 ## Графики по бенчмаркам
 
@@ -76,4 +81,4 @@
 
 ## Вывод
 
-Пакет `hw1` содержит воспроизводимый набор benchmark- и profiling-сценариев для `FileBucketHash`, `StaticPerfectHash` и `TextLSH`. Команда `make bench-collect` формирует CSV/Markdown-артефакты и сводку `benchmark_quality.md`, команда `make report` обновляет графики в `report/artifacts`. Такой процесс позволяет последовательно сравнивать производительность и память по единой методике на фиксированной сетке `N`.
+Текущие артефакты показывают, что в сценариях `FileBucketHash` и `StaticPerfectHash` baseline `Dictionary` заметно быстрее по latency, тогда как для `TextLSH` наблюдается ускорение относительно full scan на части диапазона `N` при более высокой стоимости по памяти.

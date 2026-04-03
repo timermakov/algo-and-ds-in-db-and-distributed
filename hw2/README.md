@@ -1,0 +1,67 @@
+# HW2
+
+## Части задания
+1) Geo KD-tree для точек `Lat/Lng`
+2) Вставка объектов `Insert`
+3) Пространственный поиск:
+   - `SearchRadius` (поиск в радиусе)
+   - `SearchKNearest` (k ближайших)
+
+## Запуск
+`make restore`
+`make build`
+`make test`
+`make bench`
+`make bench-collect`
+`make report`
+
+## Бенчмаркинг
+Бенчмарки настроены через `StableBenchmarkConfig` в проекте `benchmarks/Hw2.Benchmarks`.
+Текущая конфигурация использует `LaunchCount=1`, `WarmupCount=15`, `IterationCount=40`.
+В benchmark-методах применяются батчи операций (`OperationsPerInvoke`) для снижения накладных расходов таймера.
+Измерения делаются на логарифмической сетке `N`, а также по параметрам `RadiusMeters` и `K`.
+После `make bench-collect` формируется `report/artifacts/benchmark_quality.md` со значениями `Mean`, `StdDev` и `CV`.
+
+## Профайлинг
+CPU-трассировка `make profile-cpu PID=<pid>`.
+Дамп managed-кучи `make profile-memory PID=<pid>`.
+Async-профилирование `make profile-async PID=<pid>` с сохранением `async-counters.csv` и `async-trace.nettrace`.
+Flame graph `make profile-flamegraph PID=<pid>`, после чего `report/artifacts/cpu-flamegraph.speedscope.json` можно открыть в [speedscope](https://www.speedscope.app).
+Для полного набора артефактов `make profile-all PID=<pid>`.
+
+### Flamegraph
+
+`make profile-flamegraph-bench FILTER=*GeoKdTreeRadiusBenchmarks.QueryKdTreeRadius*`
+
+`make profile-flamegraph-bench FILTER=*GeoKdTree*`
+
+`make profile-flamegraph-bench FILTER=*GeoKdTree* DURATION=00:00:45`
+
+### Hotpath flamegraph
+Radius hotpath:
+`make profile-flamegraph-hotpath MODE=radius DURATION=00:02:00 N=100000`
+
+kNN hotpath:
+`make profile-flamegraph-hotpath MODE=knn DURATION=00:02:00 N=100000`
+
+Эти команды запускают `tools/Hw2.ProfileRunner` и дают чистый профиль `GeoKdTreeIndex`/`GeoDistance`.
+
+### Полный bench-профайлинг
+CPU trace:
+`make profile-cpu-bench FILTER=*GeoKdTree*`
+
+Memory gcdump:
+`make profile-memory-bench FILTER=*GeoKdTree*`
+
+Async counters + trace:
+`make profile-async-bench FILTER=*GeoKdTree*`
+
+Все артефакты за один прогон:
+`make profile-all-bench FILTER=*GeoKdTree*`
+
+Неинтерактивный режим:
+`make profile-all-bench FILTER=*GeoKdTree* DURATION=00:00:45`
+
+# Отчёт о работе
+
+[Ссылка на отчёт](report/REPORT.md)
