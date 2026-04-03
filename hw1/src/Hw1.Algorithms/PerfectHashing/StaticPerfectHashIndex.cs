@@ -127,7 +127,6 @@ public sealed class StaticPerfectHashIndex
             hash ^= (byte)(ch >> 8);
             hash *= 1099511628211UL;
         }
-
         return Mix64(hash);
     }
 
