@@ -34,7 +34,7 @@ def update_report_markdown(report_path: Path, preset: str, artifacts_dir: Path) 
         "- HNSW даст максимальный Recall при большем размере индекса.\n"
         "- IVF+PQ даст лучшую компактность и высокий QPS, но с потерей Recall.\n"
         "- LSH даст быстрый build и хороший компромисс по скорости/памяти.\n\n"
-        "## Критерии сравнения (явно)\n"
+        "## Критерии сравнения\n"
         "- Основные метрики: `Recall@100`, `QPS`, `latency_ms`, `build_s`, `size_mb`, `CV(QPS)`.\n"
         "- Правило выбора: сначала ограничение `Recall@100 >= 0.8` (если достижимо), затем максимум `QPS`, далее минимум `size_mb`, затем минимум `build_s`.\n\n"
         "## Результаты\n\n"
@@ -62,20 +62,33 @@ def update_report_markdown(report_path: Path, preset: str, artifacts_dir: Path) 
 
 def _write_summary_md(df: pd.DataFrame, best_json_path: Path, out_path: Path) -> None:
     lines: list[str] = []
-    lines.append("### Агрегированные метрики\n")
-    lines.append("| Алгоритм | Конфигурация | Recall@100 | QPS | Latency ms | Build s | Size MB | CV(QPS) |")
-    lines.append("|---|---|---:|---:|---:|---:|---:|---:|")
+    # Filter out flat from summary table
+    df = df[df["algorithm"] != "flat"].copy()
+    # 95% CI for n=3: t=4.303, sqrt(3)=1.732, factor = 4.303/1.732 ≈ 2.484
+    ci_factor = 2.484
+    df["ci_recall"] = ci_factor * df["std_recall"]
+    df["ci_qps"] = ci_factor * df["std_qps"]
+    df["ci_latency"] = ci_factor * df["std_latency_ms"]
+
+    lines.append("### Агрегированные метрики (с 95% доверительными интервалами)\n")
+    lines.append("| Алгоритм | Конфигурация | Recall@100 (CI) | QPS (CI) | Latency ms (CI) | Build s | Size MB |")
+    lines.append("|---|---|---:|---:|---:|---:|---:|")
     for _, row in df.sort_values(by=["algorithm", "mean_recall"], ascending=[True, False]).iterrows():
+        recall_ci = row["ci_recall"]
+        qps_ci = row["ci_qps"]
+        lat_ci = row["ci_latency"]
+        recall_str = f"{row['mean_recall']:.4f}±{recall_ci:.4f}" if recall_ci > 0 else f"{row['mean_recall']:.4f}"
+        qps_str = f"{row['mean_qps']:.0f}±{qps_ci:.0f}" if qps_ci > 0 else f"{row['mean_qps']:.0f}"
+        lat_str = f"{row['mean_latency_ms']:.4f}±{lat_ci:.4f}" if lat_ci > 0 else f"{row['mean_latency_ms']:.4f}"
         lines.append(
-            "| {alg} | `{cfg}` | {recall:.4f} | {qps:.0f} | {lat:.4f} | {build:.2f} | {size:.2f} | {cv:.4f} |".format(
+            "| {alg} | `{cfg}` | {recall} | {qps} | {lat} | {build:.2f} | {size:.2f} |".format(
                 alg=row["algorithm"],
                 cfg=row["config_json"],
-                recall=row["mean_recall"],
-                qps=row["mean_qps"],
-                lat=row["mean_latency_ms"],
+                recall=recall_str,
+                qps=qps_str,
+                lat=lat_str,
                 build=row["build_s"],
                 size=row["size_mb"],
-                cv=row["cv_qps"],
             )
         )
 
@@ -84,12 +97,14 @@ def _write_summary_md(df: pd.DataFrame, best_json_path: Path, out_path: Path) ->
         lines.append("\n### Лучшие конфигурации\n")
         for item in payload.get("rules", []):
             r = item["row"]
+            qps_ci_val = ci_factor * r["cv_qps"] * r["mean_qps"] if "cv_qps" in r else 0
+            qps_str = f"{r['mean_qps']:.0f}±{qps_ci_val:.0f}" if qps_ci_val > 1 else f"{r['mean_qps']:.0f}"
             lines.append(
-                "- **{alg}**: `{cfg}` | recall={rec:.4f}, qps={qps:.0f}, size={size:.2f}MB, build={build:.2f}s ({rule})".format(
+                "- **{alg}**: `{cfg}` | recall={rec:.4f}, qps={qps}, size={size:.2f}MB, build={build:.2f}s ({rule})".format(
                     alg=item["algorithm"],
                     cfg=json.dumps(r["config"], ensure_ascii=False),
                     rec=r["mean_recall"],
-                    qps=r["mean_qps"],
+                    qps=qps_str,
                     size=r["size_mb"],
                     build=r["build_s"],
                     rule=item["selection_rule"],
@@ -100,6 +115,8 @@ def _write_summary_md(df: pd.DataFrame, best_json_path: Path, out_path: Path) ->
 
 def _plot_tradeoffs(df: pd.DataFrame, artifacts_dir: Path, preset: str) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    # Filter out flat baseline from plots
+    df = df[df["algorithm"] != "flat"]
     for alg, sub in df.groupby("algorithm"):
         axes[0].errorbar(
             sub["mean_recall"],
@@ -150,6 +167,9 @@ def _plot_parameter_sweeps(artifacts_dir: Path) -> None:
 
     coarse = pd.read_csv(coarse_path)
     fine = pd.read_csv(fine_path)
+    # Filter out flat baseline
+    coarse = coarse[coarse["algorithm"] != "flat"].copy()
+    fine = fine[fine["algorithm"] != "flat"].copy()
     coarse = _with_config_columns(coarse)
     fine = _with_config_columns(fine)
 
@@ -252,17 +272,22 @@ def _render_best_notes(best_json_path: Path) -> str:
 
     payload = json.loads(best_json_path.read_text(encoding="utf-8"))
     lines: list[str] = []
+    # 95% CI for n=3: t=4.303, sqrt(3)=1.732, factor = 4.303/1.732 ≈ 2.484
+    ci_factor = 2.484
     for item in payload.get("rules", []):
         row = item["row"]
+        qps_ci = ci_factor * row.get("cv_qps", 0) * row["mean_qps"]  # Convert CV back to std then CI
+        qps_str = f"{row['mean_qps']:.0f}±{qps_ci:.0f}" if qps_ci > 1 else f"{row['mean_qps']:.0f}"
         lines.append(
-            "- {alg}: выбрана `{cfg}`; recall={rec:.4f}, qps={qps:.0f}, size={size:.2f}MB, build={build:.2f}s.".format(
+            "- {alg}: выбрана `{cfg}`; recall={rec:.4f}, qps={qps}, size={size:.2f}MB, build={build:.2f}s.".format(
                 alg=item["algorithm"].upper(),
                 cfg=json.dumps(row["config"], ensure_ascii=False),
                 rec=row["mean_recall"],
-                qps=row["mean_qps"],
+                qps=qps_str,
                 size=row["size_mb"],
                 build=row["build_s"],
             )
         )
     lines.append("- Итоговый победитель определяется по явному критерию: recall-ограничение -> максимум QPS -> минимум размера и времени сборки.")
+    lines.append("- Доверительные интервалы (95% CI) рассчитаны для n=3 повторов (t=4.303).")
     return "\n".join(lines)

@@ -36,17 +36,6 @@ def run_benchmark(
 
     rows: list[dict[str, Any]] = []
     rows.extend(
-        _run_flat_baseline(
-            vectors=vectors,
-            query_vectors=query_vectors,
-            query_indices=query_indices,
-            ground_truth=ground_truth,
-            warmups=preset.eval.warmup_runs,
-            repeats=preset.eval.repeat_runs,
-            top_k=preset.data.top_k,
-        )
-    )
-    rows.extend(
         _run_grid(
             algorithm="lsh",
             grid=preset.lsh_grid,
@@ -100,44 +89,6 @@ def _setup_reproducibility(seed: int) -> None:
     np.random.seed(seed)
     # Keep deterministic behavior across repeated runs.
     faiss.omp_set_num_threads(1)
-
-
-def _run_flat_baseline(
-    vectors,
-    query_vectors,
-    query_indices,
-    ground_truth,
-    warmups: int,
-    repeats: int,
-    top_k: int,
-) -> list[dict[str, Any]]:
-    index = faiss.IndexFlatL2(vectors.shape[1])
-    index.add(vectors)
-    for _ in range(warmups):
-        evaluate_once(index, query_vectors, query_indices, ground_truth, top_k)
-    runs: list[RunMetrics] = []
-    for _ in range(repeats):
-        runs.append(evaluate_once(index, query_vectors, query_indices, ground_truth, top_k))
-    summary = summarize_runs(runs)
-    return [
-        {
-            "algorithm": "flat",
-            "config_json": json.dumps({"type": "IndexFlatL2"}, sort_keys=True),
-            "build_s": 0.0,
-            "size_mb": measure_index_size_mb(index),
-            "mean_recall": summary.mean_recall,
-            "std_recall": summary.std_recall,
-            "cv_recall": summary.cv_recall,
-            "mean_qps": summary.mean_qps,
-            "std_qps": summary.std_qps,
-            "cv_qps": summary.cv_qps,
-            "mean_latency_ms": summary.mean_latency_ms,
-            "std_latency_ms": summary.std_latency_ms,
-            "cv_latency_ms": summary.cv_latency_ms,
-            "repeats": repeats,
-            "warmups": warmups,
-        }
-    ]
 
 
 def _run_grid(

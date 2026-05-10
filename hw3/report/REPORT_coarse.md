@@ -1,7 +1,7 @@
 # Отчёт по HW3: ANN-бенчмарк
 
 ## Пресет
-- `final`
+- `coarse`
 
 ## Гипотезы
 - HNSW даст максимальный Recall при большем размере индекса.
@@ -18,22 +18,30 @@
 
 | Алгоритм | Конфигурация | Recall@100 (CI) | QPS (CI) | Latency ms (CI) | Build s | Size MB |
 |---|---|---:|---:|---:|---:|---:|
-| hnsw | `{"ef_construction": 100, "ef_search": 128, "m": 16}` | 0.9657 | 2038±31 | 0.4907±0.0074 | 20.16 | 153.37 |
-| ivfpq | `{"m_pq": 48, "nlist": 1024, "nprobe": 24, "pq_bits": 8}` | 0.4841 | 6519±296 | 0.1534±0.0069 | 18.10 | 6.43 |
-| lsh | `{"nbits": 1024}` | 0.5056 | 1988±147 | 0.5034±0.0367 | 0.61 | 9.10 |
+| hnsw | `{"ef_construction": 100, "ef_search": 128, "m": 16}` | 0.9657 | 2047±79 | 0.4887±0.0189 | 19.90 | 153.37 |
+| hnsw | `{"ef_construction": 100, "ef_search": 128, "m": 8}` | 0.9187 | 2851±10 | 0.3507±0.0013 | 16.41 | 150.33 |
+| hnsw | `{"ef_construction": 100, "ef_search": 64, "m": 16}` | 0.9081 | 3523±41 | 0.2838±0.0033 | 20.17 | 153.37 |
+| hnsw | `{"ef_construction": 100, "ef_search": 64, "m": 8}` | 0.8303 | 4771±99 | 0.2096±0.0043 | 19.02 | 150.33 |
+| ivfpq | `{"m_pq": 48, "nlist": 1024, "nprobe": 32, "pq_bits": 8}` | 0.4878 | 5368±68 | 0.1863±0.0024 | 16.45 | 6.43 |
+| ivfpq | `{"m_pq": 48, "nlist": 512, "nprobe": 32, "pq_bits": 8}` | 0.4863 | 4743±694 | 0.2116±0.0312 | 14.72 | 4.92 |
+| ivfpq | `{"m_pq": 48, "nlist": 512, "nprobe": 8, "pq_bits": 8}` | 0.4595 | 11584±649 | 0.0864±0.0049 | 15.12 | 4.92 |
+| ivfpq | `{"m_pq": 48, "nlist": 1024, "nprobe": 8, "pq_bits": 8}` | 0.4438 | 12404±373 | 0.0806±0.0024 | 16.37 | 6.43 |
+| lsh | `{"nbits": 2048}` | 0.6328 | 688±138 | 1.4627±0.2927 | 1.65 | 18.21 |
+| lsh | `{"nbits": 1024}` | 0.5056 | 1666±53 | 0.6004±0.0190 | 0.45 | 9.10 |
+| lsh | `{"nbits": 512}` | 0.3543 | 4574±101 | 0.2186±0.0049 | 0.24 | 4.55 |
 
 ### Лучшие конфигурации
 
-- **lsh**: `{"nbits": 1024}` | recall=0.5056, qps=1988±147, size=9.10MB, build=0.61s (fallback: maximize recall then qps)
-- **hnsw**: `{"ef_construction": 100, "ef_search": 128, "m": 16}` | recall=0.9657, qps=2038±31, size=153.37MB, build=20.16s (recall>=0.8, then max qps)
-- **ivfpq**: `{"m_pq": 48, "nlist": 1024, "nprobe": 24, "pq_bits": 8}` | recall=0.4841, qps=6519±296, size=6.43MB, build=18.10s (fallback: maximize recall then qps)
+- **lsh**: `{"nbits": 2048}` | recall=0.6328, qps=688±138, size=18.21MB, build=1.65s (fallback: maximize recall then qps)
+- **hnsw**: `{"ef_construction": 100, "ef_search": 64, "m": 8}` | recall=0.8303, qps=4771±99, size=150.33MB, build=19.02s (recall>=0.8, then max qps)
+- **ivfpq**: `{"m_pq": 48, "nlist": 1024, "nprobe": 32, "pq_bits": 8}` | recall=0.4878, qps=5368±68, size=6.43MB, build=16.45s (fallback: maximize recall then qps)
 
 
 ## Интерпретация
 
-- LSH: выбрана `{"nbits": 1024}`; recall=0.5056, qps=1988±147, size=9.10MB, build=0.61s.
-- HNSW: выбрана `{"ef_construction": 100, "ef_search": 128, "m": 16}`; recall=0.9657, qps=2038±31, size=153.37MB, build=20.16s.
-- IVFPQ: выбрана `{"m_pq": 48, "nlist": 1024, "nprobe": 24, "pq_bits": 8}`; recall=0.4841, qps=6519±296, size=6.43MB, build=18.10s.
+- LSH: выбрана `{"nbits": 2048}`; recall=0.6328, qps=688±138, size=18.21MB, build=1.65s.
+- HNSW: выбрана `{"ef_construction": 100, "ef_search": 64, "m": 8}`; recall=0.8303, qps=4771±99, size=150.33MB, build=19.02s.
+- IVFPQ: выбрана `{"m_pq": 48, "nlist": 1024, "nprobe": 32, "pq_bits": 8}`; recall=0.4878, qps=5368±68, size=6.43MB, build=16.45s.
 - Итоговый победитель определяется по явному критерию: recall-ограничение -> максимум QPS -> минимум размера и времени сборки.
 - Доверительные интервалы (95% CI) рассчитаны для n=3 повторов (t=4.303).
 
@@ -60,4 +68,4 @@
 ![IVFPQ nprobe sweep](artifacts/ivfpq_nprobe_sweep.png)
 
 
-![График trade-off](artifacts/tradeoff_final.png)
+![График trade-off](artifacts/tradeoff_coarse.png)
