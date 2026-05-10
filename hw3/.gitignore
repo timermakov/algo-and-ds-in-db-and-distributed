@@ -1,0 +1,8 @@
+data/*.npy
+data/*.npz
+report/artifacts/*.csv
+report/artifacts/*.json
+report/artifacts/*.png
+report/artifacts/*.md
+__pycache__/
+*.pyc
