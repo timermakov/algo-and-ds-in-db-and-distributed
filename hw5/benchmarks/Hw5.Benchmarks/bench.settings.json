@@ -1,0 +1,6 @@
+{
+  "threadCounts": [1, 2, 4],
+  "warmupCount": 2,
+  "iterationCount": 5,
+  "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5"
+}

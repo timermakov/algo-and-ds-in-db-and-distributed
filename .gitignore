@@ -9,11 +9,11 @@ out/
 *.suo
 *.sln.docstates
 
-# VS Code settings
+# IDE settings
 .vscode/
-
-# Visual Studio settings
 .vs/
+.cursor/
+.idea/
 
 # ASP.NET Core environment files
 appsettings.Development.json

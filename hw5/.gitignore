@@ -1,0 +1,11 @@
+# Local benchmark overrides
+bench.local.json
+**/bench.local.json
+
+# Local appsettings override
+appsettings.Local.json
+**/appsettings.Local.json
+
+# Local artifacts
+BenchmarkDotNet.Artifacts/
+reports/profiles/
