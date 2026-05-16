@@ -3,10 +3,11 @@ using Hw5.SearchIndex.Tokenization;
 
 namespace Hw5.SearchIndex.Indexing;
 
-public sealed class InMemoryPositionalIndex
+public sealed class InMemoryPositionalIndex : IPositionalIndexReader
 {
     private readonly Dictionary<string, List<Posting>> _termPostings = new(StringComparer.Ordinal);
     private readonly Dictionary<int, SearchDocument> _documents = new();
+    private readonly Dictionary<int, int> _documentLengths = new();
 
     public int DocumentCount => _documents.Count;
 
@@ -22,6 +23,7 @@ public sealed class InMemoryPositionalIndex
 
         _documents[document.Id] = document;
         var tokens = SimpleTokenizer.Tokenize(document.Text);
+        _documentLengths[document.Id] = tokens.Count;
         var termPositions = new Dictionary<string, List<int>>(StringComparer.Ordinal);
         foreach (var token in tokens)
         {
@@ -69,4 +71,9 @@ public sealed class InMemoryPositionalIndex
     public bool TryGetDocument(int id, out SearchDocument document) => _documents.TryGetValue(id, out document!);
 
     public IReadOnlyCollection<string> Terms => _termPostings.Keys;
+
+    public int GetDocumentLength(int documentId)
+    {
+        return _documentLengths.TryGetValue(documentId, out var length) ? length : 0;
+    }
 }

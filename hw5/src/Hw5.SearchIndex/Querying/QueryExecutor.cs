@@ -4,7 +4,7 @@ namespace Hw5.SearchIndex.Querying;
 
 public sealed class QueryExecutor
 {
-    public QueryExecutionResult Execute(InMemoryPositionalIndex index, string query)
+    public QueryExecutionResult Execute(IPositionalIndexReader index, string query)
     {
         ArgumentNullException.ThrowIfNull(index);
         var ast = SearchQueryParser.ParseQuery(query);

@@ -4,13 +4,13 @@ namespace Hw5.SearchIndex.Querying;
 
 public sealed class QueryExecutionContext
 {
-    public QueryExecutionContext(InMemoryPositionalIndex index)
+    public QueryExecutionContext(IPositionalIndexReader index)
     {
         Index = index;
         Universe = [.. index.AllDocumentIds.Order()];
     }
 
-    public InMemoryPositionalIndex Index { get; }
+    public IPositionalIndexReader Index { get; }
 
     public IReadOnlyList<int> Universe { get; }
 }
