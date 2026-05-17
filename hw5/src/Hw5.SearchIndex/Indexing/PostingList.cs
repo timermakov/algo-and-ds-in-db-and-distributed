@@ -30,6 +30,19 @@ public sealed class PostingList
 
     public bool TryGetSkipIndex(int index, out int skipIndex) => _skipTable.TryGetValue(index, out skipIndex);
 
+    public bool TryGetPositionsForDocument(int documentId, out IReadOnlyList<int> positions)
+    {
+        var index = Array.BinarySearch(_documentIds, documentId);
+        if (index >= 0)
+        {
+            positions = _positions[index];
+            return true;
+        }
+
+        positions = [];
+        return false;
+    }
+
     private static Dictionary<int, int> BuildSkipTable(int count)
     {
         var table = new Dictionary<int, int>();

@@ -5,5 +5,5 @@ namespace Hw5.SearchIndex;
 /// </summary>
 public static class SearchIndexBootstrap
 {
-    public const string Version = "phase1-bootstrap";
+    public const string Version = "phase3-complete";
 }
