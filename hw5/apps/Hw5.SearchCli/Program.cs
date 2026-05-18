@@ -1,5 +1,4 @@
-﻿using Hw5.SearchIndex;
+﻿using Hw5.SearchCli;
 
-Console.WriteLine("Hw5.SearchCli bootstrap");
-Console.WriteLine($"Library marker: {SearchIndexBootstrap.Version}");
-Console.WriteLine("Interactive REPL is planned for later phases.");
+using var repl = new SearchCliRepl(Console.In, Console.Out);
+repl.Run();
