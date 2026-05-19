@@ -1,6 +1,7 @@
 {
-  "threadCounts": [1, 2, 4],
-  "warmupCount": 2,
-  "iterationCount": 5,
+  "documentCount": 2000,
+  "termsPerDocument": 24,
+  "warmupCount": 3,
+  "iterationCount": 8,
   "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5"
 }

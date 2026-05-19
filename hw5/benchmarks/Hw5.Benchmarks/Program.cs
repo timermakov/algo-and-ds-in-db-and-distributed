@@ -1,5 +1,13 @@
-﻿using Hw5.SearchIndex;
+﻿using BenchmarkDotNet.Running;
 
-Console.WriteLine("Hw5.Benchmarks bootstrap");
-Console.WriteLine($"Library marker: {SearchIndexBootstrap.Version}");
-Console.WriteLine("Benchmark classes will be added in later phases.");
+namespace Hw5.Benchmarks;
+
+internal static class Program
+{
+    private static int Main(string[] args)
+    {
+        var config = new StableBenchmarkConfig();
+        BenchmarkSwitcher.FromAssembly(typeof(IndexQueryBenchmarks).Assembly).Run(args, config);
+        return 0;
+    }
+}
