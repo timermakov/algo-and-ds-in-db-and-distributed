@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Hw5.SearchIndex\Hw5.SearchIndex.csproj" />
+    <ProjectReference Include="..\..\apps\Hw5.SearchCli\Hw5.SearchCli.csproj" />
   </ItemGroup>
 
 </Project>
