@@ -6,8 +6,7 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
-        var config = new StableBenchmarkConfig();
-        BenchmarkSwitcher.FromAssembly(typeof(IndexQueryBenchmarks).Assembly).Run(args, config);
+        BenchmarkSwitcher.FromAssembly(typeof(IndexQueryBenchmarks).Assembly).Run(args, StableBenchmarkConfig.Create());
         return 0;
     }
 }

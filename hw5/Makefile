@@ -4,7 +4,7 @@ SHELL = cmd.exe
 SOLUTION = Hw5.sln
 DOTNET = dotnet
 
-.PHONY: check-sdk restore build test bench-build bench bench-smoke bench-kill run-cli profile-help profile-run clean
+.PHONY: check-sdk restore build test bench-build bench bench-smoke bench-kill bench-collect bench-report graphs compression-stats run-cli profile-help profile-run profile-trace clean
 
 check-sdk:
 	@powershell -NoProfile -Command "$$v = & '$(DOTNET)' --version; if ($$v -notmatch '^10\.') { Write-Host '.NET 10 SDK required'; exit 1 }"
@@ -29,6 +29,17 @@ bench-kill:
 bench: bench-kill bench-build
 	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*IndexQuery*"
 
+bench-collect:
+	tools\collect-bench.cmd
+
+compression-stats: build
+	$(DOTNET) run -c Release --project tools\Hw5.ProfileRunner --no-build -- --compression-stats --docs 2000
+
+graphs:
+	python scripts\plot_bench.py
+
+bench-report: bench bench-collect compression-stats graphs
+
 bench-smoke: bench-kill bench-build
 	set HW5_BENCH_SMOKE=1&& $(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*IndexQuery*"
 
@@ -36,10 +47,15 @@ run-cli: build
 	$(DOTNET) run -c Release --project apps\Hw5.SearchCli --no-build --
 
 profile-help:
-	@echo make profile-run  - tight query loop without BDN
+	@echo make profile-run    - tight query loop without BDN
+	@echo make profile-trace  - speedscope + nettrace in reports\profiles\
 
 profile-run: build
 	$(DOTNET) run -c Release --project tools\Hw5.ProfileRunner --no-build -- --docs 2000 --iterations 3000
+
+profile-trace: build
+	if not exist reports\profiles mkdir reports\profiles
+	powershell -NoProfile -ExecutionPolicy Bypass -File scripts\profile.ps1
 
 clean:
 	$(DOTNET) clean $(SOLUTION) -c Release

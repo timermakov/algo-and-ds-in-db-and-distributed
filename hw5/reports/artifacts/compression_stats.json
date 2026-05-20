@@ -1,0 +1,8 @@
+{
+  "documentCount": 2000,
+  "termsPerDocument": 24,
+  "naivePostingBytes": 265820,
+  "segmentFileBytes": 61173,
+  "compressionRatio": 0.2301,
+  "spaceSavingsPercent": 76.99
+}

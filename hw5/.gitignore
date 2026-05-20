@@ -8,4 +8,5 @@ appsettings.Local.json
 
 # Local artifacts
 BenchmarkDotNet.Artifacts/
-reports/profiles/
+reports/profiles/*
+!reports/profiles/README.md

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Hw5.Benchmarks.IndexQueryBenchmarks-20260529-060825</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValley2)
+12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
+.NET SDK 10.0.201
+  [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+  Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
+</code></pre>
+<pre><code>LaunchCount=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method       </th><th>Job</th><th>IterationCount</th><th>WarmupCount</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>Memory_AndQuery</td><td>Cold</td><td>4</td><td>0</td><td>1,072.6 &mu;s</td><td>2,208.88 &mu;s</td><td>341.83 &mu;s</td><td>1.07</td><td>0.42</td><td>281.2500</td><td>88.8672</td><td>-</td><td>1.69 MB</td><td>1.00</td>
+</tr><tr><td>DiskMmap_AndQuery</td><td>Cold</td><td>4</td><td>0</td><td>1,243.8 &mu;s</td><td>82.76 &mu;s</td><td>12.81 &mu;s</td><td>1.24</td><td>0.32</td><td>359.3750</td><td>166.0156</td><td>-</td><td>2.16 MB</td><td>1.28</td>
+</tr><tr><td>Memory_NearAdjQuery</td><td>Cold</td><td>4</td><td>0</td><td>969.4 &mu;s</td><td>100.15 &mu;s</td><td>15.50 &mu;s</td><td>0.97</td><td>0.25</td><td>269.5313</td><td>91.7969</td><td>-</td><td>1.62 MB</td><td>0.96</td>
+</tr><tr><td>Memory_Bm25Top10</td><td>Cold</td><td>4</td><td>0</td><td>2,132.3 &mu;s</td><td>638.89 &mu;s</td><td>98.87 &mu;s</td><td>2.13</td><td>0.55</td><td>341.7969</td><td>97.6563</td><td>29.2969</td><td>1.97 MB</td><td>1.17</td>
+</tr><tr><td>Memory_AndQuery</td><td>Warm</td><td>8</td><td>3</td><td>811.9 &mu;s</td><td>47.02 &mu;s</td><td>24.59 &mu;s</td><td>1.00</td><td>0.04</td><td>281.2500</td><td>89.8438</td><td>-</td><td>1.69 MB</td><td>1.00</td>
+</tr><tr><td>DiskMmap_AndQuery</td><td>Warm</td><td>8</td><td>3</td><td>1,159.3 &mu;s</td><td>46.81 &mu;s</td><td>20.78 &mu;s</td><td>1.43</td><td>0.05</td><td>359.3750</td><td>166.0156</td><td>-</td><td>2.16 MB</td><td>1.28</td>
+</tr><tr><td>Memory_NearAdjQuery</td><td>Warm</td><td>8</td><td>3</td><td>928.9 &mu;s</td><td>161.30 &mu;s</td><td>84.36 &mu;s</td><td>1.15</td><td>0.10</td><td>269.5313</td><td>91.7969</td><td>-</td><td>1.62 MB</td><td>0.96</td>
+</tr><tr><td>Memory_Bm25Top10</td><td>Warm</td><td>8</td><td>3</td><td>1,911.9 &mu;s</td><td>148.67 &mu;s</td><td>66.01 &mu;s</td><td>2.36</td><td>0.10</td><td>341.7969</td><td>97.6563</td><td>29.2969</td><td>1.97 MB</td><td>1.17</td>
+</tr></tbody></table>
+</body>
+</html>
