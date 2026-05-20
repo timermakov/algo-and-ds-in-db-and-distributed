@@ -1,0 +1,27 @@
+@startuml hw5-architecture
+title HW5 — архитектура поискового движка
+
+package "Приложение" {
+  [SearchCli REPL] as cli
+}
+
+package "Hw5.SearchIndex" {
+  [SimpleTokenizer] as tok
+  [InMemoryPositionalIndex] as mem
+  [DiskSegmentIndex + mmap] as disk
+  [SearchQueryParser] as parser
+  [QueryExecutor] as exec
+  [Ranker TF-IDF/BM25] as rank
+  [SearchService] as svc
+}
+
+cli --> svc
+svc --> parser
+svc --> exec
+svc --> rank
+exec --> mem
+exec --> disk
+mem --> tok
+disk --> tok
+
+@enduml

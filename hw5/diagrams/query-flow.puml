@@ -1,0 +1,20 @@
+@startuml hw5-query
+title Исполнение запроса
+
+start
+:Ввод строки запроса;
+:Parse → AST;
+:QueryExecutor обход AST;
+if (оператор?) then (AND/OR/NOT)
+  :PostingListOperators\n+ skip-переходы;
+elseif (ADJ/NEAR)
+  :позиционное сопоставление;
+else (TERM)
+  :чтение posting-list;
+endif
+:MatchSet кандидатов;
+:Ranker TopK (TF-IDF/BM25);
+:Выдача docId + score;
+stop
+
+@enduml

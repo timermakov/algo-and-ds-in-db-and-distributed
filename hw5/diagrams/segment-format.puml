@@ -1,0 +1,26 @@
+@startuml hw5-segment
+title Формат сегмента на диске
+
+rectangle "Header" as h {
+  card "magic + version"
+  card "term count"
+}
+
+rectangle "Term directory" as td {
+  card "term → offset"
+}
+
+rectangle "Posting blocks" as pb {
+  card "delta + bitpack doc ids"
+  card "positional payloads"
+}
+
+h --> td
+td --> pb
+
+note right of pb
+  Чтение через PagedMmapReader
+  без полной загрузки в RAM
+end note
+
+@enduml

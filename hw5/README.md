@@ -1,16 +1,16 @@
 # HW5 - Инвертированный индекс
 
-Каркас первой фазы для лабораторной 5 (`.NET 10`).
+Рабочая реализация на `.NET 10`: позиционный индекс, запросы, mmap-сегменты, ранжирование, CLI, бенчмарки.
 
 ## Структура
 
-- `src/Hw5.SearchIndex` - основная библиотека (заглушка на этапе M1)
-- `tests/Hw5.SearchIndex.Tests` - проект тестов xUnit
-- `benchmarks/Hw5.Benchmarks` - проект запуска BenchmarkDotNet
-- `apps/Hw5.SearchCli` - консольная оболочка CLI
-- `tools/Hw5.ProfileRunner` - оболочка для профилирования
-- `reports/` - каркас отчета и заметки по артефактам
-- `diagrams/` - заглушки под PlantUML/C4/BPMN
+- `src/Hw5.SearchIndex` — библиотека (in-memory + disk/mmap + parser + ranking)
+- `tests/Hw5.SearchIndex.Tests` — xUnit (unit, randomized oracle, CLI)
+- `benchmarks/Hw5.Benchmarks` — BenchmarkDotNet (Warm/Cold jobs)
+- `apps/Hw5.SearchCli` — интерактивный REPL
+- `tools/Hw5.ProfileRunner` — плотный цикл запросов без BDN
+- `reports/` — отчёт `REPORT.md`
+- `diagrams/` — PlantUML
 
 ## Команды (CMD)
 
@@ -20,18 +20,18 @@
 make restore
 make build
 make test
-make bench-build
+make bench-smoke
 make bench
 make run-cli
 make profile-run
 ```
 
-Прямые аналоги:
+## Функциональность
 
-```text
-dotnet restore Hw5.sln
-dotnet build Hw5.sln -c Release
-dotnet test Hw5.sln -c Release
-```
+- позиционный in-memory индекс и skip-переходы;
+- парсер `Sprache` + AST (`AND/OR/NOT/ADJ/NEAR`);
+- сегмент на диске, mmap, delta + bitpacking;
+- ранжирование `TF-IDF` / `BM25`, TopK;
+- REPL: `:add`, `:build`, `:save`, `:load`, `:mode`, `:topk`, `:stats`.
 
-Полная реализация функциональности (индекс/запросы/сжатие/ранжирование/содержимое отчета) осознанно перенесена на следующие фазы.
+Подробности и таблицы — в `reports/REPORT.md`.

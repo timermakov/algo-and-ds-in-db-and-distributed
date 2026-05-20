@@ -1,3 +1,13 @@
-# Заглушка диаграмм
+# Диаграммы HW5
 
-Диаграммы PlantUML UML/C4/BPMN будут добавлены на следующих фазах.
+PlantUML-исходники:
+
+- `architecture.puml` — компоненты и зависимости
+- `segment-format.puml` — бинарный layout сегмента
+- `query-flow.puml` — поток исполнения запроса
+
+Рендер (при установленном PlantUML):
+
+```text
+plantuml -tpng architecture.puml segment-format.puml query-flow.puml
+```
