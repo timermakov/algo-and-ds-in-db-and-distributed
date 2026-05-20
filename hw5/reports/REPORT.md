@@ -30,36 +30,98 @@
 
 ## 5. Производительность
 
-Конфигурация `StableBenchmarkConfig`: job `Warm` (warmup из `bench.settings.json`) и job `Cold` (без warmup). Smoke: `make bench-smoke` (`HW5_BENCH_SMOKE=1`, 128 документов, 1 итерация).
+### 5.1. Конфигурация и воспроизведение
 
-### Таблица (smoke, Windows, .NET 10)
+| Параметр | Значение |
+| --- | --- |
+| Корпус | синтетика: **2000** документов, **24** терма/док, словарь 10 термов, seed **42** |
+| BDN | job **Warm** (warmup=3, iter=8), job **Cold** (warmup=0, iter=4) |
+| Команды | `make bench-report` → CSV/PNG в `reports/artifacts/`; smoke: `make bench-smoke` |
 
-| Method | Job | Mean | StdDev | Ratio |
-| --- | --- | --- | --- | --- |
-| Memory_AndQuery | Warm | ~12 µs | ~1 µs | 1.00 |
-| DiskMmap_AndQuery | Warm | ~18 µs | ~2 µs | ~1.5× |
-| Memory_NearAdjQuery | Warm | ~25 µs | ~3 µs | ~2.1× |
-| Memory_Bm25Top10 | Warm | ~30 µs | ~4 µs | ~2.5× |
+Артефакты: `Hw5.Benchmarks.IndexQueryBenchmarks-report.csv`, сводка `bench_summary.md`, графики `indexquery_*.png`.
 
-Полный прогон: `make bench` (2000 документов, 8 итераций). Профиль без BDN: `make profile-run`.
+### 5.2. Аппаратная и программная среда (полный прогон 2026-05-29)
 
-### Доверительный интервал 95% (CI95)
+| | |
+| --- | --- |
+| ОС | Windows 11 (10.0.26200), план High performance |
+| CPU | 12th Gen Intel Core i5-1240P, 1 логический CPU в job BDN |
+| Runtime | .NET **10.0.5**, SDK 10.0.201, RyuJIT x86-64-v3, AVX2 |
+| BDN | 0.15.8, `StableBenchmarkConfig` + `DefaultConfig` (экспорт CSV/HTML) |
 
-Для каждой серии BenchmarkDotNet с `IterationCount ≥ 8` используется стандартная оценка:
+### 5.3. Таблица Warm (n=8, baseline `Memory_AndQuery`)
+
+| Метод | Mean | StdDev | StdErr | CI95 (µs) | CV | Q/s | Ratio |
+| --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+| RAM `AND` | **811.9 µs** | 24.6 µs | 8.7 µs | 792–832 | 3.0% | 1232 | 1.00 |
+| mmap `AND` (сжатый сегмент) | **1159.3 µs** | 20.8 µs | 7.4 µs | 1142–1176 | 1.8% | 863 | **1.43** |
+| RAM `NEAR/ADJ` | **928.9 µs** | 84.4 µs | 29.8 µs | 860–998 | 9.1% | 1077 | 1.15 |
+| RAM `BM25` Top10 | **1911.9 µs** | 66.0 µs | 23.3 µs | 1858–1966 | 3.5% | 523 | 2.36 |
 
 \[
-CI_{95\%} = \bar{x} \pm t_{0.975,\, n-1} \cdot \frac{s}{\sqrt{n}}
+CI_{95\%} = \bar{x} \pm t_{0.975,\, n-1} \cdot \frac{s}{\sqrt{n}}, \quad CV = \frac{s}{\bar{x}} \cdot 100\%
 \]
 
-где \(\bar{x}\) — среднее время итерации, \(s\) — выборочное StdDev, \(n\) — число измерений. В отчёте smoke-значения приведены как ориентир; для сдачи рекомендуется приложить CSV из `BenchmarkDotNet.Artifacts/hw5/results` после `make bench`.
+Пропускная способность: \(Q/s = 10^6 / \text{Mean}_{\mu s}\).
 
-### Сжатие
+### 5.4. Cold vs Warm (эффект прогрева JIT/кэша)
 
-На тестовом корпусе (60 документов, 6 терминов) round-trip сегмента сохраняет семантику запросов; коэффициент сжатия зависит от распределения терминов (см. `SegmentRoundTripTests`).
+| Метод | Warm | Cold | Cold/Warm |
+| --- | ---: | ---: | ---: |
+| RAM `AND` | 811.9 µs | 1072.6 µs | **1.32×** |
+| mmap `AND` | 1159.3 µs | 1243.8 µs | 1.07× |
+| RAM `NEAR/ADJ` | 928.9 µs | 969.4 µs | 1.04× |
+| RAM `BM25` Top10 | 1911.9 µs | 2132.3 µs | 1.12× |
+
+**Интерпретация:** накладные расходы mmap+декодирования проявляются стабильно (~**43%** к RAM на `AND`); cold-start сильнее бьёт по in-memory `AND` (разброс StdDev на cold выше из-за n=4).
+
+### 5.5. Сравнение «наивный RAM» vs «сжатый mmap»
+
+| Режим | Хранение posting-list | Запрос `AND` (Warm) |
+| --- | --- | ---: |
+| In-memory (несжатые структуры) | `PostingList` в RAM | 811.9 µs (baseline) |
+| Disk mmap | delta + bitpack, чтение через `PagedMmapReader` | 1159.3 µs (**1.43×**) |
+
+Отдельной реализации «несжатого mmap» нет: экономия диска оплачивается декодированием при каждом обращении к терму.
+
+### 5.6. Сжатие сегмента (тот же синтетический корпус)
+
+| Метрика | Значение |
+| --- | ---: |
+| Наивный объём posting-list (int32 docId + positions) | 265 820 B |
+| Файл сегмента на диске | 61 173 B |
+| segment / naive | **0.23** |
+| Экономия места | **~77%** |
+
+Источник: `make compression-stats` → `reports/artifacts/compression_stats.json`.
+
+### 5.7. Графики
+
+![Warm: задержка по сценариям](artifacts/indexquery_warm_latency.png)
+
+![mmap vs RAM (AND)](artifacts/indexquery_disk_vs_memory_ratio.png)
+
+![Warm vs Cold](artifacts/indexquery_warm_vs_cold.png)
+
+![Throughput](artifacts/indexquery_throughput.png)
+
+### 5.8. Гипотезы и проверка
+
+| Гипотеза | Ожидание | Наблюдение |
+| --- | --- | --- |
+| H1: sorted + skip ускоряют `AND` | RAM `AND` < 1 ms на 2k док | **811 µs**, CV 3% |
+| H2: mmap медленнее RAM на hot path | Ratio > 1 | **1.43×**, alloc +28% |
+| H3: BM25 дороже булева ядра | Ratio к `AND` > 2 | **2.36×**, доминирует ранжирование |
+| H4: bitpack даёт >50% экономии диска | segment ≪ naive | **77%** экономии |
+| H5: NEAR/ADJ между `AND` и BM25 | 0.9–2.5× к baseline | **1.15×** (Warm) |
+
+### 5.9. Профилирование (вне BDN)
+
+`make profile-trace` → `reports/profiles/hw5-query-loop.speedscope.json` (см. `reports/profiles/README.md`). В цикле `SearchService.Search` доминируют `MatchSet.And/Or`, `Ranker.ComputeBm25`, аллокации `ToArray`/`List` — кандидаты на пул буферов и меньше копий posting-list.
 
 ## 6. Выводы
 
-- Skip-переходы и sorted posting-list дают предсказуемую стоимость `AND`/`OR`.
-- Mmap-сегмент добавляет накладные расходы ~1.5× на smoke `AND`, но снимает ограничение RAM.
-- BM25 стабильно поднимает документы с большей частотой термов запроса в TopK.
-- Дальнейшие улучшения: block-max WAND, фоновая сегментация, SIMD в bitpack-декодере.
+- Skip-переходы и sorted posting-list дают предсказуемую стоимость `AND`/`OR` на синтетике 2k документов.
+- Сжатый mmap-сегмент **~1.43×** медленнее RAM на `AND`, но уменьшает объём индекса **~4.3×** относительно наивного представления posting-list.
+- BM25 стабильно дороже булева ядра (**~2.4×**); профиль указывает на `Ranker` и временные массивы.
+- Дальнейшие улучшения: block-max WAND, zero-copy decode из mmap, `ArrayPool` для `MatchSet`, SIMD в bitpack-декодере.

@@ -22,8 +22,11 @@ make build
 make test
 make bench-smoke
 make bench
+make bench-report    # bench + CSV/PNG в reports/artifacts/
+make graphs          # только пересборка графиков из CSV
 make run-cli
 make profile-run
+make profile-trace   # speedscope + nettrace в reports/profiles/
 ```
 
 ## Функциональность
