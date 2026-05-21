@@ -1,0 +1,7 @@
+﻿align AND ndash
+align OR right
+align AND NOT category
+align ADJ ndash
+align NEAR/3 right
+(align AND ndash) OR style
+american NEAR/2 thumb AND NOT https

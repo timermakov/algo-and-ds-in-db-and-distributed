@@ -10,3 +10,9 @@ appsettings.Local.json
 BenchmarkDotNet.Artifacts/
 reports/profiles/*
 !reports/profiles/README.md
+
+# Wikipedia corpus (large)
+data/raw/
+data/processed/
+!data/dataset.manifest.json
+!data/queries/
