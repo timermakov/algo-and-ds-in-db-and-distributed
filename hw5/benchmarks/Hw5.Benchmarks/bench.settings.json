@@ -1,7 +1,23 @@
 {
-  "documentCount": 2000,
+  "documentCounts": [2000, 10000],
+  "wikiDocumentLimits": [5000],
   "termsPerDocument": 24,
+  "syntheticSeed": 42,
   "warmupCount": 3,
   "iterationCount": 8,
-  "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5"
+  "coldIterationCount": 8,
+  "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5",
+  "wikipediaProcessedPath": "data/processed/docs.jsonl",
+  "operationsPerInvoke": 32,
+  "corpusProfiles": {
+    "synthetic": {
+      "seed": 42,
+      "termsPerDocument": 24
+    },
+    "wikipedia": {
+      "manifestPath": "data/dataset.manifest.json",
+      "processedPath": "data/processed/docs.jsonl",
+      "limits": [5000]
+    }
+  }
 }

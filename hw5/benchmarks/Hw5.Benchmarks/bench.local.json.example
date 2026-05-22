@@ -1,0 +1,10 @@
+{
+  "documentCounts": [512],
+  "wikiDocumentLimits": [512],
+  "termsPerDocument": 12,
+  "warmupCount": 0,
+  "iterationCount": 1,
+  "coldIterationCount": 1,
+  "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5",
+  "wikipediaProcessedPath": "data/processed/docs.jsonl"
+}
