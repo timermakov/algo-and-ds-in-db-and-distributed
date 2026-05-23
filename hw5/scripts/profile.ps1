@@ -1,7 +1,9 @@
 # CPU profile (Speedscope + nettrace) for Hw5.ProfileRunner tight loop.
-# Usage: .\scripts\profile.ps1 -Seconds 25
+# Usage: .\scripts\profile.ps1 -Mode and|mmap|bm25 -Seconds 25
 
 param(
+    [ValidateSet("and", "mmap", "bm25")]
+    [string]$Mode = "and",
     [int]$Docs = 2000,
     [int]$Iterations = 3000,
     [int]$Seconds = 25
@@ -20,7 +22,7 @@ if (-not (Test-Path $dll)) {
 $outDir = Join-Path $root "reports\profiles"
 New-Item -ItemType Directory -Force -Path $outDir | Out-Null
 
-$base = Join-Path $outDir "hw5-query-loop"
+$base = Join-Path $outDir "hw5-query-$Mode"
 $trace = "$base.nettrace"
 $speedscope = "$base.speedscope.json"
 $topN = "$base-topN.txt"
@@ -32,11 +34,12 @@ $collectArgs = @(
     "--profile", "dotnet-sampled-thread-time",
     "--",
     "dotnet", "exec", $dll,
+    "--mode", $Mode,
     "--docs", "$Docs",
     "--iterations", "$Iterations"
 )
 
-Write-Host "Collecting -> $trace (docs=$Docs, iterations=$Iterations, ~${Seconds}s wall)"
+Write-Host "Collecting -> $trace (mode=$Mode, docs=$Docs, iterations=$Iterations, ~${Seconds}s wall)"
 & dotnet @collectArgs
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
