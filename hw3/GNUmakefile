@@ -3,7 +3,7 @@ ROOT=.
 DATA_DIR=$(ROOT)/data
 ARTIFACTS_DIR=$(ROOT)/report/artifacts
 
-.PHONY: install prepare ground-truth bench-smoke bench-coarse bench-fine bench report-smoke report-coarse report-fine report-final report all clean
+.PHONY: install prepare ground-truth bench-smoke bench-coarse bench-fine bench bench-final bench-ivfpq bench-ivf-flat report-smoke report-coarse report-fine report-final report all clean
 
 install:
 	@$(PYTHON) -m pip install -r requirements.txt
@@ -26,6 +26,14 @@ bench-fine:
 bench:
 	@$(PYTHON) scripts/run_benchmarks.py --data-dir "$(DATA_DIR)" --artifacts-dir "$(ARTIFACTS_DIR)" --preset final
 
+bench-final: bench
+
+bench-ivfpq:
+	@$(PYTHON) scripts/run_benchmarks.py --data-dir "$(DATA_DIR)" --artifacts-dir "$(ARTIFACTS_DIR)" --preset final --algorithms ivfpq --max-single-search-s 180
+
+bench-ivf-flat:
+	@$(PYTHON) scripts/run_benchmarks.py --data-dir "$(DATA_DIR)" --artifacts-dir "$(ARTIFACTS_DIR)" --preset final --algorithms ivf_flat --max-single-search-s 180
+
 report-smoke:
 	@$(PYTHON) scripts/generate_report.py --artifacts-dir "$(ARTIFACTS_DIR)" --report-path report/REPORT.md --preset smoke
 
@@ -40,7 +48,7 @@ report-final:
 
 report: report-final
 
-all: prepare ground-truth bench-coarse bench-fine bench report
+all: prepare ground-truth bench-coarse bench-fine bench-final report
 
 clean:
 	@$(PYTHON) -c "import pathlib; [p.unlink() for p in pathlib.Path('$(ARTIFACTS_DIR)').glob('*.csv')]; [p.unlink() for p in pathlib.Path('$(ARTIFACTS_DIR)').glob('*.json')]; [p.unlink() for p in pathlib.Path('$(ARTIFACTS_DIR)').glob('*.png')]; [p.unlink() for p in pathlib.Path('$(ARTIFACTS_DIR)').glob('*.md')]"

@@ -40,6 +40,18 @@ def build_ivfpq(vectors: np.ndarray, cfg: IvfPqConfig) -> tuple[faiss.IndexIVFPQ
     return index, perf_counter() - t0
 
 
+def build_ivf_flat(vectors: np.ndarray, nlist: int, nprobe: int) -> tuple[faiss.IndexIVFFlat, float]:
+    """Build IVF without PQ (IndexIVFFlat) - exact L2 within clusters."""
+    dim = vectors.shape[1]
+    t0 = perf_counter()
+    quantizer = faiss.IndexFlatL2(dim)
+    index = faiss.IndexIVFFlat(quantizer, dim, nlist)
+    index.train(vectors)
+    index.add(vectors)
+    index.nprobe = nprobe
+    return index, perf_counter() - t0
+
+
 def measure_index_size_mb(index: faiss.Index) -> float:
     return float(faiss.serialize_index(index).nbytes / (1024 * 1024))
 

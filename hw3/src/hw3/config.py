@@ -43,6 +43,13 @@ class IvfPqConfig:
 
 
 @dataclass(frozen=True)
+class IvfFlatConfig:
+    """IVF without PQ - exact L2 within clusters."""
+    nlist: int
+    nprobe: int
+
+
+@dataclass(frozen=True)
 class LshConfig:
     nbits: int
 
@@ -55,69 +62,107 @@ class BenchmarkPreset:
     lsh_grid: list[LshConfig]
     hnsw_grid: list[HnswConfig]
     ivfpq_grid: list[IvfPqConfig]
+    ivf_flat_grid: list[IvfFlatConfig] | None = None
 
 
+# База под целевой режим: 100k векторов, 10k запросов.
 BASE_DATA_CONFIG = DataConfig(
     random_seed=42,
-    corpus_size=50_000,
+    corpus_size=100_000,
     query_size=10_000,
-    sample_scan_limit=50_000,
+    sample_scan_limit=100_000,
 )
 
 
 def get_preset(name: PresetName) -> BenchmarkPreset:
     if name == "smoke":
+        # Быстрый sanity-check на одной конфигурации алгоритма.
         return BenchmarkPreset(
             name=name,
             data=BASE_DATA_CONFIG,
             eval=EvalConfig(warmup_runs=1, repeat_runs=3),
             lsh_grid=[LshConfig(nbits=512)],
             hnsw_grid=[HnswConfig(m=16, ef_construction=100, ef_search=128)],
-            ivfpq_grid=[IvfPqConfig(nlist=512, nprobe=16, m_pq=48)],
+            ivfpq_grid=[IvfPqConfig(nlist=1024, nprobe=64, m_pq=16, pq_bits=8)],
+            ivf_flat_grid=[IvfFlatConfig(nlist=1024, nprobe=64)],
         )
 
     if name == "coarse":
+        # Умеренно широкая сетка: много точек без взрывного времени.
         return BenchmarkPreset(
             name=name,
             data=BASE_DATA_CONFIG,
             eval=EvalConfig(warmup_runs=1, repeat_runs=3),
-            lsh_grid=[LshConfig(nbits=v) for v in [512, 1024, 2048]],
+            lsh_grid=[LshConfig(nbits=v) for v in [256, 512, 1024, 2048, 4096]],
             hnsw_grid=[
-                HnswConfig(m=m, ef_construction=100, ef_search=ef)
-                for m in [8, 16]
-                for ef in [64, 128]
+                HnswConfig(m=m, ef_construction=150, ef_search=efs)
+                for m in [8, 16, 32]
+                for efs in [32, 64, 128]
             ],
             ivfpq_grid=[
-                IvfPqConfig(nlist=nlist, nprobe=nprobe, m_pq=48)
-                for nlist in [512, 1024]
-                for nprobe in [8, 32]
+                IvfPqConfig(nlist=1024, nprobe=nprobe, m_pq=mpq, pq_bits=pq_bits)
+                for nprobe in [16, 32, 64, 128]
+                for mpq in [8, 16, 24]
+                for pq_bits in [8, 10]
+            ],
+            ivf_flat_grid=[
+                IvfFlatConfig(nlist=1024, nprobe=nprobe)
+                for nprobe in [16, 32, 64, 128, 256, 512]
             ],
         )
 
     if name == "fine":
+        # Локальное уточнение вокруг кандидатов с лучшим quality/speed.
         return BenchmarkPreset(
             name=name,
             data=BASE_DATA_CONFIG,
             eval=EvalConfig(warmup_runs=1, repeat_runs=3),
-            lsh_grid=[LshConfig(nbits=v) for v in [1024, 2048]],
+            lsh_grid=[LshConfig(nbits=v) for v in [1024, 1536, 2048]],
             hnsw_grid=[
-                HnswConfig(m=16, ef_construction=100, ef_search=ef)
-                for ef in [96, 128, 160]
+                HnswConfig(m=m, ef_construction=200, ef_search=efs)
+                for m in [16, 32]
+                for efs in [96, 128, 192, 256]
             ],
             ivfpq_grid=[
-                IvfPqConfig(nlist=1024, nprobe=nprobe, m_pq=48)
-                for nprobe in [16, 24, 32]
+                IvfPqConfig(nlist=1024, nprobe=nprobe, m_pq=mpq, pq_bits=pq_bits)
+                for nprobe in [64, 96, 128, 192]
+                for mpq in [12, 16, 24]
+                for pq_bits in [8, 10]
+            ],
+            ivf_flat_grid=[
+                IvfFlatConfig(nlist=1024, nprobe=nprobe)
+                for nprobe in [64, 96, 128, 192, 256]
             ],
         )
 
     if name == "final":
+        # Финальный профиль для защиты: 1-3 лучших на алгоритм.
         return BenchmarkPreset(
             name=name,
             data=BASE_DATA_CONFIG,
-            eval=EvalConfig(warmup_runs=1, repeat_runs=3),
-            lsh_grid=[LshConfig(nbits=1024)],
-            hnsw_grid=[HnswConfig(m=16, ef_construction=100, ef_search=128)],
-            ivfpq_grid=[IvfPqConfig(nlist=1024, nprobe=24, m_pq=48)],
+            eval=EvalConfig(warmup_runs=2, repeat_runs=5),
+            lsh_grid=[LshConfig(nbits=v) for v in [1024, 1536, 2048]],
+            hnsw_grid=[
+                HnswConfig(m=16, ef_construction=200, ef_search=128),
+                HnswConfig(m=16, ef_construction=200, ef_search=192),
+                HnswConfig(m=32, ef_construction=200, ef_search=128),
+            ],
+            ivfpq_grid=[
+                IvfPqConfig(nlist=1024, nprobe=96, m_pq=16, pq_bits=8),
+                IvfPqConfig(nlist=1024, nprobe=128, m_pq=16, pq_bits=8),
+                IvfPqConfig(nlist=1024, nprobe=128, m_pq=12, pq_bits=10),
+                IvfPqConfig(nlist=1024, nprobe=128, m_pq=48, pq_bits=10),
+                IvfPqConfig(nlist=1024, nprobe=256, m_pq=48, pq_bits=10),
+                IvfPqConfig(nlist=1024, nprobe=128, m_pq=96, pq_bits=8),
+                IvfPqConfig(nlist=1024, nprobe=256, m_pq=96, pq_bits=8),
+                IvfPqConfig(nlist=512, nprobe=256, m_pq=96, pq_bits=8),
+                IvfPqConfig(nlist=512, nprobe=512, m_pq=192, pq_bits=8),
+            ],
+            ivf_flat_grid=[
+                IvfFlatConfig(nlist=1024, nprobe=64),
+                IvfFlatConfig(nlist=1024, nprobe=128),
+                IvfFlatConfig(nlist=1024, nprobe=256),
+            ],
         )
 
     raise ValueError(f"Unsupported preset: {name}")

@@ -20,9 +20,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--split", type=str, default="train")
     parser.add_argument("--embedding-column", type=str, default=None)
-    parser.add_argument("--corpus-size", type=int, default=50_000)
+    parser.add_argument("--corpus-size", type=int, default=100_000)
     parser.add_argument("--query-size", type=int, default=10_000)
-    parser.add_argument("--scan-limit", type=int, default=50_000)
+    parser.add_argument("--scan-limit", type=int, default=100_000)
     parser.add_argument("--seed", type=int, default=42)
     return parser.parse_args()
 
