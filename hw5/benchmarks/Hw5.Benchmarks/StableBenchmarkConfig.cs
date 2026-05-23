@@ -4,16 +4,16 @@ using BenchmarkDotNet.Jobs;
 
 namespace Hw5.Benchmarks;
 
-public static class StableBenchmarkConfig
+/// <summary>Warm + Cold — only for IndexQueryBenchmarks (smoke + warm/cold charts).</summary>
+public sealed class StableBenchmarkConfig : ManualConfig
 {
-    public static IConfig Create()
+    public StableBenchmarkConfig()
     {
         var settings = BenchRuntime.Current;
         var art = Path.GetFullPath(settings.ArtifactDirectory);
         Directory.CreateDirectory(art);
 
-        return ManualConfig
-            .Create(DefaultConfig.Instance.WithOptions(ConfigOptions.DisableOptimizationsValidator))
+        WithOptions(ConfigOptions.DisableOptimizationsValidator)
             .WithArtifactsPath(art)
             .AddDiagnoser(MemoryDiagnoser.Default)
             .AddJob(
@@ -26,7 +26,7 @@ public static class StableBenchmarkConfig
                 Job.Default
                     .WithLaunchCount(1)
                     .WithWarmupCount(0)
-                    .WithIterationCount(Math.Max(3, settings.IterationCount / 2))
+                    .WithIterationCount(Math.Max(3, settings.ColdIterationCount))
                     .WithId("Cold"));
     }
 }
