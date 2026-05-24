@@ -4,6 +4,7 @@
 - LSH (`faiss.IndexLSH`)
 - HNSW (`faiss.IndexHNSWFlat`)
 - IVF+PQ (`faiss.IndexIVFPQ`)
+- IVF Flat (`faiss.IndexIVFFlat`)
 
 Считаемые метрики:
 - `Recall@100`
@@ -34,14 +35,16 @@ make all
 ```
 
 ## Метод
-В рамках текущей сессии в соответствии с требованиями сделан бенчмарк на выборке:
-- `N=50000` индексируемых векторов,
+В рамках текущей сессии выполнен бенчмарк на выборке:
+- `N=100000` индексируемых векторов,
 - `Q=10000` query-векторов,
 - `k=100`.
 - `seed=42`,
-- число повторов на конфигурацию: `3` (+warmup).
+- число повторов:
+  - `coarse/fine`: `3` (+warmup),
+  - `final`: `5` (+warmup).
 
-Единый размер датасета (`N=50000`, `Q=10000`) используется для `coarse`, `fine` и `final`, чтобы сравнение было корректным и сопоставимым.
+Единый размер датасета (`N=100000`, `Q=10000`) используется для `coarse`, `fine` и `final`, чтобы сравнение было корректным и сопоставимым.
 
 ## Критерии сравнения
 
@@ -55,11 +58,13 @@ make all
 Этапы `coarse -> fine -> final` нужны для сужения области параметров и выбора рабочей конфигурации, а не для обязательного монотонного улучшения всех метрик на каждом шаге.
 
 Команды:
-- `python scripts/prepare_data.py --corpus-size 50000 --query-size 10000 --scan-limit 50000`
+- `python scripts/prepare_data.py --corpus-size 100000 --query-size 10000 --scan-limit 100000`
 - `python scripts/build_ground_truth.py --top-k 100`
 - `make bench-coarse`
 - `make bench-fine`
-- `make bench` (final)
+- `make bench-final` (или `make bench`)
+- `make bench-ivfpq` (отдельный прогон IVF+PQ)
+- `make bench-ivf-flat` (отдельный прогон IVF Flat)
 - `make report-coarse`
 - `make report-fine`
 - `make report-final`
@@ -77,43 +82,30 @@ make all
 
 ## Результаты выполнения бенчмарка
 
-Ниже приведены лучшие конфигурации из каждого этапа (`coarse`, `fine`, `final`).
-
-### Coarse
-| Алгоритм | Конфигурация | Recall@100 | QPS | Latency ms | Build s | Size MB |
-|---|---|---:|---:|---:|---:|---:|
-| LSH | `nbits=2048` | 0.6328 | 688 | 1.4627 | 1.65 | 18.21 |
-| HNSW | `M=8, efC=100, efS=64` | 0.8303 | 4771 | 0.2096 | 19.02 | 150.33 |
-| IVFPQ | `nlist=1024, nprobe=32, m_pq=48, pq_bits=8` | 0.4878 | 5368 | 0.1863 | 16.45 | 6.43 |
-
-### Fine
+Ниже приведены актуальные результаты `final`-этапа (`N=100000`) с 95% CI.
 
 | Алгоритм | Конфигурация | Recall@100 | QPS | Latency ms | Build s | Size MB |
 |---|---|---:|---:|---:|---:|---:|
-| LSH | `nbits=2048` | 0.6328 | 787 | 1.2751 | 1.21 | 18.21 |
-| HNSW | `M=16, efC=100, efS=96` | 0.9474 | 2376 | 0.4220 | 20.12 | 153.37 |
-| IVFPQ | `nlist=1024, nprobe=32, m_pq=48, pq_bits=8` | 0.4878 | 5417 | 0.1846 | 16.33 | 6.43 |
+| LSH | `{"nbits": 2048}` | 0.6195 | 401 | 2.4908 | 1.71 | 30.41 |
+| HNSW | `{"ef_construction": 200, "ef_search": 128, "m": 16}` | 0.9652 | 1581 | 0.6326 | 95.56 | 306.73 |
+| IVF+PQ | `{"m_pq": 192, "nlist": 512, "nprobe": 512, "pq_bits": 8}` | 0.8617 | 70 | 14.3658 | 32.95 | 21.33 |
+| IVF Flat | `{"nlist": 1024, "nprobe": 64}` | 0.9467 | 633 | 1.5796 | 6.89 | 296.74 |
 
-### Final
-
-| Алгоритм | Конфигурация | Recall@100 | QPS | Latency ms | Build s | Size MB |
-|---|---|---:|---:|---:|---:|---:|
-| LSH | `nbits=1024` | 0.5056 | 1988 | 0.5034 | 0.61 | 9.10 |
-| HNSW | `M=16, efC=100, efS=128` | 0.9657 | 2038 | 0.4907 | 20.16 | 153.37 |
-| IVFPQ | `nlist=1024, nprobe=24, m_pq=48, pq_bits=8` | 0.4841 | 6519 | 0.1534 | 18.10 | 6.43 |
+Ключевое условие для защиты выполнено: `IVF+PQ Recall@100 >= 0.85` (получено `0.8617`).
 
 ## Интерпретация
 
-- Лучший `Recall@100` стабильно у HNSW.
-- На этой выборке `IVFPQ` даёт максимальный `QPS`, но уступает HNSW по recall.
-- `LSH` показывает средний компромисс между скоростью и качеством.
+- Максимальный `Recall@100` в `final` среди выбранных best-конфигов у HNSW (`0.9652`), при высокой цене памяти и build-time.
+- `IVF Flat` даёт очень высокий recall (`0.9467`) и хороший QPS, но индекс большой (`~296.74 MB`).
+- `IVF+PQ` после тюнинга даёт целевой recall (`0.8617`) и радикально меньший размер (`21.33 MB`), но заметно ниже QPS.
+- `LSH` остаётся самым лёгким по build-time, но уступает по качеству.
 
 ## Важная оговорка
 
-Результаты выше уже получены на `50000` векторах и `10000` query, что покрывает минимальное требование ТЗ по числу запросов.  
-Для расширенного эксперимента (например, `N=200k` или `N=500k`) повторите:
+Результаты выше получены на `100000` векторах и `10000` query.  
+Для повторного эксперимента:
 1. `make clean`
-2. `make prepare` (или `python scripts/prepare_data.py --corpus-size ... --query-size ...`)
+2. `make prepare` (или `python scripts/prepare_data.py --corpus-size ... --query-size ... --scan-limit ...`)
 3. `make ground-truth`
-4. `make bench-coarse && make bench-fine && make bench`
+4. `make bench-coarse && make bench-fine && make bench-final`
 5. `make report-coarse && make report-fine && make report-final`
