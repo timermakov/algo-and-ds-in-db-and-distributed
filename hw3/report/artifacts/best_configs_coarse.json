@@ -1,0 +1,71 @@
+{
+  "preset": "coarse",
+  "rules": [
+    {
+      "algorithm": "lsh",
+      "selection_rule": "fallback: maximize recall then qps",
+      "row": {
+        "config": {
+          "nbits": 4096
+        },
+        "mean_recall": 0.719123999999997,
+        "mean_qps": 172.21698871854247,
+        "mean_latency_ms": 5.806781243333292,
+        "size_mb": 60.82821369171143,
+        "build_s": 6.552965100003348,
+        "cv_qps": 0.005136772056118
+      }
+    },
+    {
+      "algorithm": "hnsw",
+      "selection_rule": "recall>=0.8, then max qps",
+      "row": {
+        "config": {
+          "ef_construction": 150,
+          "ef_search": 64,
+          "m": 8
+        },
+        "mean_recall": 0.8169359999999978,
+        "mean_qps": 4079.372445551086,
+        "mean_latency_ms": 0.2451358233332333,
+        "size_mb": 300.65474128723145,
+        "build_s": 56.593472600001405,
+        "cv_qps": 0.0005683769571503
+      }
+    },
+    {
+      "algorithm": "ivfpq",
+      "selection_rule": "fallback: maximize recall then qps",
+      "row": {
+        "config": {
+          "m_pq": 24,
+          "nlist": 1024,
+          "nprobe": 128,
+          "pq_bits": 10
+        },
+        "mean_recall": 0.4359150000000032,
+        "mean_qps": 557.3356728179722,
+        "mean_latency_ms": 1.7943146033332595,
+        "size_mb": 9.631946563720703,
+        "build_s": 92.94902979999824,
+        "cv_qps": 0.005954429151732
+      }
+    },
+    {
+      "algorithm": "ivf_flat",
+      "selection_rule": "recall>=0.8, then max qps",
+      "row": {
+        "config": {
+          "nlist": 1024,
+          "nprobe": 32
+        },
+        "mean_recall": 0.8765229999999709,
+        "mean_qps": 1217.6723714175944,
+        "mean_latency_ms": 0.8212657500000204,
+        "size_mb": 296.739634513855,
+        "build_s": 7.953212500000518,
+        "cv_qps": 0.0057019158157991
+      }
+    }
+  ]
+}
