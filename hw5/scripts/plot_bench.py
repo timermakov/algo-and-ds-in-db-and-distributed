@@ -1,4 +1,4 @@
-"""Графики и сводка по Hw5 IndexQueryBenchmarks-report.csv. Запуск: make graphs."""
+"""Графики и сводка по BenchmarkDotNet CSV. Запуск: make graphs."""
 
 from __future__ import annotations
 
@@ -7,28 +7,12 @@ import json
 import math
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
 _DURATION = re.compile(r"^([\d.Ee+-]+)\s*(\S+)?$")
-METHODS = [
-    "Memory_AndQuery",
-    "DiskMmap_AndQuery",
-    "Memory_NearAdjQuery",
-    "Memory_Bm25Top10",
-]
-METHOD_LABELS = {
-    "Memory_AndQuery": "RAM (AND)",
-    "DiskMmap_AndQuery": "mmap сегмент (AND)",
-    "Memory_NearAdjQuery": "RAM (NEAR/ADJ)",
-    "Memory_Bm25Top10": "RAM (BM25 Top10)",
-}
-COLORS = {
-    "Memory_AndQuery": "#1b5e20",
-    "DiskMmap_AndQuery": "#1565c0",
-    "Memory_NearAdjQuery": "#6a1b9a",
-    "Memory_Bm25Top10": "#e65100",
-}
+_ALLOC = re.compile(r"^([\d.]+)\s*(\w+)?$")
 JOBS = ("Warm", "Cold")
 
 
@@ -70,11 +54,41 @@ def parse_ns(cell: str) -> float | None:
     return val
 
 
-def parse_method_name(method: str) -> str | None:
-    for name in METHODS:
-        if name in method:
-            return name
-    return None
+def parse_bytes(cell: str) -> float | None:
+    cell = cell.strip().replace(",", "")
+    m = _ALLOC.match(cell)
+    if not m:
+        return None
+    val = float(m.group(1))
+    u = (m.group(2) or "b").lower()
+    if u == "kb":
+        return val * 1024
+    if u == "mb":
+        return val * 1024 * 1024
+    if u == "gb":
+        return val * 1024 * 1024 * 1024
+    return val
+
+
+def parse_case(raw: str | None) -> tuple[str, int | None]:
+    if not raw:
+        return "Synthetic", None
+    raw = raw.strip()
+    if "_" in raw:
+        corpus, _, n_str = raw.partition("_")
+        try:
+            return corpus, int(n_str)
+        except ValueError:
+            pass
+    return raw, None
+
+
+def parse_method_name(method: str) -> str:
+    if "." in method:
+        method = method.rsplit(".", 1)[-1]
+    if " " in method:
+        method = method.split(" ", 1)[0]
+    return method
 
 
 def load_csv(path: Path) -> list[dict[str, Any]]:
@@ -83,15 +97,12 @@ def load_csv(path: Path) -> list[dict[str, Any]]:
         canon = _field_map(reader.fieldnames)
         out: list[dict[str, Any]] = []
         for row in reader:
-            method = _cell(row, canon, "method")
+            method_raw = _cell(row, canon, "method")
             mean_raw = (_cell(row, canon, "mean") or "").strip('"')
-            if not method or not mean_raw:
+            if not method_raw or not mean_raw:
                 continue
             mean_ns = parse_ns(mean_raw)
             if mean_ns is None:
-                continue
-            mname = parse_method_name(method)
-            if mname is None:
                 continue
             job = (_cell(row, canon, "job") or "Warm").strip()
             if job not in JOBS:
@@ -99,17 +110,27 @@ def load_csv(path: Path) -> list[dict[str, Any]]:
             std_raw = _cell(row, canon, "stddev", "stdDev")
             err_raw = _cell(row, canon, "error", "stdErr", "stderr")
             ratio_raw = _cell(row, canon, "ratio")
+            alloc_raw = _cell(row, canon, "allocated")
+            case_raw = _cell(row, canon, "case")
+            corpus, doc_n = parse_case(case_raw)
             std_ns = parse_ns(std_raw.replace(",", "")) if std_raw else None
             err_ns = parse_ns(err_raw.replace(",", "")) if err_raw else None
             ratio = float(ratio_raw) if ratio_raw and ratio_raw != "?" else None
+            alloc_b = parse_bytes(alloc_raw) if alloc_raw else None
+            bench_class = path.stem.replace("-report", "").split(".")[-1]
             out.append(
                 {
-                    "method": mname,
+                    "bench_class": bench_class,
+                    "method": parse_method_name(method_raw),
                     "job": job,
+                    "corpus": corpus,
+                    "document_count": doc_n,
                     "mean_ns": mean_ns,
                     "stddev_ns": std_ns,
                     "error_ns": err_ns,
                     "ratio": ratio,
+                    "allocated_bytes": alloc_b,
+                    "source_csv": path.name,
                 }
             )
         return out
@@ -146,97 +167,385 @@ def fmt_us(ns: float) -> str:
     return f"{ns / 1_000.0:.2f}"
 
 
-def fmt_ms(ns: float) -> str:
-    return f"{ns / 1_000_000.0:.3f}"
+def load_all_csv(artifacts: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for path in sorted(artifacts.glob("*-report.csv")):
+        rows.extend(load_csv(path))
+    return rows
 
 
-def find_report_csv(artifacts: Path) -> Path | None:
-    candidates = sorted(artifacts.glob("*IndexQueryBenchmarks*-report.csv"))
-    if candidates:
-        return candidates[-1]
-    candidates = sorted(artifacts.glob("*-report.csv"))
-    return candidates[-1] if candidates else None
-
-
-def matrix(rows: list[dict[str, Any]], job: str) -> dict[str, dict[str, Any]]:
-    out: dict[str, dict[str, Any]] = {}
-    for r in rows:
-        if r["job"] != job:
+def warm_rows(rows: list[dict[str, Any]], **filters: Any) -> list[dict[str, Any]]:
+    out = [r for r in rows if r["job"] == "Warm"]
+    for k, v in filters.items():
+        if v is None:
             continue
-        out[r["method"]] = r
+        out = [r for r in out if r.get(k) == v]
     return out
 
 
-def plot_warm_bar(warm: dict[str, dict[str, Any]], out: Path) -> None:
+def plot_scaling_latency(rows: list[dict[str, Any]], out: Path) -> None:
     import matplotlib.pyplot as plt
 
-    methods = [m for m in METHODS if m in warm]
-    xs = list(range(len(methods)))
-    means = [warm[m]["mean_ns"] / 1_000.0 for m in methods]
-    errs = [warm[m].get("stderr_ns", 0) / 1_000.0 for m in methods]
-    fig, ax = plt.subplots(figsize=(9, 5))
-    ax.bar(xs, means, yerr=errs, capsize=4, color=[COLORS[m] for m in methods], edgecolor="#222", linewidth=0.5)
-    ax.set_xticks(xs)
-    ax.set_xticklabels([METHOD_LABELS[m] for m in methods], rotation=15, ha="right")
-    ax.set_ylabel("Mean, µs")
-    ax.set_title("IndexQuery (Warm): RAM vs mmap, позиционные запросы, BM25")
-    ax.grid(axis="y", linestyle="--", alpha=0.35)
-    fig.savefig(out, dpi=140, bbox_inches="tight")
-    plt.close(fig)
-
-
-def plot_ratio_disk_vs_memory(warm: dict[str, dict[str, Any]], out: Path) -> None:
-    import matplotlib.pyplot as plt
-
-    base = warm.get("Memory_AndQuery")
-    disk = warm.get("DiskMmap_AndQuery")
-    if not base or not disk:
+    data = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks")
+    if not data:
         return
-    ratio = disk["mean_ns"] / base["mean_ns"]
-    fig, ax = plt.subplots(figsize=(5, 4))
-    ax.bar(["DiskMmap / RAM\n(AND)"], [ratio], color="#1565c0")
-    ax.axhline(1.0, color="#bf360c", linestyle="--", label="parity")
-    ax.set_ylabel("Относительная задержка (>1 = медленнее)")
-    ax.set_title(f"Накладные расходы mmap+декод: {ratio:.2f}×")
-    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    series: dict[tuple[str, str], list[tuple[int, float]]] = defaultdict(list)
+    for r in data:
+        if r["document_count"] is None:
+            continue
+        key = (r["corpus"], r["method"])
+        series[key].append((r["document_count"], r["mean_ns"] / 1_000.0))
+    if not series:
+        return
+    fig, ax = plt.subplots(figsize=(9, 5))
+    for (corpus, method), pts in sorted(series.items()):
+        pts.sort()
+        label = f"{corpus} {method.replace('_', ' ')}"
+        ax.plot([p[0] for p in pts], [p[1] for p in pts], marker="o", label=label)
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlabel("N документов")
+    ax.set_ylabel("Mean, µs")
+    ax.set_title("Масштабирование AND: RAM vs mmap")
+    ax.legend(fontsize=8)
+    ax.grid(True, linestyle="--", alpha=0.35)
     fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
 
 
-def plot_warm_cold(warm: dict[str, dict[str, Any]], cold: dict[str, dict[str, Any]], out: Path) -> None:
+def plot_mmap_ratio_vs_n(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+
+    data = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks")
+    by_key: dict[tuple[str, int], dict[str, float]] = defaultdict(dict)
+    for r in data:
+        if r["document_count"] is None:
+            continue
+        by_key[(r["corpus"], r["document_count"])][r["method"]] = r["mean_ns"]
+    pts: list[tuple[str, int, float]] = []
+    for (corpus, n), methods in sorted(by_key.items()):
+        ram = methods.get("Memory_AndQuery")
+        mmap = methods.get("DiskMmap_AndQuery")
+        if ram and mmap:
+            pts.append((corpus, n, mmap / ram))
+    if not pts:
+        return
+    fig, ax = plt.subplots(figsize=(8, 5))
+    for corpus in sorted({p[0] for p in pts}):
+        cpts = [(p[1], p[2]) for p in pts if p[0] == corpus]
+        cpts.sort()
+        ax.plot([x[0] for x in cpts], [x[1] for x in cpts], marker="s", label=corpus)
+    ax.axhline(1.0, color="#bf360c", linestyle="--")
+    ax.set_xscale("log")
+    ax.set_xlabel("N")
+    ax.set_ylabel("mmap / RAM")
+    ax.set_title("Накладные mmap vs N")
+    ax.legend()
+    ax.grid(True, linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_operators(rows: list[dict[str, Any]], out: Path) -> None:
     import matplotlib.pyplot as plt
     import numpy as np
 
-    methods = [m for m in METHODS if m in warm and m in cold]
-    if not methods:
+    data = warm_rows(rows, bench_class="OperatorBenchmarks")
+    if not data:
         return
-    x = np.arange(len(methods))
-    w = 0.35
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.bar(x - w / 2, [warm[m]["mean_ns"] / 1_000.0 for m in methods], w, label="Warm", color="#2e7d32")
-    ax.bar(x + w / 2, [cold[m]["mean_ns"] / 1_000.0 for m in methods], w, label="Cold", color="#c62828")
+    main_n = max(r["document_count"] or 0 for r in data)
+    subset = [r for r in data if (r["document_count"] or 0) == main_n and r["corpus"] == "Synthetic"]
+    if not subset:
+        subset = [r for r in data if (r["document_count"] or 0) == main_n]
+    methods = ["AndQuery", "OrQuery", "NotQuery", "AdjQuery", "NearQuery"]
+    labels = ["AND", "OR", "NOT", "ADJ", "NEAR"]
+    means = []
+    cvs = []
+    for m in methods:
+        row = next((r for r in subset if r["method"] == m), None)
+        means.append(row["mean_ns"] / 1_000.0 if row else 0)
+        cvs.append(row["cv_percent"] if row else 0)
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar(x, means, color="#1565c0", edgecolor="#222")
     ax.set_xticks(x)
-    ax.set_xticklabels([METHOD_LABELS[m] for m in methods], rotation=12, ha="right")
+    ax.set_xticklabels(labels)
     ax.set_ylabel("Mean, µs")
-    ax.set_title("Warm vs Cold (первый запуск без прогрева)")
+    ax.set_title(f"Операторы @ N={main_n} (Synthetic)")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_cv_by_method(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks")
+    if not data:
+        data = warm_rows(rows)
+    if not data:
+        return
+    labels = [r["method"] for r in data]
+    cvs = [r["cv_percent"] for r in data]
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(10, 5))
+    colors = ["#2e7d32" if c <= 5 else "#c62828" for c in cvs]
+    ax.bar(x, cvs, color=colors, edgecolor="#222")
+    ax.axhline(5.0, color="#1565c0", linestyle="--", label="порог 5%")
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=20, ha="right")
+    ax.set_ylabel("CV, %")
+    ax.set_title("Коэффициент вариации по методам (Warm)")
     ax.legend()
     ax.grid(axis="y", linestyle="--", alpha=0.35)
     fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
 
 
-def plot_throughput(warm: dict[str, dict[str, Any]], out: Path) -> None:
+def plot_alloc_ratio(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks")
+    data = [r for r in data if r.get("allocated_bytes")]
+    if len(data) < 2:
+        return
+    base = next((r for r in data if r["method"] == "Memory_AndQuery"), data[0])
+    base_b = base["allocated_bytes"]
+    labels = [r["method"] for r in data]
+    ratios = [r["allocated_bytes"] / base_b for r in data]
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar(x, ratios, color="#6a1b9a", edgecolor="#222")
+    ax.axhline(1.0, color="#bf360c", linestyle="--")
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=15, ha="right")
+    ax.set_ylabel("Allocated / baseline")
+    ax.set_title("Аллокации на запрос относительно RAM AND")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_ranking(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="RankingBenchmarks")
+    subset = [r for r in data if r["corpus"] == "Synthetic" and r["document_count"]]
+    if not subset:
+        subset = data
+    main_n = max(r["document_count"] or 0 for r in subset)
+    subset = [r for r in subset if (r["document_count"] or 0) == main_n]
+    order = ["BooleanOnly", "TfIdfTop10", "Bm25Top10"]
+    labels = ["Boolean", "TF-IDF", "BM25"]
+    means = []
+    for m in order:
+        row = next((r for r in subset if r["method"] == m), None)
+        means.append(row["mean_ns"] / 1_000.0 if row else 0)
+    x = np.arange(3)
+    fig, ax = plt.subplots(figsize=(7, 5))
+    ax.bar(x, means, color=["#1b5e20", "#e65100", "#1565c0"])
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.set_ylabel("Mean, µs")
+    ax.set_title(f"Ранжирование vs булево ядро @ N={main_n}")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_corpus_comparison(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks", method="Memory_AndQuery")
+    if not data:
+        return
+    common_n = None
+    for n in sorted({r["document_count"] for r in data if r["document_count"]}):
+        corps = {r["corpus"] for r in data if r["document_count"] == n}
+        if len(corps) >= 2:
+            common_n = n
+            break
+    if common_n is None:
+        return
+    subset = [r for r in data if r["document_count"] == common_n]
+    labels = [r["corpus"] for r in subset]
+    means = [r["mean_ns"] / 1_000.0 for r in subset]
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.bar(x, means, color=["#1b5e20", "#1565c0"][: len(labels)])
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.set_ylabel("Mean, µs")
+    ax.set_title(f"Synthetic vs Wikipedia @ N={common_n}")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_warm_cold(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = [r for r in rows if r["bench_class"] == "IndexQueryBenchmarks"]
+    methods = sorted({r["method"] for r in data})
+    if not methods:
+        return
+    x = np.arange(len(methods))
+    w = 0.35
+    warm = {r["method"]: r["mean_ns"] / 1_000.0 for r in data if r["job"] == "Warm"}
+    cold = {r["method"]: r["mean_ns"] / 1_000.0 for r in data if r["job"] == "Cold"}
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.bar(x - w / 2, [warm.get(m, 0) for m in methods], w, label="Warm", color="#2e7d32")
+    ax.bar(x + w / 2, [cold.get(m, 0) for m in methods], w, label="Cold", color="#c62828")
+    ax.set_xticks(x)
+    ax.set_xticklabels(methods, rotation=15, ha="right")
+    ax.set_ylabel("Mean, µs")
+    ax.set_title("Warm vs Cold")
+    ax.legend()
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_naive_ratio(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="NaiveScanBenchmarks")
+    if not data:
+        return
+    by_n: dict[int, dict[str, float]] = defaultdict(dict)
+    for r in data:
+        if r["document_count"] is None:
+            continue
+        by_n[r["document_count"]][r["method"]] = r["mean_ns"]
+    ns = sorted(by_n)
+    ratios = []
+    for n in ns:
+        idx = by_n[n].get("IndexedAndQuery")
+        naive = by_n[n].get("NaiveAndQuery")
+        if idx and naive:
+            ratios.append(naive / idx)
+        else:
+            ratios.append(0)
+    fig, ax = plt.subplots(figsize=(7, 5))
+    ax.bar([str(n) for n in ns], ratios, color="#c62828")
+    ax.set_xlabel("N")
+    ax.set_ylabel("Naive / Indexed")
+    ax.set_title("Ускорение индекса vs наивный scan")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_mmap_touch(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="MmapTouchBenchmarks")
+    if not data:
+        return
+    methods = ["FirstTouchMmap_AndQuery", "RepeatedMmap_AndQuery"]
+    labels = ["First touch", "Repeated"]
+    means = []
+    for m in methods:
+        row = next((r for r in data if r["method"] == m), None)
+        means.append(row["mean_ns"] / 1_000.0 if row else 0)
+    x = np.arange(2)
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.bar(x, means, color=["#c62828", "#2e7d32"])
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.set_ylabel("Mean, µs")
+    ax.set_title("mmap: первое обращение vs повтор")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_compression(rows: list[dict[str, Any]], artifacts: Path, out: Path) -> None:
     import matplotlib.pyplot as plt
 
-    methods = [m for m in METHODS if m in warm]
-    xs = list(range(len(methods)))
-    qps = [warm[m]["queries_per_sec"] for m in methods]
+    comp_path = artifacts / "compression_by_corpus.json"
+    if not comp_path.is_file():
+        comp_path = artifacts / "compression_stats.json"
+        if not comp_path.is_file():
+            return
+        payload = json.loads(comp_path.read_text(encoding="utf-8"))
+        if isinstance(payload, list):
+            entries = payload
+        else:
+            entries = [payload]
+    else:
+        entries = json.loads(comp_path.read_text(encoding="utf-8"))
+
+    ns = []
+    ratios = []
+    for e in entries:
+        n = e.get("documentCount")
+        seg = e.get("segmentFileBytes")
+        naive = e.get("naivePostingBytes")
+        if n and seg and naive:
+            ns.append(n)
+            ratios.append(seg / naive)
+        elif n and seg:
+            ns.append(n)
+            ratios.append(seg / 1_000_000)
+    if not ns:
+        return
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(ns, ratios, marker="o", color="#1565c0")
+    ax.set_xscale("log")
+    ax.set_xlabel("N")
+    ax.set_ylabel("segment / naive")
+    ax.set_title("Степень сжатия vs N")
+    ax.grid(True, linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_throughput(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks")
+    if not data:
+        return
+    labels = [r["method"] for r in data]
+    qps = [r["queries_per_sec"] for r in data]
+    x = np.arange(len(labels))
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.bar(xs, qps, color=[COLORS[m] for m in methods], edgecolor="#222", linewidth=0.5)
-    ax.set_xticks(xs)
-    ax.set_xticklabels([METHOD_LABELS[m] for m in methods], rotation=15, ha="right")
-    ax.set_ylabel("Throughput (запросов/с)")
-    ax.set_title("Пропускная способность (1 / mean latency)")
+    ax.bar(x, qps, color="#1b5e20", edgecolor="#222")
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=15, ha="right")
+    ax.set_ylabel("Q/s")
+    ax.set_title("Пропускная способность (IndexQuery)")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_warm_bar(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks")
+    if not data:
+        return
+    labels = [r["method"] for r in data]
+    means = [r["mean_ns"] / 1_000.0 for r in data]
+    errs = [r.get("stderr_ns", 0) / 1_000.0 for r in data]
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar(x, means, yerr=errs, capsize=4, color="#1565c0", edgecolor="#222")
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, rotation=15, ha="right")
+    ax.set_ylabel("Mean, µs")
+    ax.set_title("IndexQuery Warm latency")
     ax.grid(axis="y", linestyle="--", alpha=0.35)
     fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
@@ -250,80 +559,75 @@ def markdown_table(headers: list[str], cells: list[list[str]]) -> str:
     return "\n".join([head, sep, *body])
 
 
-def write_summary(
-    out_dir: Path,
-    rows: list[dict[str, Any]],
-    compression: dict[str, Any] | None,
-    generated: list[str],
-) -> None:
-    warm = matrix(rows, "Warm")
-    cold = matrix(rows, "Cold")
+def write_summary(artifacts: Path, rows: list[dict[str, Any]], generated: list[str]) -> None:
+    warm = [r for r in rows if r["job"] == "Warm"]
     table_rows = []
-    for m in METHODS:
-        if m not in warm:
-            continue
-        r = warm[m]
+    for r in sorted(warm, key=lambda x: (x["bench_class"], x["method"])):
         table_rows.append(
             [
-                METHOD_LABELS[m],
+                r["bench_class"],
+                r["method"],
+                r.get("corpus") or "",
+                str(r.get("document_count") or ""),
                 fmt_us(r["mean_ns"]),
-                fmt_us(r.get("stddev_ns") or 0),
-                fmt_us(r["stderr_ns"]),
-                f"{r['ci95_lo_ns']/1000:.1f}–{r['ci95_hi_ns']/1000:.1f}",
                 f"{r['cv_percent']:.1f}%",
-                f"{r['queries_per_sec']:.0f}",
-                f"{r.get('ratio', 1.0):.2f}" if r.get("ratio") else "1.00",
+                f"{r.get('ratio', 1.0):.2f}" if r.get("ratio") else "",
             ]
         )
-
     lines = [
-        "# Сводка бенчмарков HW5 (IndexQuery)\n",
-        "## Warm — статистика (n=8 итераций)\n",
-        markdown_table(
-            ["Метод", "Mean µs", "StdDev", "StdErr", "CI95 µs", "CV", "Q/s", "Ratio"],
-            table_rows,
-        ),
+        "# Сводка бенчмарков HW5\n",
+        "## Warm — все классы\n",
+        markdown_table(["Класс", "Метод", "Corpus", "N", "Mean µs", "CV", "Ratio"], table_rows[:80]),
         "",
-        "## Cold vs Warm (µs)\n",
+        "## Графики\n",
+        *[f"- `{n}`" for n in generated],
     ]
-    cold_rows = []
-    for m in METHODS:
-        if m in warm and m in cold:
-            cold_rows.append(
-                [
-                    METHOD_LABELS[m],
-                    fmt_us(warm[m]["mean_ns"]),
-                    fmt_us(cold[m]["mean_ns"]),
-                    f"{cold[m]['mean_ns'] / warm[m]['mean_ns']:.2f}×",
-                ]
+    (artifacts / "bench_summary.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def write_analysis(artifacts: Path, rows: list[dict[str, Any]], generated: list[str]) -> None:
+    warm = warm_rows(rows)
+    scaling = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks", method="Memory_AndQuery")
+    lines = [
+        "# Глубокий анализ бенчмарков HW5\n",
+        "## Методика\n",
+        "- Корпуса: **Synthetic** (seed 42, 24 терма/док) и **Wikipedia** (shard pages-articles1, wikitext→plain).",
+        "- BDN: Warm (warmup=3, iter=8), Cold (warmup=0, iter=8), `OperationsPerInvoke=32`.",
+        "- Классы: IndexQuery, Scaling, Operators, Ranking, Build, Naive, MmapTouch.\n",
+        "## Гипотезы\n",
+        "| ID | Гипотеза | Критерий |",
+        "| --- | --- | --- |",
+        "| H_scale | latency растёт с N | log-log на scaling_latency_by_N |",
+        "| H_ops | NOT/NEAR дороже AND | operators_latency |",
+        "| H_disk | mmap 1.3–1.6× RAM | mmap_ratio_vs_N |",
+        "| H_rank | BM25 2–3× boolean | ranking_tfidf_vs_bm25 |",
+        "| H_naive | indexed ≫ naive на малых N | naive_index_ratio |",
+        "| H_corpus | Wiki выше alloc/CV | corpus_comparison |",
+        "| H_cold | Cold > Warm на RAM | indexquery_warm_vs_cold |\n",
+    ]
+    if scaling:
+        lines.append("## Масштабирование (RAM AND)\n")
+        for r in sorted(scaling, key=lambda x: (x["corpus"], x.get("document_count") or 0)):
+            lines.append(
+                f"- {r['corpus']} N={r.get('document_count')}: **{fmt_us(r['mean_ns'])} µs**, CV={r['cv_percent']:.1f}%"
             )
-    if cold_rows:
-        lines.append(markdown_table(["Метод", "Warm", "Cold", "Cold/Warm"], cold_rows))
         lines.append("")
-
-    if compression:
-        lines.extend(
-            [
-                "## Сжатие сегмента (синтетика bench.settings)\n",
-                f"- Документов: **{compression.get('documentCount')}**",
-                f"- Наивный объём posting-list: **{compression.get('naivePostingBytes'):,}** байт",
-                f"- Файл сегмента (delta+bitpack): **{compression.get('segmentFileBytes'):,}** байт",
-                f"- Отношение segment/naive: **{compression.get('compressionRatio')}**",
-                f"- Экономия места: **{compression.get('spaceSavingsPercent')}%**",
-                "",
-            ]
-        )
-
+    high_cv = [r for r in warm if r["cv_percent"] > 5]
+    if high_cv:
+        lines.append("## CV > 5% (статистическая слабость)\n")
+        for r in high_cv:
+            lines.append(f"- `{r['bench_class']}.{r['method']}` ({r.get('corpus')}, N={r.get('document_count')}): **{r['cv_percent']:.1f}%**")
+        lines.append("")
     lines.append("## Графики\n")
-    lines.extend(f"- `{n}`" for n in generated)
-    (out_dir / "bench_summary.md").write_text("\n".join(lines), encoding="utf-8")
+    lines.extend(f"![{n}]({n})" for n in generated)
+    (artifacts / "analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def main() -> None:
     root = Path(__file__).resolve().parents[1]
     artifacts = root / "reports" / "artifacts"
-    csv_path = find_report_csv(artifacts)
-    if not csv_path:
+    raw = load_all_csv(artifacts)
+    if not raw:
         print("Нет *-report.csv — выполните make bench && make bench-collect")
         sys.exit(1)
 
@@ -335,11 +639,6 @@ def main() -> None:
         print("pip install matplotlib")
         sys.exit(0)
 
-    raw = load_csv(csv_path)
-    if not raw:
-        print(f"Пустой CSV: {csv_path}")
-        sys.exit(1)
-
     settings_path = root / "benchmarks" / "Hw5.Benchmarks" / "bench.settings.json"
     n_iter = 8
     if settings_path.is_file():
@@ -349,28 +648,40 @@ def main() -> None:
             pass
 
     rows = enrich_stats(raw, n=n_iter)
-    warm = matrix(rows, "Warm")
-    cold = matrix(rows, "Cold")
-
-    compression = None
-    comp_path = artifacts / "compression_stats.json"
-    if comp_path.is_file():
-        compression = json.loads(comp_path.read_text(encoding="utf-8"))
-
+    plots = [
+        ("indexquery_warm_latency.png", plot_warm_bar),
+        ("scaling_latency_by_N.png", plot_scaling_latency),
+        ("mmap_ratio_vs_N.png", plot_mmap_ratio_vs_n),
+        ("operators_latency.png", plot_operators),
+        ("cv_by_method.png", plot_cv_by_method),
+        ("alloc_ratio.png", plot_alloc_ratio),
+        ("indexquery_throughput.png", plot_throughput),
+        ("ranking_tfidf_vs_bm25.png", plot_ranking),
+        ("corpus_comparison_and_latency.png", plot_corpus_comparison),
+        ("indexquery_warm_vs_cold.png", plot_warm_cold),
+        ("naive_index_ratio.png", plot_naive_ratio),
+        ("mmap_first_vs_repeat.png", plot_mmap_touch),
+        ("compression_ratio_vs_N.png", plot_compression),
+    ]
     generated: list[str] = []
-    for name, fn in (
-        ("indexquery_warm_latency.png", lambda p: plot_warm_bar(warm, p)),
-        ("indexquery_disk_vs_memory_ratio.png", lambda p: plot_ratio_disk_vs_memory(warm, p)),
-        ("indexquery_warm_vs_cold.png", lambda p: plot_warm_cold(warm, cold, p)),
-        ("indexquery_throughput.png", lambda p: plot_throughput(warm, p)),
-    ):
-        fn(artifacts / name)
-        if (artifacts / name).is_file():
-            generated.append(name)
+    for name, fn in plots:
+        out = artifacts / name
+        if fn is rows:
+            continue
+        try:
+            if name == "compression_ratio_vs_N.png":
+                fn(rows, artifacts, out)
+            else:
+                fn(rows, out)
+            if out.is_file():
+                generated.append(name)
+        except Exception as exc:
+            print(f"skip {name}: {exc}")
 
-    write_summary(artifacts, rows, compression, generated)
-    print(f"CSV: {csv_path.name}")
-    print("bench_summary.md")
+    write_summary(artifacts, rows, generated)
+    write_analysis(artifacts, rows, generated)
+    print(f"Loaded {len(raw)} rows from {len(list(artifacts.glob('*-report.csv')))} CSV")
+    print("bench_summary.md, analysis.md")
     for n in generated:
         print(" ", n)
 
