@@ -1,0 +1,32 @@
+[
+  {
+    "Corpus": "Synthetic",
+    "DocumentCount": 128,
+    "SegmentFileBytes": 3087
+  },
+  {
+    "Corpus": "Wikipedia",
+    "DocumentCount": 128,
+    "SegmentFileBytes": 2900226
+  },
+  {
+    "Corpus": "Synthetic",
+    "DocumentCount": 10000,
+    "SegmentFileBytes": 311201
+  },
+  {
+    "Corpus": "Wikipedia",
+    "DocumentCount": 20000,
+    "SegmentFileBytes": 310520405
+  },
+  {
+    "Corpus": "Synthetic",
+    "DocumentCount": 2000,
+    "SegmentFileBytes": 61173
+  },
+  {
+    "Corpus": "Wikipedia",
+    "DocumentCount": 5000,
+    "SegmentFileBytes": 82873531
+  }
+]
