@@ -1,28 +1,29 @@
 # Профилирование HW5 (локальные артефакты)
 
-Сгенерировано `make profile-trace` (ProfileRunner: 2000 док, 3000 итераций, запрос `alpha AND beta OR gamma NEAR/2 delta`).
+## Режимы (`MODE=and|mmap|bm25`)
 
-## Файлы
+| Команда | Цикл | Запрос (по умолчанию) |
+| --- | --- | --- |
+| `make profile-run MODE=and` | `QueryExecutor` in-memory | `alpha AND beta` |
+| `make profile-run MODE=mmap` | `QueryExecutor` на mmap-сегменте | `alpha AND beta` |
+| `make profile-run MODE=bm25` | `SearchService` BM25 Top10 | `alpha OR beta` |
+
+Трассировка: `make profile-trace MODE=and` (или `mmap`, `bm25`) → отдельные файлы `hw5-query-{mode}.*`.
+
+## Файлы (пример для `MODE=and`)
 
 | Файл | Назначение |
 | --- | --- |
-| `hw5-query-loop.nettrace` | сырой trace (`dotnet trace`) |
-| `hw5-query-loop.speedscope.json` | flame graph для [speedscope.app](https://www.speedscope.app/) |
-| `hw5-query-loop-topN.txt` | top-25 exclusive/inclusive |
+| `hw5-query-and.nettrace` | сырой trace |
+| `hw5-query-and.speedscope.json` | flame graph → [speedscope.app](https://www.speedscope.app/) |
+| `hw5-query-and-topN.txt` | top-25 exclusive/inclusive |
 
-## Top hotspots (exclusive, ориентир)
+## Hotspot → гипотеза
 
-1. **GC / `Thread.PollGC`** (~26%) — давление аллокаций в горячем цикле.
-2. **`List<int>.ToArray` / resize** (~23% incl.) — копии при материализации posting-list.
-3. **`Ranker.ComputeBm25`** (~7% excl., ~14% incl.) — скоринг TopK.
-4. **`BinarySearch` / сортировки** — работа с отсортированными docId.
-5. **`MatchSet.And` / `Or` / `NearUnordered`** — булево ядро запроса.
+| Режим | Ожидаемый hotspot | Улучшение |
+| --- | --- | --- |
+| `and` | `MatchSet.And`, skip-merge | block-max WAND, меньше копий posting |
+| `mmap` | bitpack decode, `PagedMmapReader` | zero-copy decode, prefetch сегмента |
+| `bm25` | `Ranker.ComputeBm25`, `ToArray`, GC | кэш IDF при Seal, `ArrayPool` |
 
-## Гипотезы улучшений
-
-- Убрать лишние `ToArray()` в `MatchSet` / ранжировании → `ArrayPool<int>` или span поверх mmap-буфера.
-- Разделить «лёгкий» булевый путь и BM25: не строить полный `MatchSet`, если нужен только TopK по одному терму.
-- Предвычислить IDF/длины документов при `Seal()` — меньше работы в `ComputeBm25` на запрос.
-- Декодер bitpack: batch-read без промежуточных `List<int>`.
-
-Повторить сбор: `make profile-trace` из `hw5/`.
+Повторить: `make profile-trace MODE=bm25` из каталога `hw5/`.

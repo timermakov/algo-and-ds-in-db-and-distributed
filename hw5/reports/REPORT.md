@@ -34,55 +34,102 @@
 
 | Параметр | Значение |
 | --- | --- |
-| Корпус | синтетика: **2000** документов, **24** терма/док, словарь 10 термов, seed **42** |
-| BDN | job **Warm** (warmup=3, iter=8), job **Cold** (warmup=0, iter=4) |
-| Команды | `make bench-report` → CSV/PNG в `reports/artifacts/`; smoke: `make bench-smoke` |
+| Корпус **Synthetic** | N ∈ {2000, 10000}, 24 терма/док, seed **42** |
+| Корпус **Wikipedia** | shard `pages-articles1`, `docs.jsonl`, bench **N=5000** |
+| BDN | Warm (warmup=3, iter=8); Cold — только `IndexQueryBenchmarks`; `OperationsPerInvoke=32` |
+| Классы | IndexQuery, Scaling, Operators, Ranking, Build, NaiveScan, MmapTouch |
+| Команды | `make download-wiki` → `make prepare-corpus` → `make bench-report` (~**37 мин**) |
 
-Артефакты: `Hw5.Benchmarks.IndexQueryBenchmarks-report.csv`, сводка `bench_summary.md`, графики `indexquery_*.png`.
+Настройки: `benchmarks/Hw5.Benchmarks/bench.settings.json`, локальный override — `bench.local.json` (см. `bench.local.json.example`).
 
-### 5.2. Аппаратная и программная среда (полный прогон 2026-05-29)
+Артефакты: все `*-report.csv`, `bench_summary.md`, **`analysis.md`**, PNG в `reports/artifacts/`.
+
+### 5.1a. Корпус Wikipedia
+
+Источник: [enwiki-latest-pages-articles1.xml-p1p41242.bz2](https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles1.xml-p1p41242.bz2) (~296 MB). Устаревший `abstract.xml.gz` в дампах не публикуется; полный `pages-articles.xml.bz2` (~25 GB) избыточен для лабораторной машины.
+
+Пайплайн: streaming XML → `WikiTextNormalizer` → `data/processed/docs.jsonl`; manifest — `data/dataset.manifest.json`; bench-запросы — `data/queries/wiki-bench-queries.txt` (top-DF, фильтр stopwords из `data/stopwords-en.txt`, флаг `--no-stopwords` для A/B).
+
+### 5.1b. Синтетика vs Wikipedia
+
+| Ось | Synthetic | Wikipedia |
+| --- | --- | --- |
+| Распределение термов | равномерное по словарю 10 термов | Zipf, длинные тексты |
+| Запросы | `alpha/beta/...` | curated из DF корпуса |
+| Ожидание CV | ниже на AND | выше alloc, возможен больший CV |
+| mmap ratio | ~1.6× | выше на коротких posting-list (2.06× @ scaling 2k) |
+
+### 5.2. Аппаратная и программная среда (полный прогон 2026-05-31)
 
 | | |
 | --- | --- |
 | ОС | Windows 11 (10.0.26200), план High performance |
 | CPU | 12th Gen Intel Core i5-1240P, 1 логический CPU в job BDN |
 | Runtime | .NET **10.0.5**, SDK 10.0.201, RyuJIT x86-64-v3, AVX2 |
-| BDN | 0.15.8, `StableBenchmarkConfig` + `DefaultConfig` (экспорт CSV/HTML) |
+| BDN | 0.15.8; Warm-only для scaling/operators/ranking; Warm+Cold — `IndexQueryBenchmarks` |
 
-### 5.3. Таблица Warm (n=8, baseline `Memory_AndQuery`)
+### 5.3. IndexQuery @ Synthetic 2000 (Warm, n=8)
 
-| Метод | Mean | StdDev | StdErr | CI95 (µs) | CV | Q/s | Ratio |
-| --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
-| RAM `AND` | **811.9 µs** | 24.6 µs | 8.7 µs | 792–832 | 3.0% | 1232 | 1.00 |
-| mmap `AND` (сжатый сегмент) | **1159.3 µs** | 20.8 µs | 7.4 µs | 1142–1176 | 1.8% | 863 | **1.43** |
-| RAM `NEAR/ADJ` | **928.9 µs** | 84.4 µs | 29.8 µs | 860–998 | 9.1% | 1077 | 1.15 |
-| RAM `BM25` Top10 | **1911.9 µs** | 66.0 µs | 23.3 µs | 1858–1966 | 3.5% | 523 | 2.36 |
+| Метод | Mean µs | CV | Ratio | Alloc/invoke |
+| --- | ---: | ---: | ---: | ---: |
+| RAM `AND` | **690.9** | 1.7% | 1.00 | 1729 KB |
+| mmap `AND` | **1090.8** | 3.0% | **1.58** | 2213 KB (+28%) |
+| RAM NEAR/ADJ | 355.1 | 4.7% | 0.51 | 742 KB |
+| RAM BM25 Top10 | **1836.6** | 3.3% | **2.66** | 1995 KB |
 
-\[
-CI_{95\%} = \bar{x} \pm t_{0.975,\, n-1} \cdot \frac{s}{\sqrt{n}}, \quad CV = \frac{s}{\bar{x}} \cdot 100\%
-\]
+Q/s (RAM AND): **~1447**.
 
-Пропускная способность: \(Q/s = 10^6 / \text{Mean}_{\mu s}\).
+### 5.4. Cold vs Warm (Synthetic 2000, IndexQuery)
 
-### 5.4. Cold vs Warm (эффект прогрева JIT/кэша)
-
-| Метод | Warm | Cold | Cold/Warm |
+| Метод | Warm µs | Cold µs | Cold/Warm |
 | --- | ---: | ---: | ---: |
-| RAM `AND` | 811.9 µs | 1072.6 µs | **1.32×** |
-| mmap `AND` | 1159.3 µs | 1243.8 µs | 1.07× |
-| RAM `NEAR/ADJ` | 928.9 µs | 969.4 µs | 1.04× |
-| RAM `BM25` Top10 | 1911.9 µs | 2132.3 µs | 1.12× |
+| RAM `AND` | 690.9 | 674.2 | **0.98×** |
+| mmap `AND` | 1090.8 | 1068.1 | 0.98× |
+| RAM BM25 | 1836.6 | 1802.4 | 0.98× |
 
-**Интерпретация:** накладные расходы mmap+декодирования проявляются стабильно (~**43%** к RAM на `AND`); cold-start сильнее бьёт по in-memory `AND` (разброс StdDev на cold выше из-за n=4).
+При cold iter=8 hot path стабилен (в отличие от прогона 2026-05-29 с cold iter=4 и ratio 1.32×).
 
-### 5.5. Сравнение «наивный RAM» vs «сжатый mmap»
+### 5.5. Масштабирование (Synthetic, Scaling benchmarks)
 
-| Режим | Хранение posting-list | Запрос `AND` (Warm) |
-| --- | --- | ---: |
-| In-memory (несжатые структуры) | `PostingList` в RAM | 811.9 µs (baseline) |
-| Disk mmap | delta + bitpack, чтение через `PagedMmapReader` | 1159.3 µs (**1.43×**) |
+| N | RAM AND µs | mmap AND µs | mmap/RAM |
+| --- | ---: | ---: | ---: |
+| 2000 | 611.5 | 1255.5 | 2.06× |
+| 10000 | 9132.7 | 13595.6 | **1.49×** |
 
-Отдельной реализации «несжатого mmap» нет: экономия диска оплачивается декодированием при каждом обращении к терму.
+Рост RAM AND **~15×** при N×5.
+
+### 5.5a. Операторы (изолированно, Synthetic 2000)
+
+| Оператор | Mean µs | Ratio к AND |
+| --- | ---: | ---: |
+| `AND` | 702 | 1.00 |
+| `OR` | 1324 | **1.89** |
+| `NOT` | 222 | 0.32 |
+| `ADJ` | 296 | 0.42 |
+| `NEAR/3` | 330 | 0.47 |
+
+Wikipedia 5000: `OR` **~13 ms** (CV 18%), `NOT` **~2 ms** (CV 23%). Wiki `AND` в IndexQuery — **NA** (таймаут GlobalSetup).
+
+### 5.5b. Naive baseline (BDN)
+
+| N | Indexed µs | Naive µs | Ускорение |
+| --- | ---: | ---: | ---: |
+| 128 | 48 | 150 | **3.1×** |
+| 512 | 172 | 715 | **4.2×** |
+
+### 5.5c. Ранжирование и mmap locality
+
+- **Ranking** (OR-запрос): TF-IDF **1.05–1.11×**, BM25 **1.13–1.15×** к BooleanOnly; в IndexQuery BM25 **2.66×** к AND.
+- **FirstTouch mmap** 5780 µs vs **Repeated** 1334 µs (**~4.3×**) @ Synthetic 2k.
+
+### 5.5d. RAM vs mmap (Synthetic 2000)
+
+| Режим | Mean µs | Ratio |
+| --- | ---: | ---: |
+| In-memory | 690.9 | 1.00 |
+| mmap + bitpack | 1090.8 | **1.58** |
+
+Несжатого mmap-baseline нет: экономия диска оплачивается декодированием.
 
 ### 5.6. Сжатие сегмента (тот же синтетический корпус)
 
@@ -95,33 +142,57 @@ CI_{95\%} = \bar{x} \pm t_{0.975,\, n-1} \cdot \frac{s}{\sqrt{n}}, \quad CV = \f
 
 Источник: `make compression-stats` → `reports/artifacts/compression_stats.json`.
 
-### 5.7. Графики
+### 5.7. Графики (11 PNG, прогон 2026-05-31)
 
-![Warm: задержка по сценариям](artifacts/indexquery_warm_latency.png)
+| # | Файл | Содержание |
+| --- | --- | --- |
+| 1 | `indexquery_warm_latency.png` | IndexQuery Warm по методам |
+| 2 | `scaling_latency_by_N.png` | AND RAM/mmap vs N (Synthetic) |
+| 3 | `mmap_ratio_vs_N.png` | mmap/RAM vs N |
+| 4 | `operators_latency.png` | AND/OR/NOT/ADJ/NEAR |
+| 5 | `cv_by_method.png` | CV по методам, порог 5% |
+| 6 | `alloc_ratio.png` | Allocated vs baseline |
+| 7 | `indexquery_throughput.png` | Q/s |
+| 8 | `ranking_tfidf_vs_bm25.png` | ранжирование |
+| 9 | `indexquery_warm_vs_cold.png` | Warm/Cold |
+| 10 | `naive_index_ratio.png` | naive vs indexed |
+| 11 | `mmap_first_vs_repeat.png` | page-fault proxy |
 
-![mmap vs RAM (AND)](artifacts/indexquery_disk_vs_memory_ratio.png)
+Не построены (нет данных в CSV/JSON): `corpus_comparison_and_latency.png` (scaling только Synthetic), `compression_ratio_vs_N.png` (нет naive bytes по N).
+
+Полный текстовый разбор: **`artifacts/analysis.md`**.
+
+![Warm: задержка](artifacts/indexquery_warm_latency.png)
+
+![Масштабирование](artifacts/scaling_latency_by_N.png)
+
+![Операторы](artifacts/operators_latency.png)
 
 ![Warm vs Cold](artifacts/indexquery_warm_vs_cold.png)
 
-![Throughput](artifacts/indexquery_throughput.png)
-
 ### 5.8. Гипотезы и проверка
 
-| Гипотеза | Ожидание | Наблюдение |
+| Гипотеза | Ожидание | Наблюдение (2026-05-31) |
 | --- | --- | --- |
-| H1: sorted + skip ускоряют `AND` | RAM `AND` < 1 ms на 2k док | **811 µs**, CV 3% |
-| H2: mmap медленнее RAM на hot path | Ratio > 1 | **1.43×**, alloc +28% |
-| H3: BM25 дороже булева ядра | Ratio к `AND` > 2 | **2.36×**, доминирует ранжирование |
-| H4: bitpack даёт >50% экономии диска | segment ≪ naive | **77%** экономии |
-| H5: NEAR/ADJ между `AND` и BM25 | 0.9–2.5× к baseline | **1.15×** (Warm) |
+| H1: skip ускоряют `AND` | < 1 ms @ 2k | **691 µs**, CV **1.7%** |
+| H2: mmap медленнее RAM | Ratio > 1 | **1.58×**, alloc **+28%** |
+| H3: BM25 дороже AND | > 2× | **2.66×** |
+| H4: bitpack экономит диск | > 50% | **~77%** |
+| H_scale | рост с N | **15×** latency при N×5 (611→9133 µs) |
+| H_ops | OR дороже AND | OR **1.89×** (synth); NOT/ADJ/NEAR дешевле на synth |
+| H_naive | indexed ≫ naive | **3.1–4.2×** @ N≤512 |
+| H_corpus | Wiki дороже | BM25 **4.3 ms** vs **1.8 ms**; CV wiki 17–23% |
+| H_cold | Cold > Warm | **Опровергнута** @ synth AND (0.98×) |
 
 ### 5.9. Профилирование (вне BDN)
 
-`make profile-trace` → `reports/profiles/hw5-query-loop.speedscope.json` (см. `reports/profiles/README.md`). В цикле `SearchService.Search` доминируют `MatchSet.And/Or`, `Ranker.ComputeBm25`, аллокации `ToArray`/`List` — кандидаты на пул буферов и меньше копий posting-list.
+`make profile-trace MODE=and|mmap|bm25` → `reports/profiles/hw5-query-{mode}.speedscope.json` (см. `reports/profiles/README.md`). Режимы изолируют булево ядро, mmap+decode и BM25.
 
 ## 6. Выводы
 
-- Skip-переходы и sorted posting-list дают предсказуемую стоимость `AND`/`OR` на синтетике 2k документов.
-- Сжатый mmap-сегмент **~1.43×** медленнее RAM на `AND`, но уменьшает объём индекса **~4.3×** относительно наивного представления posting-list.
-- BM25 стабильно дороже булева ядра (**~2.4×**); профиль указывает на `Ranker` и временные массивы.
-- Дальнейшие улучшения: block-max WAND, zero-copy decode из mmap, `ArrayPool` для `MatchSet`, SIMD в bitpack-декодере.
+- На Synthetic 2000 RAM `AND` **~691 µs** (CV 1.7%); mmap **1.58×** медленнее, alloc **+28%**; BM25 **2.66×** к AND.
+- Масштабирование Synthetic: **~15×** latency при росте N с 2k до 10k; mmap/RAM стабилизируется к **1.49×** на большом N.
+- Операторы: `OR` дороже `AND` (1.89×); на Wikipedia `OR` **~13 ms** из-за Zipf и длинных posting-list.
+- Naive scan в **3–4×** медленнее индекса уже при N≤512; first-touch mmap **~4.3×** дороже повторного чтения.
+- Wikipedia (5k doc): BM25 **~4.3 ms**, индексация **~3.7 s**; CV операторов 17–23%.
+- Сжатие сегмента **~77%**; дальнейшие улучшения: `ArrayPool`, zero-copy decode, block-max WAND.

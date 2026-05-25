@@ -5,37 +5,33 @@
 | Путь | Описание |
 | --- | --- |
 | `REPORT.md` | Основной текст отчёта (архитектура, валидация, бенчмарки, выводы) |
-| `artifacts/` | CSV/HTML BDN, `bench_summary.md`, PNG-графики, `compression_stats.json` |
-| `profiles/` | Speedscope / nettrace / topN (локально, в `.gitignore`) |
+| `artifacts/bench_summary.md` | Таблица Warm по всем BDN-классам |
+| `artifacts/analysis.md` | Глубокий разбор гипотез и ограничений |
+| `artifacts/*.png` | Графики (scaling, operators, CV, alloc, …) |
+| `profiles/` | Speedscope / nettrace (локально, в `.gitignore`) |
 
 ## Воспроизведение бенчмарков
 
-Из каталога `hw5/` (CMD + GNU Make):
+Из каталога `hw5/`:
 
 ```text
-make bench              # полный BDN (2000 док, 8 итераций Warm)
-make bench-collect      # копия CSV в reports/artifacts/
-make compression-stats  # compression_stats.json
-make graphs             # plot_bench.py → PNG + bench_summary.md
-make bench-report       # bench + collect + compression + graphs
-make bench-smoke        # быстрый smoke (128 док, 1 итерация)
+make bench-report       # полный прогон ~25–37 мин → artifacts/
+make bench-smoke        # быстрая проверка (~4 мин)
+make graphs             # пересборка PNG из CSV
+make prepare-corpus-queries              # wiki-запросы (со stopwords)
+make prepare-corpus-queries-no-stopwords # A/B без stopwords
 ```
 
-Настройки корпуса: `benchmarks/Hw5.Benchmarks/bench.settings.json`.
-
-Требования для графиков: Python 3 + `matplotlib` (`pip install matplotlib`).
+Конфиг: `benchmarks/Hw5.Benchmarks/bench.settings.json` — Synthetic N∈{2000,10000}, Wiki N=5000.
 
 ## Профилирование
 
 ```text
-make profile-run      # плотный цикл без dotnet-trace (оценка wall-time)
-make profile-trace    # hw5-query-loop.nettrace + .speedscope.json + topN.txt
+make profile-trace MODE=and    # или mmap, bm25
 ```
 
-Открыть flame graph: [speedscope.app](https://www.speedscope.app/) → файл `reports/profiles/hw5-query-loop.speedscope.json` (режим Left Heavy).
-
-Сводка hotspots: `reports/profiles/README.md`.
+См. `profiles/README.md`.
 
 ## Диаграммы
 
-Исходники PlantUML в `../diagrams/`. PNG в отчёт не обязателен — схемы читаются из `.puml` в IDE/онлайн-рендерере.
+PlantUML в `../diagrams/`.
