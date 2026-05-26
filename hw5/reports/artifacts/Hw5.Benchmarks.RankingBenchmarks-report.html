@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Hw5.Benchmarks.RankingBenchmarks-20260531-181706</title>
+<title>Hw5.Benchmarks.RankingBenchmarks-20260531-201848</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -17,27 +17,24 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValle
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
-  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
   Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
 </code></pre>
-<pre><code>IterationCount=8  LaunchCount=1  
+<pre><code>Job=Warm  IterationCount=8  LaunchCount=1  
+WarmupCount=3  
 </code></pre>
 
 <table>
-<thead><tr><th>Method</th><th>Job</th><th>WarmupCount</th><th>Case    </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
+<thead><tr><th>Method</th><th>Case    </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Gen1</th><th>Gen2</th><th>Allocated</th><th>Alloc Ratio</th>
 </tr>
-</thead><tbody><tr><td>BooleanOnly</td><td>Cold</td><td>0</td><td>Synthetic_2000</td><td>1.658 ms</td><td>0.1868 ms</td><td>0.0830 ms</td><td>1.00</td><td>0.07</td><td>309.0278</td><td>97.2222</td><td>27.7778</td><td>1.78 MB</td><td>1.00</td>
-</tr><tr><td>TfIdfTop10</td><td>Cold</td><td>0</td><td>Synthetic_2000</td><td>3.802 ms</td><td>1.3795 ms</td><td>0.6125 ms</td><td>2.30</td><td>0.36</td><td>312.5000</td><td>78.1250</td><td>15.6250</td><td>1.95 MB</td><td>1.10</td>
-</tr><tr><td>Bm25Top10</td><td>Cold</td><td>0</td><td>Synthetic_2000</td><td>2.353 ms</td><td>0.1203 ms</td><td>0.0629 ms</td><td>1.42</td><td>0.07</td><td>334.8214</td><td>89.2857</td><td>26.7857</td><td>1.95 MB</td><td>1.10</td>
-</tr><tr><td>BooleanOnly</td><td>Warm</td><td>3</td><td>Synthetic_2000</td><td>2.296 ms</td><td>0.4144 ms</td><td>0.2167 ms</td><td>1.01</td><td>0.12</td><td>307.2917</td><td>88.5417</td><td>26.0417</td><td>1.78 MB</td><td>1.00</td>
-</tr><tr><td>TfIdfTop10</td><td>Warm</td><td>3</td><td>Synthetic_2000</td><td>2.404 ms</td><td>0.5884 ms</td><td>0.2613 ms</td><td>1.05</td><td>0.14</td><td>322.9167</td><td>83.3333</td><td>20.8333</td><td>1.95 MB</td><td>1.10</td>
-</tr><tr><td>Bm25Top10</td><td>Warm</td><td>3</td><td>Synthetic_2000</td><td>2.639 ms</td><td>0.9210 ms</td><td>0.4817 ms</td><td>1.16</td><td>0.22</td><td>322.9167</td><td>83.3333</td><td>20.8333</td><td>1.95 MB</td><td>1.10</td>
-</tr><tr><td>BooleanOnly</td><td>Cold</td><td>0</td><td>Wikipedia_5000</td><td>8.937 ms</td><td>4.4796 ms</td><td>2.3429 ms</td><td>1.08</td><td>0.42</td><td>604.1667</td><td>166.6667</td><td>-</td><td>3.94 MB</td><td>1.00</td>
-</tr><tr><td>TfIdfTop10</td><td>Cold</td><td>0</td><td>Wikipedia_5000</td><td>6.144 ms</td><td>2.0614 ms</td><td>1.0781 ms</td><td>0.74</td><td>0.25</td><td>635.4167</td><td>177.0833</td><td>-</td><td>4.15 MB</td><td>1.05</td>
-</tr><tr><td>Bm25Top10</td><td>Cold</td><td>0</td><td>Wikipedia_5000</td><td>5.081 ms</td><td>0.3768 ms</td><td>0.1344 ms</td><td>0.61</td><td>0.18</td><td>640.6250</td><td>179.6875</td><td>-</td><td>4.15 MB</td><td>1.05</td>
-</tr><tr><td>BooleanOnly</td><td>Warm</td><td>3</td><td>Wikipedia_5000</td><td>4.300 ms</td><td>0.3259 ms</td><td>0.1705 ms</td><td>1.00</td><td>0.05</td><td>609.3750</td><td>171.8750</td><td>-</td><td>3.94 MB</td><td>1.00</td>
-</tr><tr><td>TfIdfTop10</td><td>Warm</td><td>3</td><td>Wikipedia_5000</td><td>4.790 ms</td><td>0.3618 ms</td><td>0.1606 ms</td><td>1.12</td><td>0.05</td><td>640.6250</td><td>179.6875</td><td>-</td><td>4.15 MB</td><td>1.05</td>
-</tr><tr><td>Bm25Top10</td><td>Warm</td><td>3</td><td>Wikipedia_5000</td><td>4.877 ms</td><td>0.3992 ms</td><td>0.1772 ms</td><td>1.14</td><td>0.06</td><td>635.4167</td><td>177.0833</td><td>-</td><td>4.15 MB</td><td>1.05</td>
+</thead><tbody><tr><td>BooleanOnly</td><td>Synthetic_2000</td><td>1,926.2 &mu;s</td><td>244.20 &mu;s</td><td>108.42 &mu;s</td><td>1.00</td><td>0.08</td><td>308.5938</td><td>93.7500</td><td>27.3438</td><td>1818.48 KB</td><td>1.00</td>
+</tr><tr><td>TfIdfTop10</td><td>Synthetic_2000</td><td>2,693.9 &mu;s</td><td>634.01 &mu;s</td><td>331.60 &mu;s</td><td>1.40</td><td>0.18</td><td>312.5000</td><td>78.1250</td><td>15.6250</td><td>1994.77 KB</td><td>1.10</td>
+</tr><tr><td>Bm25Top10</td><td>Synthetic_2000</td><td>2,258.8 &mu;s</td><td>410.05 &mu;s</td><td>182.07 &mu;s</td><td>1.18</td><td>0.11</td><td>322.9167</td><td>83.3333</td><td>20.8333</td><td>1994.82 KB</td><td>1.10</td>
+</tr><tr><td>BooleanOnly</td><td>Wikipedia_2000</td><td>291.0 &mu;s</td><td>78.96 &mu;s</td><td>41.30 &mu;s</td><td>1.02</td><td>0.19</td><td>39.0625</td><td>5.3711</td><td>-</td><td>242.23 KB</td><td>1.00</td>
+</tr><tr><td>TfIdfTop10</td><td>Wikipedia_2000</td><td>313.8 &mu;s</td><td>37.24 &mu;s</td><td>16.54 &mu;s</td><td>1.10</td><td>0.15</td><td>45.8984</td><td>5.8594</td><td>-</td><td>281.48 KB</td><td>1.16</td>
+</tr><tr><td>Bm25Top10</td><td>Wikipedia_2000</td><td>343.1 &mu;s</td><td>45.97 &mu;s</td><td>16.39 &mu;s</td><td>1.20</td><td>0.16</td><td>45.8984</td><td>5.8594</td><td>-</td><td>281.52 KB</td><td>1.16</td>
+</tr><tr><td>BooleanOnly</td><td>Wikipedia_5000</td><td>966.3 &mu;s</td><td>176.50 &mu;s</td><td>78.37 &mu;s</td><td>1.01</td><td>0.11</td><td>106.2500</td><td>28.1250</td><td>-</td><td>660.74 KB</td><td>1.00</td>
+</tr><tr><td>TfIdfTop10</td><td>Wikipedia_5000</td><td>2,218.3 &mu;s</td><td>1,177.13 &mu;s</td><td>615.66 &mu;s</td><td>2.31</td><td>0.63</td><td>125.0000</td><td>34.3750</td><td>-</td><td>772.27 KB</td><td>1.17</td>
+</tr><tr><td>Bm25Top10</td><td>Wikipedia_5000</td><td>1,730.5 &mu;s</td><td>459.42 &mu;s</td><td>203.99 &mu;s</td><td>1.80</td><td>0.24</td><td>125.0000</td><td>35.1563</td><td>-</td><td>772.3 KB</td><td>1.17</td>
 </tr></tbody></table>
 </body>
 </html>

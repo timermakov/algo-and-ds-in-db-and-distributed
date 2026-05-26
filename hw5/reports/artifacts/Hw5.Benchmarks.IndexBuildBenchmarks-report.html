@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Hw5.Benchmarks.IndexBuildBenchmarks-20260531-174757</title>
+<title>Hw5.Benchmarks.IndexBuildBenchmarks-20260531-200752</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -17,23 +17,21 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValle
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
-  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
   Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
 </code></pre>
-<pre><code>IterationCount=8  LaunchCount=1  
+<pre><code>Job=Warm  IterationCount=8  LaunchCount=1  
+WarmupCount=3  
 </code></pre>
 
 <table>
-<thead><tr><th>Method       </th><th>Job</th><th>WarmupCount</th><th>Case    </th><th>Mean    </th><th>Error  </th><th>StdDev </th><th>Gen0 </th><th>Gen1</th><th>Allocated</th>
+<thead><tr><th>Method       </th><th>Case    </th><th>Mean           </th><th>Error          </th><th>StdDev       </th><th>Gen0 </th><th>Gen1</th><th>Gen2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>SealAndWriteSegment</td><td>Cold</td><td>0</td><td>Synthetic_2000</td><td>6,893.0 &mu;s</td><td>932.00 &mu;s</td><td>413.81 &mu;s</td><td>312.5000</td><td>62.5000</td><td>1957.67 KB</td>
-</tr><tr><td>NaivePostingBytes</td><td>Cold</td><td>0</td><td>Synthetic_2000</td><td>254.7 &mu;s</td><td>86.30 &mu;s</td><td>45.14 &mu;s</td><td>40.5273</td><td>2.9297</td><td>250.4 KB</td>
-</tr><tr><td>SealAndWriteSegment</td><td>Warm</td><td>3</td><td>Synthetic_2000</td><td>5,382.5 &mu;s</td><td>1,119.26 &mu;s</td><td>496.96 &mu;s</td><td>312.5000</td><td>70.3125</td><td>1957.09 KB</td>
-</tr><tr><td>NaivePostingBytes</td><td>Warm</td><td>3</td><td>Synthetic_2000</td><td>217.9 &mu;s</td><td>18.53 &mu;s</td><td>8.23 &mu;s</td><td>40.7715</td><td>2.9297</td><td>250.4 KB</td>
-</tr><tr><td>SealAndWriteSegment</td><td>Cold</td><td>0</td><td>Wikipedia_5000</td><td>3,667,896.5 &mu;s</td><td>165,780.21 &mu;s</td><td>73,607.44 &mu;s</td><td>175000.0000</td><td>46000.0000</td><td>1186679.54 KB</td>
-</tr><tr><td>NaivePostingBytes</td><td>Cold</td><td>0</td><td>Wikipedia_5000</td><td>539,291.2 &mu;s</td><td>71,036.60 &mu;s</td><td>37,153.51 &mu;s</td><td>24000.0000</td><td>-</td><td>150404.44 KB</td>
-</tr><tr><td>SealAndWriteSegment</td><td>Warm</td><td>3</td><td>Wikipedia_5000</td><td>3,710,093.9 &mu;s</td><td>362,995.11 &mu;s</td><td>189,853.46 &mu;s</td><td>175000.0000</td><td>46000.0000</td><td>1186679.28 KB</td>
-</tr><tr><td>NaivePostingBytes</td><td>Warm</td><td>3</td><td>Wikipedia_5000</td><td>583,318.8 &mu;s</td><td>53,338.56 &mu;s</td><td>27,897.10 &mu;s</td><td>24000.0000</td><td>-</td><td>150404.44 KB</td>
+</thead><tbody><tr><td>SealAndWriteSegment</td><td>Synthetic_2000</td><td>15,106,460.5469 ns</td><td>3,229,534.0900 ns</td><td>1,689,108.7760 ns</td><td>515.6250</td><td>234.3750</td><td>140.6250</td><td>2922095 B</td>
+</tr><tr><td>NaivePostingBytes</td><td>Synthetic_2000</td><td>0.0000 ns</td><td>0.0000 ns</td><td>0.0000 ns</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>SealAndWriteSegment</td><td>Wikipedia_2000</td><td>2,522,776,825.0000 ns</td><td>470,866,932.1973 ns</td><td>246,272,510.3141 ns</td><td>77000.0000</td><td>20000.0000</td><td>-</td><td>516872080 B</td>
+</tr><tr><td>NaivePostingBytes</td><td>Wikipedia_2000</td><td>0.0000 ns</td><td>0.0000 ns</td><td>0.0000 ns</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>SealAndWriteSegment</td><td>Wikipedia_5000</td><td>5,975,730,785.7143 ns</td><td>1,042,096,035.9032 ns</td><td>462,697,098.6833 ns</td><td>175000.0000</td><td>46000.0000</td><td>-</td><td>1217197328 B</td>
+</tr><tr><td>NaivePostingBytes</td><td>Wikipedia_5000</td><td>0.3464 ns</td><td>0.6019 ns</td><td>0.2672 ns</td><td>-</td><td>-</td><td>-</td><td>-</td>
 </tr></tbody></table>
 </body>
 </html>

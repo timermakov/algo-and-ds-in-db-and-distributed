@@ -1,32 +1,7233 @@
 [
   {
-    "Corpus": "Synthetic",
-    "DocumentCount": 128,
-    "SegmentFileBytes": 3087
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
   },
   {
-    "Corpus": "Wikipedia",
-    "DocumentCount": 128,
-    "SegmentFileBytes": 2900226
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
   },
   {
-    "Corpus": "Synthetic",
-    "DocumentCount": 10000,
-    "SegmentFileBytes": 311201
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
   },
   {
-    "Corpus": "Wikipedia",
-    "DocumentCount": 20000,
-    "SegmentFileBytes": 310520405
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
   },
   {
-    "Corpus": "Synthetic",
-    "DocumentCount": 2000,
-    "SegmentFileBytes": 61173
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
   },
   {
-    "Corpus": "Wikipedia",
-    "DocumentCount": 5000,
-    "SegmentFileBytes": 82873531
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "",
+    "documentCount": 0,
+    "segmentFileBytes": 0,
+    "naivePostingBytes": 0,
+    "compressionRatio": 0
+  },
+  {
+    "corpus": "Wikipedia",
+    "documentCount": 5000,
+    "segmentFileBytes": 82873531,
+    "naivePostingBytes": 97386900,
+    "compressionRatio": 0.851
   }
 ]

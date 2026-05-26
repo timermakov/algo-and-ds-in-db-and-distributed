@@ -4,40 +4,28 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValle
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
-  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
   Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
 
-IterationCount=8  LaunchCount=1  
+Job=Warm  IterationCount=8  LaunchCount=1  
+WarmupCount=3  
 
 ```
-| Method    | Job  | WarmupCount | Case           | Mean        | Error       | StdDev      | Ratio | RatioSD | Gen0     | Gen1     | Gen2    | Allocated  | Alloc Ratio |
-|---------- |----- |------------ |--------------- |------------:|------------:|------------:|------:|--------:|---------:|---------:|--------:|-----------:|------------:|
-| **AndQuery**  | **Cold** | **0**           | **Synthetic_2000** |    **672.1 μs** |   **144.74 μs** |    **75.70 μs** |  **1.01** |    **0.15** | **281.2500** |  **89.5833** |       **-** | **1728.95 KB** |        **1.00** |
-| OrQuery   | Cold | 0           | Synthetic_2000 |  1,870.2 μs |   256.21 μs |   113.76 μs |  2.81 |    0.33 | 304.6875 |  85.9375 | 23.4375 | 1818.47 KB |        1.05 |
-| NotQuery  | Cold | 0           | Synthetic_2000 |    348.8 μs |    24.14 μs |    12.63 μs |  0.52 |    0.06 | 101.0742 |  24.4141 |       - |  621.77 KB |        0.36 |
-| AdjQuery  | Cold | 0           | Synthetic_2000 |    281.4 μs |    24.98 μs |    13.07 μs |  0.42 |    0.05 | 102.5391 |  27.8320 |       - |  630.35 KB |        0.36 |
-| NearQuery | Cold | 0           | Synthetic_2000 |    448.6 μs |   135.58 μs |    70.91 μs |  0.67 |    0.12 | 120.1172 |  32.2266 |       - |  742.43 KB |        0.43 |
-|           |      |             |                |             |             |             |       |         |          |          |         |            |             |
-| AndQuery  | Warm | 3           | Synthetic_2000 |    702.3 μs |    90.99 μs |    40.40 μs |  1.00 |    0.08 | 281.2500 |  88.8672 |       - | 1728.95 KB |        1.00 |
-| OrQuery   | Warm | 3           | Synthetic_2000 |  1,323.9 μs |   186.60 μs |    82.85 μs |  1.89 |    0.15 | 310.0962 |  98.5577 | 28.8462 | 1818.48 KB |        1.05 |
-| NotQuery  | Warm | 3           | Synthetic_2000 |    221.6 μs |    17.49 μs |     7.77 μs |  0.32 |    0.02 |  97.6563 |  23.4375 |       - |  621.77 KB |        0.36 |
-| AdjQuery  | Warm | 3           | Synthetic_2000 |    295.7 μs |    32.17 μs |    16.82 μs |  0.42 |    0.03 | 102.5391 |  27.8320 |       - |  630.35 KB |        0.36 |
-| NearQuery | Warm | 3           | Synthetic_2000 |    329.6 μs |    31.45 μs |    16.45 μs |  0.47 |    0.03 | 120.6055 |  31.7383 |       - |  742.43 KB |        0.43 |
-|           |      |             |                |             |             |             |       |         |          |          |         |            |             |
-| **AndQuery**  | **Cold** | **0**           | **Wikipedia_5000** |          **NA** |          **NA** |          **NA** |     **?** |       **?** |       **NA** |       **NA** |      **NA** |         **NA** |           **?** |
-| OrQuery   | Cold | 0           | Wikipedia_5000 |  4,060.4 μs |   462.09 μs |   205.17 μs |     ? |       ? | 609.3750 | 171.8750 |       - | 4034.96 KB |           ? |
-| NotQuery  | Cold | 0           | Wikipedia_5000 |    899.2 μs |   102.66 μs |    53.69 μs |     ? |       ? | 158.2031 |  42.9688 |       - | 1269.68 KB |           ? |
-| AdjQuery  | Cold | 0           | Wikipedia_5000 |          NA |          NA |          NA |     ? |       ? |       NA |       NA |      NA |         NA |           ? |
-| NearQuery | Cold | 0           | Wikipedia_5000 |  1,098.9 μs |   816.10 μs |   362.35 μs |     ? |       ? | 139.4231 |  38.4615 |       - |  953.27 KB |           ? |
-|           |      |             |                |             |             |             |       |         |          |          |         |            |             |
-| AndQuery  | Warm | 3           | Wikipedia_5000 |          NA |          NA |          NA |     ? |       ? |       NA |       NA |      NA |         NA |           ? |
-| OrQuery   | Warm | 3           | Wikipedia_5000 | 13,089.1 μs | 4,487.38 μs | 2,346.98 μs |     ? |       ? | 604.1667 | 166.6667 |       - | 4034.96 KB |           ? |
-| NotQuery  | Warm | 3           | Wikipedia_5000 |  2,050.5 μs |   899.74 μs |   470.58 μs |     ? |       ? | 156.2500 |  42.9688 |       - | 1269.68 KB |           ? |
-| AdjQuery  | Warm | 3           | Wikipedia_5000 |          NA |          NA |          NA |     ? |       ? |       NA |       NA |      NA |         NA |           ? |
-| NearQuery | Warm | 3           | Wikipedia_5000 |  1,115.6 μs |   368.93 μs |   192.96 μs |     ? |       ? | 138.0208 |  39.0625 |       - |  953.27 KB |           ? |
-
-Benchmarks with issues:
-  OperatorBenchmarks.AndQuery: Cold(IterationCount=8, LaunchCount=1, WarmupCount=0) [Case=Wikipedia_5000]
-  OperatorBenchmarks.AdjQuery: Cold(IterationCount=8, LaunchCount=1, WarmupCount=0) [Case=Wikipedia_5000]
-  OperatorBenchmarks.AndQuery: Warm(IterationCount=8, LaunchCount=1, WarmupCount=3) [Case=Wikipedia_5000]
-  OperatorBenchmarks.AdjQuery: Warm(IterationCount=8, LaunchCount=1, WarmupCount=3) [Case=Wikipedia_5000]
+| Method    | Case           | Mean       | Error       | StdDev    | Median     | Ratio | RatioSD | Gen0     | Gen1    | Gen2    | Allocated  | Alloc Ratio |
+|---------- |--------------- |-----------:|------------:|----------:|-----------:|------:|--------:|---------:|--------:|--------:|-----------:|------------:|
+| **AndQuery**  | **Synthetic_2000** | **1,515.4 μs** | **1,324.36 μs** | **692.67 μs** | **1,140.6 μs** |  **1.17** |    **0.68** | **281.2500** | **89.8438** |       **-** | **1728.95 KB** |        **1.00** |
+| OrQuery   | Synthetic_2000 | 1,875.2 μs |   144.51 μs |  64.16 μs | 1,860.7 μs |  1.45 |    0.51 | 309.0278 | 93.7500 | 27.7778 | 1818.48 KB |        1.05 |
+| NotQuery  | Synthetic_2000 |   298.6 μs |    64.77 μs |  28.76 μs |   295.4 μs |  0.23 |    0.08 | 101.0742 | 24.4141 |       - |  621.77 KB |        0.36 |
+| AdjQuery  | Synthetic_2000 |   423.8 μs |   177.69 μs |  78.90 μs |   405.1 μs |  0.33 |    0.13 | 102.5391 | 27.8320 |       - |  630.35 KB |        0.36 |
+| NearQuery | Synthetic_2000 |   460.4 μs |   107.36 μs |  56.15 μs |   460.0 μs |  0.36 |    0.13 | 120.6055 | 31.7383 |       - |  742.43 KB |        0.43 |
+|           |                |            |             |           |            |       |         |          |         |         |            |             |
+| **AndQuery**  | **Wikipedia_2000** |   **294.2 μs** |    **79.82 μs** |  **41.75 μs** |   **286.5 μs** |  **1.02** |    **0.19** |  **36.6211** |  **4.8828** |       **-** |     **227 KB** |        **1.00** |
+| OrQuery   | Wikipedia_2000 |   296.0 μs |    39.27 μs |  20.54 μs |   290.6 μs |  1.02 |    0.15 |  39.0625 |  5.3711 |       - |  242.23 KB |        1.07 |
+| NotQuery  | Wikipedia_2000 |   390.4 μs |    45.75 μs |  20.32 μs |   385.3 μs |  1.35 |    0.19 |  73.2422 | 14.6484 |       - |  450.82 KB |        1.99 |
+| AdjQuery  | Wikipedia_2000 |   132.5 μs |    28.15 μs |  14.72 μs |   133.5 μs |  0.46 |    0.08 |  22.2168 |  2.1973 |       - |   137.2 KB |        0.60 |
+| NearQuery | Wikipedia_2000 |   139.7 μs |    11.49 μs |   5.10 μs |   140.5 μs |  0.48 |    0.07 |  25.6348 |  2.4414 |       - |  157.56 KB |        0.69 |
+|           |                |            |             |           |            |       |         |          |         |         |            |             |
+| **AndQuery**  | **Wikipedia_5000** |   **642.8 μs** |   **185.76 μs** |  **97.16 μs** |   **644.7 μs** |  **1.02** |    **0.21** |  **97.6563** | **27.3438** |       **-** |  **605.02 KB** |        **1.00** |
+| OrQuery   | Wikipedia_5000 |   555.4 μs |    39.59 μs |  17.58 μs |   549.7 μs |  0.88 |    0.13 | 107.4219 | 30.2734 |       - |  660.74 KB |        1.09 |
+| NotQuery  | Wikipedia_5000 |   681.8 μs |    25.81 μs |  13.50 μs |   680.3 μs |  1.08 |    0.15 | 171.8750 | 48.8281 |       - | 1169.27 KB |        1.93 |
+| AdjQuery  | Wikipedia_5000 |   410.6 μs |   227.67 μs | 101.09 μs |   380.9 μs |  0.65 |    0.18 |  62.5000 | 15.6250 |       - |  383.99 KB |        0.63 |
+| NearQuery | Wikipedia_5000 |   674.5 μs |    97.69 μs |  34.84 μs |   684.0 μs |  1.07 |    0.16 |  65.4297 | 12.6953 |       - |  403.34 KB |        0.67 |

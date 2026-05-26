@@ -4,19 +4,17 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValle
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
-  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
   Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
 
-IterationCount=8  LaunchCount=1  
+Job=Warm  IterationCount=8  LaunchCount=1  
+WarmupCount=3  
 
 ```
-| Method              | Job  | WarmupCount | Case           | Mean           | Error         | StdDev        | Gen0        | Gen1       | Allocated     |
-|-------------------- |----- |------------ |--------------- |---------------:|--------------:|--------------:|------------:|-----------:|--------------:|
-| **SealAndWriteSegment** | **Cold** | **0**           | **Synthetic_2000** |     **6,893.0 μs** |     **932.00 μs** |     **413.81 μs** |    **312.5000** |    **62.5000** |    **1957.67 KB** |
-| NaivePostingBytes   | Cold | 0           | Synthetic_2000 |       254.7 μs |      86.30 μs |      45.14 μs |     40.5273 |     2.9297 |      250.4 KB |
-| SealAndWriteSegment | Warm | 3           | Synthetic_2000 |     5,382.5 μs |   1,119.26 μs |     496.96 μs |    312.5000 |    70.3125 |    1957.09 KB |
-| NaivePostingBytes   | Warm | 3           | Synthetic_2000 |       217.9 μs |      18.53 μs |       8.23 μs |     40.7715 |     2.9297 |      250.4 KB |
-| **SealAndWriteSegment** | **Cold** | **0**           | **Wikipedia_5000** | **3,667,896.5 μs** | **165,780.21 μs** |  **73,607.44 μs** | **175000.0000** | **46000.0000** | **1186679.54 KB** |
-| NaivePostingBytes   | Cold | 0           | Wikipedia_5000 |   539,291.2 μs |  71,036.60 μs |  37,153.51 μs |  24000.0000 |          - |  150404.44 KB |
-| SealAndWriteSegment | Warm | 3           | Wikipedia_5000 | 3,710,093.9 μs | 362,995.11 μs | 189,853.46 μs | 175000.0000 | 46000.0000 | 1186679.28 KB |
-| NaivePostingBytes   | Warm | 3           | Wikipedia_5000 |   583,318.8 μs |  53,338.56 μs |  27,897.10 μs |  24000.0000 |          - |  150404.44 KB |
+| Method              | Case           | Mean                  | Error                 | StdDev              | Gen0        | Gen1       | Gen2     | Allocated    |
+|-------------------- |--------------- |----------------------:|----------------------:|--------------------:|------------:|-----------:|---------:|-------------:|
+| **SealAndWriteSegment** | **Synthetic_2000** |    **15,106,460.5469 ns** |     **3,229,534.0900 ns** |   **1,689,108.7760 ns** |    **515.6250** |   **234.3750** | **140.6250** |    **2922095 B** |
+| NaivePostingBytes   | Synthetic_2000 |             0.0000 ns |             0.0000 ns |           0.0000 ns |           - |          - |        - |            - |
+| **SealAndWriteSegment** | **Wikipedia_2000** | **2,522,776,825.0000 ns** |   **470,866,932.1973 ns** | **246,272,510.3141 ns** |  **77000.0000** | **20000.0000** |        **-** |  **516872080 B** |
+| NaivePostingBytes   | Wikipedia_2000 |             0.0000 ns |             0.0000 ns |           0.0000 ns |           - |          - |        - |            - |
+| **SealAndWriteSegment** | **Wikipedia_5000** | **5,975,730,785.7143 ns** | **1,042,096,035.9032 ns** | **462,697,098.6833 ns** | **175000.0000** | **46000.0000** |        **-** | **1217197328 B** |
+| NaivePostingBytes   | Wikipedia_5000 |             0.3464 ns |             0.6019 ns |           0.2672 ns |           - |          - |        - |            - |

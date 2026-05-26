@@ -4,34 +4,22 @@ BenchmarkDotNet v0.15.8, Windows 11 (10.0.26200.8524/25H2/2025Update/HudsonValle
 12th Gen Intel Core i5-1240P 1.70GHz, 1 CPU, 16 logical and 12 physical cores
 .NET SDK 10.0.201
   [Host] : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
-  Cold   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
   Warm   : .NET 10.0.5 (10.0.5, 10.0.526.15411), X64 RyuJIT x86-64-v3
 
-IterationCount=8  LaunchCount=1  
+Job=Warm  IterationCount=8  LaunchCount=1  
+WarmupCount=3  
 
 ```
-| Method            | Job  | WarmupCount | Case            | Mean        | Error       | StdDev      | Ratio | RatioSD | Gen0      | Gen1     | Gen2     | Allocated | Alloc Ratio |
-|------------------ |----- |------------ |---------------- |------------:|------------:|------------:|------:|--------:|----------:|---------:|---------:|----------:|------------:|
-| **Memory_AndQuery**   | **Cold** | **0**           | **Synthetic_10000** | **15,853.7 μs** | **5,042.88 μs** | **2,239.07 μs** |  **1.02** |    **0.19** | **1375.0000** | **468.7500** | **156.2500** |   **9.44 MB** |        **1.00** |
-| DiskMmap_AndQuery | Cold | 0           | Synthetic_10000 | 13,684.6 μs | 1,629.73 μs |   723.61 μs |  0.88 |    0.12 | 1781.2500 | 656.2500 | 187.5000 |  11.78 MB |        1.25 |
-|                   |      |             |                 |             |             |             |       |         |           |          |          |           |             |
-| Memory_AndQuery   | Warm | 3           | Synthetic_10000 |  9,132.7 μs |   523.91 μs |   274.01 μs |  1.00 |    0.04 | 1375.0000 | 468.7500 | 156.2500 |   9.44 MB |        1.00 |
-| DiskMmap_AndQuery | Warm | 3           | Synthetic_10000 | 13,595.6 μs |   610.03 μs |   270.86 μs |  1.49 |    0.05 | 1781.2500 | 625.0000 | 187.5000 |  11.78 MB |        1.25 |
-|                   |      |             |                 |             |             |             |       |         |           |          |          |           |             |
-| **Memory_AndQuery**   | **Cold** | **0**           | **Synthetic_2000**  |    **597.4 μs** |    **34.62 μs** |    **18.10 μs** |  **1.00** |    **0.04** |  **281.2500** |  **88.8672** |        **-** |   **1.69 MB** |        **1.00** |
-| DiskMmap_AndQuery | Cold | 0           | Synthetic_2000  |  1,033.7 μs |    79.67 μs |    35.38 μs |  1.73 |    0.07 |  359.3750 | 165.1786 |        - |   2.16 MB |        1.28 |
-|                   |      |             |                 |             |             |             |       |         |           |          |          |           |             |
-| Memory_AndQuery   | Warm | 3           | Synthetic_2000  |    611.5 μs |    42.41 μs |    22.18 μs |  1.00 |    0.05 |  281.2500 |  88.8672 |        - |   1.69 MB |        1.00 |
-| DiskMmap_AndQuery | Warm | 3           | Synthetic_2000  |  1,255.5 μs |   468.94 μs |   245.27 μs |  2.06 |    0.39 |  360.4167 | 166.6667 |        - |   2.16 MB |        1.28 |
-|                   |      |             |                 |             |             |             |       |         |           |          |          |           |             |
-| **Memory_AndQuery**   | **Cold** | **0**           | **Wikipedia_5000**  |          **NA** |          **NA** |          **NA** |     **?** |       **?** |        **NA** |       **NA** |       **NA** |        **NA** |           **?** |
-| DiskMmap_AndQuery | Cold | 0           | Wikipedia_5000  |          NA |          NA |          NA |     ? |       ? |        NA |       NA |       NA |        NA |           ? |
-|                   |      |             |                 |             |             |             |       |         |           |          |          |           |             |
-| Memory_AndQuery   | Warm | 3           | Wikipedia_5000  |          NA |          NA |          NA |     ? |       ? |        NA |       NA |       NA |        NA |           ? |
-| DiskMmap_AndQuery | Warm | 3           | Wikipedia_5000  |          NA |          NA |          NA |     ? |       ? |        NA |       NA |       NA |        NA |           ? |
-
-Benchmarks with issues:
-  IndexQueryScalingBenchmarks.Memory_AndQuery: Cold(IterationCount=8, LaunchCount=1, WarmupCount=0) [Case=Wikipedia_5000]
-  IndexQueryScalingBenchmarks.DiskMmap_AndQuery: Cold(IterationCount=8, LaunchCount=1, WarmupCount=0) [Case=Wikipedia_5000]
-  IndexQueryScalingBenchmarks.Memory_AndQuery: Warm(IterationCount=8, LaunchCount=1, WarmupCount=3) [Case=Wikipedia_5000]
-  IndexQueryScalingBenchmarks.DiskMmap_AndQuery: Warm(IterationCount=8, LaunchCount=1, WarmupCount=3) [Case=Wikipedia_5000]
+| Method            | Case            | Mean        | Error        | StdDev      | Ratio | RatioSD | Gen0      | Gen1     | Gen2     | Allocated   | Alloc Ratio |
+|------------------ |---------------- |------------:|-------------:|------------:|------:|--------:|----------:|---------:|---------:|------------:|------------:|
+| **Memory_AndQuery**   | **Synthetic_10000** | **18,576.1 μs** | **13,069.96 μs** | **6,835.84 μs** |  **1.11** |    **0.51** | **1375.0000** | **500.0000** | **156.2500** |  **9670.19 KB** |        **1.00** |
+| DiskMmap_AndQuery | Synthetic_10000 | 21,197.8 μs |  5,860.77 μs | 2,602.22 μs |  1.26 |    0.39 | 1781.2500 | 593.7500 | 187.5000 | 12066.09 KB |        1.25 |
+|                   |                 |             |              |             |       |         |           |          |          |             |             |
+| **Memory_AndQuery**   | **Synthetic_2000**  |  **1,914.0 μs** |  **1,077.89 μs** |   **563.76 μs** |  **1.07** |    **0.42** |  **281.2500** |  **88.0682** |        **-** |  **1728.95 KB** |        **1.00** |
+| DiskMmap_AndQuery | Synthetic_2000  |  2,372.6 μs |  1,753.30 μs |   917.01 μs |  1.33 |    0.61 |  357.6389 | 166.6667 |        - |   2212.7 KB |        1.28 |
+|                   |                 |             |              |             |       |         |           |          |          |             |             |
+| **Memory_AndQuery**   | **Wikipedia_2000**  |    **252.5 μs** |     **42.54 μs** |    **22.25 μs** |  **1.01** |    **0.12** |   **36.6211** |   **4.3945** |        **-** |      **227 KB** |        **1.00** |
+| DiskMmap_AndQuery | Wikipedia_2000  |    556.3 μs |    229.30 μs |   101.81 μs |  2.22 |    0.42 |   51.7578 |   6.8359 |        - |   321.79 KB |        1.42 |
+|                   |                 |             |              |             |       |         |           |          |          |             |             |
+| **Memory_AndQuery**   | **Wikipedia_5000**  |  **1,897.8 μs** |    **989.49 μs** |   **517.52 μs** |  **1.09** |    **0.47** |   **98.2143** |  **22.3214** |        **-** |   **605.02 KB** |        **1.00** |
+| DiskMmap_AndQuery | Wikipedia_5000  |  1,342.0 μs |    641.12 μs |   335.32 μs |  0.77 |    0.32 |  141.6667 |  45.8333 |        - |   876.48 KB |        1.45 |
