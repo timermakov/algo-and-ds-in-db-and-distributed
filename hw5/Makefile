@@ -54,6 +54,15 @@ graphs:
 
 bench-report: bench bench-collect compression-stats graphs
 
+bench-wiki: bench-kill bench-build
+	@set HW5_BENCH_SMOKE=
+	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*IndexQueryBenchmarks*"
+	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*OperatorBenchmarks*"
+	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*IndexQueryScalingBenchmarks*"
+	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*IndexBuildBenchmarks*"
+	$(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "*RankingBenchmarks*"
+	$(MAKE) bench-collect graphs
+
 bench-smoke: bench-kill bench-build
 	set HW5_BENCH_SMOKE=1&& $(DOTNET) run -c Release --project benchmarks\Hw5.Benchmarks --no-build -- --filter "$(BENCH_FILTER)"
 

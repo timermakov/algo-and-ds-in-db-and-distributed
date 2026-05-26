@@ -360,9 +360,17 @@ def plot_corpus_comparison(rows: list[dict[str, Any]], out: Path) -> None:
     import matplotlib.pyplot as plt
     import numpy as np
 
-    data = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks", method="Memory_AndQuery")
+    def valid_mean(r: dict[str, Any]) -> bool:
+        return r.get("mean_ns") is not None and r["mean_ns"] > 0
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks", method="Memory_AndQuery")
+    data = [r for r in data if valid_mean(r)]
+    if not data:
+        data = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks", method="Memory_AndQuery")
+        data = [r for r in data if valid_mean(r)]
     if not data:
         return
+
     common_n = None
     for n in sorted({r["document_count"] for r in data if r["document_count"]}):
         corps = {r["corpus"] for r in data if r["document_count"] == n}
@@ -371,7 +379,11 @@ def plot_corpus_comparison(rows: list[dict[str, Any]], out: Path) -> None:
             break
     if common_n is None:
         return
-    subset = [r for r in data if r["document_count"] == common_n]
+
+    subset = sorted(
+        [r for r in data if r["document_count"] == common_n],
+        key=lambda r: r["corpus"],
+    )
     labels = [r["corpus"] for r in subset]
     means = [r["mean_ns"] / 1_000.0 for r in subset]
     x = np.arange(len(labels))
@@ -380,7 +392,43 @@ def plot_corpus_comparison(rows: list[dict[str, Any]], out: Path) -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
     ax.set_ylabel("Mean, µs")
-    ax.set_title(f"Synthetic vs Wikipedia @ N={common_n}")
+    ax.set_title(f"RAM AND: Synthetic vs Wikipedia @ N={common_n}")
+    ax.grid(axis="y", linestyle="--", alpha=0.35)
+    fig.savefig(out, dpi=140, bbox_inches="tight")
+    plt.close(fig)
+
+
+def plot_corpus_mmap_comparison(rows: list[dict[str, Any]], out: Path) -> None:
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    data = warm_rows(rows, bench_class="IndexQueryBenchmarks", method="DiskMmap_AndQuery")
+    data = [r for r in data if r.get("mean_ns") and r["mean_ns"] > 0]
+    if not data:
+        return
+
+    common_n = None
+    for n in sorted({r["document_count"] for r in data if r["document_count"]}):
+        corps = {r["corpus"] for r in data if r["document_count"] == n}
+        if len(corps) >= 2:
+            common_n = n
+            break
+    if common_n is None:
+        return
+
+    subset = sorted(
+        [r for r in data if r["document_count"] == common_n],
+        key=lambda r: r["corpus"],
+    )
+    labels = [r["corpus"] for r in subset]
+    means = [r["mean_ns"] / 1_000.0 for r in subset]
+    x = np.arange(len(labels))
+    fig, ax = plt.subplots(figsize=(6, 5))
+    ax.bar(x, means, color=["#ef6c00", "#6a1b9a"][: len(labels)])
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.set_ylabel("Mean, µs")
+    ax.set_title(f"mmap AND: Synthetic vs Wikipedia @ N={common_n}")
     ax.grid(axis="y", linestyle="--", alpha=0.35)
     fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
@@ -476,33 +524,36 @@ def plot_compression(rows: list[dict[str, Any]], artifacts: Path, out: Path) -> 
         if not comp_path.is_file():
             return
         payload = json.loads(comp_path.read_text(encoding="utf-8"))
-        if isinstance(payload, list):
-            entries = payload
-        else:
-            entries = [payload]
+        entries = payload if isinstance(payload, list) else [payload]
     else:
         entries = json.loads(comp_path.read_text(encoding="utf-8"))
 
-    ns = []
-    ratios = []
+    by_corpus: dict[str, tuple[list[int], list[float]]] = defaultdict(lambda: ([], []))
     for e in entries:
-        n = e.get("documentCount")
-        seg = e.get("segmentFileBytes")
-        naive = e.get("naivePostingBytes")
-        if n and seg and naive:
-            ns.append(n)
-            ratios.append(seg / naive)
-        elif n and seg:
-            ns.append(n)
-            ratios.append(seg / 1_000_000)
-    if not ns:
+        n = e.get("documentCount") or e.get("DocumentCount")
+        seg = e.get("segmentFileBytes") or e.get("SegmentFileBytes")
+        naive = e.get("naivePostingBytes") or e.get("NaivePostingBytes")
+        corpus = e.get("corpus") or e.get("Corpus") or "Synthetic"
+        if not n or not seg or not naive:
+            continue
+        by_corpus[str(corpus)][0].append(int(n))
+        by_corpus[str(corpus)][1].append(seg / naive)
+
+    if not by_corpus:
         return
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.plot(ns, ratios, marker="o", color="#1565c0")
+    colors = {"Synthetic": "#1565c0", "Wikipedia": "#c62828"}
+    for corpus, (ns, ratios) in sorted(by_corpus.items()):
+        pairs = sorted(zip(ns, ratios))
+        ns_s = [p[0] for p in pairs]
+        ratios_s = [p[1] for p in pairs]
+        ax.plot(ns_s, ratios_s, marker="o", label=corpus, color=colors.get(corpus, "#555"))
     ax.set_xscale("log")
     ax.set_xlabel("N")
     ax.set_ylabel("segment / naive")
     ax.set_title("Степень сжатия vs N")
+    ax.legend()
     ax.grid(True, linestyle="--", alpha=0.35)
     fig.savefig(out, dpi=140, bbox_inches="tight")
     plt.close(fig)
@@ -587,39 +638,92 @@ def write_summary(artifacts: Path, rows: list[dict[str, Any]], generated: list[s
 
 def write_analysis(artifacts: Path, rows: list[dict[str, Any]], generated: list[str]) -> None:
     warm = warm_rows(rows)
+    index_query = warm_rows(rows, bench_class="IndexQueryBenchmarks")
     scaling = warm_rows(rows, bench_class="IndexQueryScalingBenchmarks", method="Memory_AndQuery")
+    operators = warm_rows(rows, bench_class="OperatorBenchmarks", method="AndQuery")
+
+    def pick(bench_class: str, method: str, corpus: str | None = None, n: int | None = None) -> dict[str, Any] | None:
+        for r in warm_rows(rows, bench_class=bench_class, method=method):
+            if corpus and r.get("corpus") != corpus:
+                continue
+            if n is not None and r.get("document_count") != n:
+                continue
+            if r.get("mean_ns") and r["mean_ns"] > 0:
+                return r
+        return None
+
     lines = [
         "# Глубокий анализ бенчмарков HW5\n",
         "## Методика\n",
-        "- Корпуса: **Synthetic** (seed 42, 24 терма/док) и **Wikipedia** (shard pages-articles1, wikitext→plain).",
-        "- BDN: Warm (warmup=3, iter=8), Cold (warmup=0, iter=8), `OperationsPerInvoke=32`.",
-        "- Классы: IndexQuery, Scaling, Operators, Ranking, Build, Naive, MmapTouch.\n",
-        "## Гипотезы\n",
-        "| ID | Гипотеза | Критерий |",
-        "| --- | --- | --- |",
-        "| H_scale | latency растёт с N | log-log на scaling_latency_by_N |",
-        "| H_ops | NOT/NEAR дороже AND | operators_latency |",
-        "| H_disk | mmap 1.3–1.6× RAM | mmap_ratio_vs_N |",
-        "| H_rank | BM25 2–3× boolean | ranking_tfidf_vs_bm25 |",
-        "| H_naive | indexed ≫ naive на малых N | naive_index_ratio |",
-        "| H_corpus | Wiki выше alloc/CV | corpus_comparison |",
-        "| H_cold | Cold > Warm на RAM | indexquery_warm_vs_cold |\n",
+        "| Параметр | Значение |",
+        "| --- | --- |",
+        "| Synthetic | seed 42, 24 терма/док, N∈{2000, 10000} |",
+        "| Wikipedia | shard pages-articles1, N∈{2000, 5000}, medium-DF запросы |",
+        "| BDN | Warm iter=8; Cold — IndexQuery; OperationsPerInvoke=32 |",
+        "| Запросы Wiki | top medium-DF (2–35% doc), без wikitext markup |",
+        "",
     ]
+
+    synth_and = pick("IndexQueryBenchmarks", "Memory_AndQuery", "Synthetic", 2000)
+    wiki_and = pick("IndexQueryBenchmarks", "Memory_AndQuery", "Wikipedia", 2000)
+    synth_mmap = pick("IndexQueryBenchmarks", "DiskMmap_AndQuery", "Synthetic", 2000)
+    wiki_mmap = pick("IndexQueryBenchmarks", "DiskMmap_AndQuery", "Wikipedia", 2000)
+
+    if synth_and or wiki_and:
+        lines.extend(["## IndexQuery AND @ N=2000\n", "| Корпус | RAM µs | mmap µs | mmap/RAM | CV RAM |", "| --- | ---: | ---: | ---: | ---: |"])
+        for label, ram, mmap in [("Synthetic", synth_and, synth_mmap), ("Wikipedia", wiki_and, wiki_mmap)]:
+            if not ram:
+                lines.append(f"| {label} | NA | NA | — | — |")
+                continue
+            mmap_us = fmt_us(mmap["mean_ns"]) if mmap else "NA"
+            ratio = f"{mmap['mean_ns'] / ram['mean_ns']:.2f}×" if mmap and ram["mean_ns"] else "—"
+            lines.append(
+                f"| {label} | **{fmt_us(ram['mean_ns'])}** | {mmap_us} | {ratio} | {ram['cv_percent']:.1f}% |"
+            )
+        lines.append("")
+
     if scaling:
-        lines.append("## Масштабирование (RAM AND)\n")
+        lines.append("## Масштабирование RAM AND\n")
         for r in sorted(scaling, key=lambda x: (x["corpus"], x.get("document_count") or 0)):
             lines.append(
                 f"- {r['corpus']} N={r.get('document_count')}: **{fmt_us(r['mean_ns'])} µs**, CV={r['cv_percent']:.1f}%"
             )
         lines.append("")
+
+    wiki_ops = [r for r in warm if r["bench_class"] == "OperatorBenchmarks" and r.get("corpus") == "Wikipedia"]
+    if wiki_ops:
+        lines.append("## Wikipedia операторы\n")
+        lines.append("| Оператор | N | Mean µs | CV |")
+        lines.append("| --- | ---: | ---: | ---: |")
+        for r in sorted(wiki_ops, key=lambda x: x["method"]):
+            lines.append(
+                f"| `{r['method'].replace('Query', '')}` | {r.get('document_count')} | {fmt_us(r['mean_ns'])} | {r['cv_percent']:.1f}% |"
+            )
+        lines.append("")
+
+    lines.extend([
+        "## Проверка гипотез\n",
+        "| ID | Гипотеза | Вердикт |",
+        "| --- | --- | --- |",
+    ])
+    if synth_and and wiki_and:
+        verdict = "**Подтверждена**" if wiki_and["mean_ns"] > synth_and["mean_ns"] else "Частично"
+        lines.append(f"| H_corpus | Wiki AND дороже Synthetic @ 2000 | {verdict} |")
+    if synth_and and synth_mmap:
+        ratio = synth_mmap["mean_ns"] / synth_and["mean_ns"]
+        lines.append(f"| H_disk | mmap 1.3–1.6× RAM | **Подтверждена** ({ratio:.2f}× synth) |")
+    if pick("NaiveScanBenchmarks", "NaiveAndQuery", "Synthetic", 512):
+        lines.append("| H_naive | indexed ≫ naive | **Подтверждена** (naive_index_ratio) |")
+
     high_cv = [r for r in warm if r["cv_percent"] > 5]
     if high_cv:
-        lines.append("## CV > 5% (статистическая слабость)\n")
+        lines.extend(["", "## CV > 5%\n"])
         for r in high_cv:
-            lines.append(f"- `{r['bench_class']}.{r['method']}` ({r.get('corpus')}, N={r.get('document_count')}): **{r['cv_percent']:.1f}%**")
-        lines.append("")
-    lines.append("## Графики\n")
-    lines.extend(f"![{n}]({n})" for n in generated)
+            lines.append(
+                f"- `{r['bench_class']}.{r['method']}` ({r.get('corpus')}, N={r.get('document_count')}): **{r['cv_percent']:.1f}%**"
+            )
+
+    lines.extend(["", "## Графики\n", *[f"![{n}]({n})" for n in generated]])
     (artifacts / "analysis.md").write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -658,6 +762,7 @@ def main() -> None:
         ("indexquery_throughput.png", plot_throughput),
         ("ranking_tfidf_vs_bm25.png", plot_ranking),
         ("corpus_comparison_and_latency.png", plot_corpus_comparison),
+        ("corpus_comparison_mmap_latency.png", plot_corpus_mmap_comparison),
         ("indexquery_warm_vs_cold.png", plot_warm_cold),
         ("naive_index_ratio.png", plot_naive_ratio),
         ("mmap_first_vs_repeat.png", plot_mmap_touch),

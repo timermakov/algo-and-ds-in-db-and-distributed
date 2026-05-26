@@ -44,11 +44,39 @@ public sealed class BenchCorpusCase
             yield break;
         }
 
-        yield return new BenchCorpusCase
+        foreach (var n in settings.WikiDocumentLimits)
         {
-            Corpus = CorpusKind.Wikipedia,
-            DocumentCount = settings.WikiDocumentLimits[0],
-        };
+            yield return new BenchCorpusCase
+            {
+                Corpus = CorpusKind.Wikipedia,
+                DocumentCount = n,
+            };
+        }
+    }
+
+    public static IEnumerable<BenchCorpusCase> WikiMainCases()
+    {
+        if (!BenchRuntime.WikipediaAvailable || BenchRuntime.Current.WikiDocumentLimits.Length == 0)
+        {
+            yield break;
+        }
+
+        foreach (var n in BenchRuntime.Current.WikiDocumentLimits)
+        {
+            yield return new BenchCorpusCase { Corpus = CorpusKind.Wikipedia, DocumentCount = n };
+        }
+    }
+
+    private static int WikiSmokeDocumentCount()
+    {
+        var limits = BenchRuntime.Current.WikiDocumentLimits;
+        if (limits.Length == 0)
+        {
+            return 0;
+        }
+
+        var synthN = BenchRuntime.Current.DocumentCounts[0];
+        return limits.Contains(synthN) ? synthN : limits[0];
     }
 
     public static IEnumerable<BenchCorpusCase> SyntheticOnly() =>
@@ -62,7 +90,7 @@ public sealed class BenchCorpusCase
             yield return new BenchCorpusCase
             {
                 Corpus = CorpusKind.Wikipedia,
-                DocumentCount = BenchRuntime.Current.WikiDocumentLimits[0],
+                DocumentCount = WikiSmokeDocumentCount(),
             };
         }
     }

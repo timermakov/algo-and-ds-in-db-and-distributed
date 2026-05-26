@@ -1,6 +1,6 @@
 {
   "documentCounts": [2000, 10000],
-  "wikiDocumentLimits": [5000],
+  "wikiDocumentLimits": [2000, 5000],
   "termsPerDocument": 24,
   "syntheticSeed": 42,
   "warmupCount": 3,
@@ -17,7 +17,7 @@
     "wikipedia": {
       "manifestPath": "data/dataset.manifest.json",
       "processedPath": "data/processed/docs.jsonl",
-      "limits": [5000]
+      "limits": [2000, 5000]
     }
   }
 }

@@ -129,7 +129,7 @@ done:;
 
 var sha256 = await ComputeSha256Async(rawPath);
 WriteManifest(manifestPath, rawPath, sha256, written);
-WriteQueries(queriesPath, termDf, stopWords);
+WriteQueries(queriesPath, termDf, written, stopWords);
 
 Console.WriteLine($"Prepared {written} documents -> {outPath}");
 Console.WriteLine($"Manifest -> {manifestPath}");
@@ -173,39 +173,25 @@ static void RegenerateQueriesFromJsonl(string jsonlPath, string queriesPath, Has
     }
 
     var termDf = new Dictionary<string, int>(StringComparer.Ordinal);
+    var docCount = 0;
     foreach (var record in WikipediaJsonlReader.ReadRecords(jsonlPath))
     {
         CountTerms(record.Text, termDf);
+        docCount++;
     }
 
     Directory.CreateDirectory(Path.GetDirectoryName(queriesPath)!);
-    WriteQueries(queriesPath, termDf, stopWords);
+    WriteQueries(queriesPath, termDf, docCount, stopWords);
     Console.WriteLine($"Queries -> {queriesPath}");
 }
 
-static void WriteQueries(string path, Dictionary<string, int> termDf, HashSet<string>? stopWords)
+static void WriteQueries(string path, Dictionary<string, int> termDf, int documentCount, HashSet<string>? stopWords)
 {
-    var top = termDf
-        .Where(kv => kv.Key.Length > 3 && !StopWordFilter.IsStopWord(kv.Key, stopWords))
-        .OrderByDescending(static kv => kv.Value)
-        .Select(static kv => kv.Key)
-        .Take(12)
-        .ToArray();
-    if (top.Length < 4)
+    var lines = WikiBenchQuerySelector.BuildQueries(termDf, documentCount, stopWords);
+    if (lines.Count == 0)
     {
         return;
     }
-
-    var lines = new List<string>
-    {
-        $"{top[0]} AND {top[1]}",
-        $"{top[0]} OR {top[2]}",
-        $"{top[0]} AND NOT {top[3]}",
-        $"{top[0]} ADJ {top[1]}",
-        $"{top[0]} NEAR/3 {top[2]}",
-        $"({top[0]} AND {top[1]}) OR {top[4]}",
-        $"{top[5]} NEAR/2 {top[6]} AND NOT {top[7]}",
-    };
 
     File.WriteAllLines(path, lines, Encoding.UTF8);
 }
