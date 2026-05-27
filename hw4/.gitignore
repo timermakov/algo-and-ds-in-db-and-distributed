@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+*.local.json
+**/bench.settings.local.json
+**/appsettings.Local.json
+BenchmarkDotNet.Artifacts/
+reports/profiles/*.nettrace
+reports/profiles/*.speedscope.json
+*.nettrace
