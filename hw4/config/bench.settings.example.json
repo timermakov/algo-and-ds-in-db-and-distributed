@@ -1,0 +1,8 @@
+{
+  "threadCounts": [1, 2, 4, 8, 16],
+  "keySpace": 16384,
+  "opsPerInvocation": 65536,
+  "warmupCount": 5,
+  "iterationCount": 20,
+  "artifactDirectory": "BenchmarkDotNet.Artifacts"
+}
