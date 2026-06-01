@@ -1,10 +1,22 @@
 namespace Hw5.SearchIndex.Corpus;
 
 /// <summary>
-/// Curated bench queries from term DF: medium-frequency content terms, not wikitext markup.
+/// Bench queries from corpus term DF: pairs from high / mid / low frequency tiers.
+/// AND, OR, ADJ, NEAR on the same (termA, termB) per pair; NOT uses termA AND NOT excludeTerm.
 /// </summary>
 public static class WikiBenchQuerySelector
 {
+    public const int AndQueryIndex = 0;
+    public const int OrQueryIndex = 1;
+    public const int NotQueryIndex = 2;
+    public const int AdjQueryIndex = 3;
+    public const int NearQueryIndex = 4;
+    public const int CompositeOrQueryIndex = 5;
+    public const int CompositeNearNotQueryIndex = 6;
+
+    public const int NearDistance = 3;
+    public const int PairsPerTier = 3;
+
     private static readonly HashSet<string> MarkupTerms = new(StringComparer.Ordinal)
     {
         "align", "style", "category", "thumb", "https", "http", "ndash", "mdash",
@@ -14,68 +26,98 @@ public static class WikiBenchQuerySelector
         "wikipedia", "external", "links", "references", "seealso", "stub",
     };
 
-    public static IReadOnlyList<string> BuildQueries(
+    public static BenchQuerySuite BuildSuite(
         IReadOnlyDictionary<string, int> termDf,
         int documentCount,
         HashSet<string>? stopWords)
     {
-        if (documentCount <= 0 || termDf.Count == 0)
-        {
-            return [];
-        }
-
-        var minDf = Math.Max(2, (int)(documentCount * 0.02));
-        var maxDf = Math.Max(minDf + 1, (int)(documentCount * 0.35));
-
-        var ranked = termDf
-            .Where(kv => IsContentTerm(kv.Key, stopWords))
-            .Where(kv => kv.Value >= minDf && kv.Value <= maxDf)
-            .OrderByDescending(static kv => kv.Value)
-            .Select(static kv => kv.Key)
-            .ToList();
-
+        var ranked = RankContentTerms(termDf, stopWords);
         if (ranked.Count < 8)
         {
-            ranked = termDf
-                .Where(kv => IsContentTerm(kv.Key, stopWords))
-                .OrderByDescending(static kv => kv.Value)
-                .Skip(25)
-                .Take(20)
-                .Select(static kv => kv.Key)
-                .ToList();
+            return BenchQuerySuite.BuildSynthetic();
         }
 
-        if (ranked.Count < 4)
+        var pairs = BuildTierPairs(ranked);
+        return BenchQuerySuite.FromPairs(pairs);
+    }
+
+    public static IReadOnlyList<string> BuildQueries(
+        IReadOnlyDictionary<string, int> termDf,
+        int documentCount,
+        HashSet<string>? stopWords) =>
+        BuildSuite(termDf, documentCount, stopWords).ToLegacySlots();
+
+    private static List<BenchTermPair> BuildTierPairs(List<string> ranked)
+    {
+        var pairs = new List<BenchTermPair>(PairsPerTier * 3);
+        var excludePool = ranked.Take(Math.Min(12, ranked.Count)).ToList();
+
+        foreach (var (tier, startIndex) in TierOffsets(ranked.Count))
         {
-            return [];
+            for (var p = 0; p < PairsPerTier; p++)
+            {
+                var offset = startIndex + p * 2;
+                if (offset + 1 >= ranked.Count)
+                {
+                    break;
+                }
+
+                var termA = ranked[offset];
+                var termB = ranked[offset + 1];
+                var exclude = PickExcludeTerm(excludePool, termA, termB);
+                pairs.Add(new BenchTermPair(tier, termA, termB, exclude));
+            }
         }
 
-        var andA = ranked[0];
-        var andB = ranked[Math.Min(4, ranked.Count - 1)];
-        var orTerm = ranked[Math.Min(2, ranked.Count - 1)];
-        var notTerm = ranked[Math.Min(6, ranked.Count - 1)];
-        var adjB = ranked[Math.Min(1, ranked.Count - 1)];
-        var nearTerm = ranked[Math.Min(3, ranked.Count - 1)];
-        var extraOr = ranked[Math.Min(5, ranked.Count - 1)];
-        var near2A = ranked[Math.Min(7, ranked.Count - 1)];
-        var near2B = ranked[Math.Min(8, ranked.Count - 1)];
-        var not2 = ranked[Math.Min(9, ranked.Count - 1)];
+        return pairs;
+    }
 
-        return
-        [
-            $"{andA} AND {andB}",
-            $"{andA} OR {orTerm}",
-            $"{andA} AND NOT {notTerm}",
-            $"{andA} ADJ {adjB}",
-            $"{andA} NEAR/3 {nearTerm}",
-            $"({andA} AND {andB}) OR {extraOr}",
-            $"{near2A} NEAR/2 {near2B} AND NOT {not2}",
-        ];
+    private static IEnumerable<(string Tier, int StartIndex)> TierOffsets(int count)
+    {
+        yield return ("high", 0);
+        yield return ("mid", Math.Max(0, count / 3));
+        yield return ("low", Math.Max(0, (count * 2) / 3));
+    }
+
+    private static string PickExcludeTerm(IReadOnlyList<string> pool, string termA, string termB)
+    {
+        foreach (var term in pool)
+        {
+            if (!string.Equals(term, termA, StringComparison.Ordinal)
+                && !string.Equals(term, termB, StringComparison.Ordinal))
+            {
+                return term;
+            }
+        }
+
+        return pool[0];
+    }
+
+    private static List<string> RankContentTerms(
+        IReadOnlyDictionary<string, int> termDf,
+        HashSet<string>? stopWords)
+    {
+        return termDf
+            .Where(kv => IsContentTerm(kv.Key, stopWords))
+            .OrderByDescending(static kv => kv.Value)
+            .ThenBy(static kv => kv.Key, StringComparer.Ordinal)
+            .Select(static kv => kv.Key)
+            .ToList();
     }
 
     private static bool IsContentTerm(string term, HashSet<string>? stopWords)
     {
         if (term.Length < 4 || MarkupTerms.Contains(term))
+        {
+            return false;
+        }
+
+        if (term.Any(static c => !char.IsAsciiLetter(c)))
+        {
+            return false;
+        }
+
+        if (term.Any(char.IsDigit))
         {
             return false;
         }

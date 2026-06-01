@@ -12,7 +12,7 @@ public sealed class SyntheticProfile
 public sealed class WikipediaProfile
 {
     public string ManifestPath { get; init; } = "data/dataset.manifest.json";
-    public string ProcessedPath { get; init; } = "data/processed/docs.jsonl";
+    public string ProcessedPath { get; init; } = "data/processed";
     public int[] Limits { get; init; } = [5000, 20000];
 }
 
@@ -33,7 +33,7 @@ public sealed class BenchSettings
     public int ColdIterationCount { get; init; } = 8;
     public int OperationsPerInvoke { get; init; } = 32;
     public string ArtifactDirectory { get; init; } = "BenchmarkDotNet.Artifacts/hw5";
-    public string WikipediaProcessedPath { get; init; } = "data/processed/docs.jsonl";
+    public string WikipediaProcessedPath { get; init; } = "data/processed";
     public CorpusProfiles CorpusProfiles { get; init; } = new();
 
     [Obsolete("Use DocumentCounts[0]")]
@@ -55,7 +55,9 @@ public static class BenchRuntime
     {
         Hw5Root = FindHw5Root();
         var loaded = LoadSettings();
-        WikipediaJsonlPath = ResolveWikiPath(loaded.WikipediaProcessedPath);
+        WikipediaCorpusPath = ProcessedCorpusCatalog.ResolveProcessedRoot(
+            loaded.WikipediaProcessedPath,
+            Hw5Root);
         Current = ApplySmokeIfNeeded(loaded);
     }
 
@@ -63,9 +65,12 @@ public static class BenchRuntime
 
     public static BenchSettings Current { get; }
 
-    public static string WikipediaJsonlPath { get; }
+    public static string WikipediaCorpusPath { get; }
 
-    public static bool WikipediaAvailable => WikipediaJsonlReader.IsAvailable(WikipediaJsonlPath);
+    [Obsolete("Use WikipediaCorpusPath")]
+    public static string WikipediaJsonlPath => WikipediaCorpusPath;
+
+    public static bool WikipediaAvailable => WikipediaJsonlReader.IsAvailable(WikipediaCorpusPath, Hw5Root);
 
     public static IEnumerable<object[]> CorpusDocumentCases()
     {

@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using Hw5.SearchIndex.Corpus;
 using Hw5.SearchIndex.Indexing;
 using Hw5.SearchIndex.Querying;
 using Hw5.SearchIndex.Ranking;
@@ -15,7 +16,7 @@ public class IndexQueryBenchmarks
     private DiskSegmentIndex _disk = null!;
     private string _segmentPath = string.Empty;
     private string _andQuery = string.Empty;
-    private string _nearAdjQuery = string.Empty;
+    private string _nearQuery = string.Empty;
     private string _rankQuery = string.Empty;
     private readonly QueryExecutor _executor = new();
     private readonly SearchService _search = new();
@@ -32,7 +33,9 @@ public class IndexQueryBenchmarks
         (_disk, _segmentPath) = CorpusBenchmarkBuilder.BuildDiskIndex(_memory);
         var queries = CorpusBenchmarkBuilder.LoadQueries(Case.Corpus);
         _andQuery = queries[0];
-        _nearAdjQuery = queries.Length > 4 ? queries[4] : "alpha NEAR/3 beta OR gamma ADJ delta";
+        _nearQuery = queries.Length > WikiBenchQuerySelector.NearQueryIndex
+            ? queries[WikiBenchQuerySelector.NearQueryIndex]
+            : "alpha NEAR/3 beta";
         _rankQuery = queries.Length > 1 ? queries[1] : "alpha OR beta";
     }
 
@@ -71,12 +74,12 @@ public class IndexQueryBenchmarks
     }
 
     [Benchmark(OperationsPerInvoke = BenchRuntime.DefaultOperationsPerInvoke)]
-    public int Memory_NearAdjQuery()
+    public int Memory_NearQuery()
     {
         var total = 0;
         for (var i = 0; i < BenchRuntime.Current.OperationsPerInvoke; i++)
         {
-            total += _executor.Execute(_memory, _nearAdjQuery).Matches.DocumentIds.Count;
+            total += _executor.Execute(_memory, _nearQuery).Matches.DocumentIds.Count;
         }
 
         return total;

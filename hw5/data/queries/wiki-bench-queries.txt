@@ -1,7 +1,55 @@
-﻿allow AND contemporary
-allow OR playing
-allow AND NOT definition
-allow ADJ festival
-allow NEAR/3 1963
-(allow AND contemporary) OR korea
-1962 NEAR/2 regular AND NOT jean
+﻿# HW5 wiki bench queries — same (termA, termB) per pair for AND/OR/ADJ/NEAR
+# tiers: high / mid / low DF; OperatorBenchmarks cycles all lines per operator
+# --- AND ---
+AND	american AND more
+AND	used AND text
+AND	most AND some
+AND	flashlamp AND flashlamps
+AND	flashline AND flatfishes
+AND	flatline AND flatman
+AND	falsedad AND falselight
+AND	falsen AND falsest
+AND	falsete AND falsettoland
+# --- OR ---
+OR	american OR more
+OR	used OR text
+OR	most OR some
+OR	flashlamp OR flashlamps
+OR	flashline OR flatfishes
+OR	flatline OR flatman
+OR	falsedad OR falselight
+OR	falsen OR falsest
+OR	falsete OR falsettoland
+# --- NOT ---
+NOT	american AND NOT used
+NOT	used AND NOT american
+NOT	most AND NOT american
+NOT	flashlamp AND NOT american
+NOT	flashline AND NOT american
+NOT	flatline AND NOT american
+NOT	falsedad AND NOT american
+NOT	falsen AND NOT american
+NOT	falsete AND NOT american
+# --- ADJ ---
+ADJ	american ADJ more
+ADJ	used ADJ text
+ADJ	most ADJ some
+ADJ	flashlamp ADJ flashlamps
+ADJ	flashline ADJ flatfishes
+ADJ	flatline ADJ flatman
+ADJ	falsedad ADJ falselight
+ADJ	falsen ADJ falsest
+ADJ	falsete ADJ falsettoland
+# --- NEAR ---
+NEAR	american NEAR/3 more
+NEAR	used NEAR/3 text
+NEAR	most NEAR/3 some
+NEAR	flashlamp NEAR/3 flashlamps
+NEAR	flashline NEAR/3 flatfishes
+NEAR	flatline NEAR/3 flatman
+NEAR	falsedad NEAR/3 falselight
+NEAR	falsen NEAR/3 falsest
+NEAR	falsete NEAR/3 falsettoland
+# --- composite ---
+(american AND more) OR used
+falsete NEAR/2 falsettoland AND NOT american

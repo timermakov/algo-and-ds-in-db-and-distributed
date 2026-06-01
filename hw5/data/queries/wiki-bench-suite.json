@@ -1,0 +1,119 @@
+{
+  "documentCount": 24573,
+  "generatedAtUtc": "2026-06-01T13:03:24.9289624Z",
+  "pairs": [
+    {
+      "tier": "high",
+      "termA": "american",
+      "termB": "more",
+      "excludeTerm": "used"
+    },
+    {
+      "tier": "high",
+      "termA": "used",
+      "termB": "text",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "high",
+      "termA": "most",
+      "termB": "some",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "mid",
+      "termA": "flashlamp",
+      "termB": "flashlamps",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "mid",
+      "termA": "flashline",
+      "termB": "flatfishes",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "mid",
+      "termA": "flatline",
+      "termB": "flatman",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "low",
+      "termA": "falsedad",
+      "termB": "falselight",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "low",
+      "termA": "falsen",
+      "termB": "falsest",
+      "excludeTerm": "american"
+    },
+    {
+      "tier": "low",
+      "termA": "falsete",
+      "termB": "falsettoland",
+      "excludeTerm": "american"
+    }
+  ],
+  "and": [
+    "american AND more",
+    "used AND text",
+    "most AND some",
+    "flashlamp AND flashlamps",
+    "flashline AND flatfishes",
+    "flatline AND flatman",
+    "falsedad AND falselight",
+    "falsen AND falsest",
+    "falsete AND falsettoland"
+  ],
+  "or": [
+    "american OR more",
+    "used OR text",
+    "most OR some",
+    "flashlamp OR flashlamps",
+    "flashline OR flatfishes",
+    "flatline OR flatman",
+    "falsedad OR falselight",
+    "falsen OR falsest",
+    "falsete OR falsettoland"
+  ],
+  "not": [
+    "american AND NOT used",
+    "used AND NOT american",
+    "most AND NOT american",
+    "flashlamp AND NOT american",
+    "flashline AND NOT american",
+    "flatline AND NOT american",
+    "falsedad AND NOT american",
+    "falsen AND NOT american",
+    "falsete AND NOT american"
+  ],
+  "adj": [
+    "american ADJ more",
+    "used ADJ text",
+    "most ADJ some",
+    "flashlamp ADJ flashlamps",
+    "flashline ADJ flatfishes",
+    "flatline ADJ flatman",
+    "falsedad ADJ falselight",
+    "falsen ADJ falsest",
+    "falsete ADJ falsettoland"
+  ],
+  "near": [
+    "american NEAR/3 more",
+    "used NEAR/3 text",
+    "most NEAR/3 some",
+    "flashlamp NEAR/3 flashlamps",
+    "flashline NEAR/3 flatfishes",
+    "flatline NEAR/3 flatman",
+    "falsedad NEAR/3 falselight",
+    "falsen NEAR/3 falsest",
+    "falsete NEAR/3 falsettoland"
+  ],
+  "composite": [
+    "(american AND more) OR used",
+    "falsete NEAR/2 falsettoland AND NOT american"
+  ]
+}

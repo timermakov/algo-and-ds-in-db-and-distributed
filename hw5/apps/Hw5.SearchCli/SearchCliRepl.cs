@@ -1,3 +1,4 @@
+using Hw5.SearchIndex.Corpus;
 using Hw5.SearchIndex.Documents;
 using Hw5.SearchIndex.Indexing;
 using Hw5.SearchIndex.Ranking;
@@ -21,6 +22,32 @@ public sealed class SearchCliRepl : IDisposable
     {
         _input = input;
         _output = output;
+    }
+
+    public void LoadWikiCorpus(string jsonlPath, int maxDocuments)
+    {
+        if (!WikipediaJsonlReader.IsAvailable(jsonlPath))
+        {
+            throw new FileNotFoundException(
+                $"Wiki-корпус не найден: {jsonlPath}. Выполните: make prepare-corpus");
+        }
+
+        var loaded = 0;
+        foreach (var record in WikipediaJsonlReader.ReadRecords(jsonlPath, maxDocuments))
+        {
+            _mutableIndex.AddDocument(new SearchDocument(record.Id, record.Text));
+            loaded++;
+        }
+
+        if (loaded == 0)
+        {
+            throw new InvalidOperationException($"В {jsonlPath} нет документов для загрузки.");
+        }
+
+        _mutableIndex.Seal();
+        _sealed = true;
+        _output.WriteLine(
+            $"Загружен Wikipedia-корпус: {loaded} документов (limit {maxDocuments}) из {jsonlPath}.");
     }
 
     public void Run()

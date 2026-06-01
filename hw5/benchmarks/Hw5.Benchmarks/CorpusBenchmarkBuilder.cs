@@ -12,15 +12,16 @@ internal static class CorpusBenchmarkBuilder
         "alpha", "beta", "gamma", "delta", "omega", "zeta", "kappa", "lambda", "sigma", "theta",
     ];
 
-    public static InMemoryPositionalIndex BuildMemoryIndex(CorpusKind kind, int documentCount)
-    {
-        return kind switch
+    public static InMemoryPositionalIndex BuildMemoryIndex(CorpusKind kind, int documentCount) =>
+        kind switch
         {
             CorpusKind.Synthetic => BuildSynthetic(documentCount),
-            CorpusKind.Wikipedia => WikipediaJsonlReader.BuildIndex(BenchRuntime.WikipediaJsonlPath, documentCount),
+            CorpusKind.Wikipedia => WikipediaJsonlReader.BuildIndex(
+                BenchRuntime.WikipediaCorpusPath,
+                documentCount,
+                BenchRuntime.Hw5Root),
             _ => throw new ArgumentOutOfRangeException(nameof(kind), kind, null),
         };
-    }
 
     public static (DiskSegmentIndex Disk, string Path) BuildDiskIndex(InMemoryPositionalIndex memory)
     {
@@ -40,26 +41,22 @@ internal static class CorpusBenchmarkBuilder
         return new NaivePositionalIndexReader(docs);
     }
 
-    public static string[] LoadQueries(CorpusKind kind)
+    public static BenchQuerySuite LoadQuerySuite(CorpusKind kind)
     {
         if (kind == CorpusKind.Wikipedia)
         {
-            var queryFile = Path.Combine(BenchRuntime.Hw5Root, "data", "queries", "wiki-bench-queries.txt");
-            if (File.Exists(queryFile))
+            var jsonPath = Path.Combine(BenchRuntime.Hw5Root, "data", "queries", "wiki-bench-suite.json");
+            if (File.Exists(jsonPath))
             {
-                return File.ReadAllLines(queryFile).Where(static l => !string.IsNullOrWhiteSpace(l)).ToArray();
+                return BenchQuerySuite.LoadJson(jsonPath);
             }
         }
 
-        return
-        [
-            "alpha AND beta",
-            "alpha OR gamma",
-            "alpha AND NOT delta",
-            "alpha ADJ beta",
-            "alpha NEAR/3 gamma",
-        ];
+        return BenchQuerySuite.BuildSynthetic();
     }
+
+    public static string[] LoadQueries(CorpusKind kind) =>
+        LoadQuerySuite(kind).ToLegacySlots().ToArray();
 
     private static InMemoryPositionalIndex BuildSynthetic(int documentCount)
     {

@@ -31,6 +31,9 @@ prepare-corpus-queries: build
 prepare-corpus-queries-no-stopwords: build
 	tools\prepare-corpus.cmd --queries-only --no-stopwords
 
+prepare-corpus-articles: build
+	tools\prepare-corpus.cmd --to-articles-only
+
 bench-build:
 	$(DOTNET) restore benchmarks\Hw5.Benchmarks\Hw5.Benchmarks.csproj
 	$(DOTNET) build benchmarks\Hw5.Benchmarks\Hw5.Benchmarks.csproj -c Release --no-restore -v:q
@@ -70,8 +73,8 @@ run-cli: build
 	$(DOTNET) run -c Release --project apps\Hw5.SearchCli --no-build --
 
 run-cli-wiki: build
-	if not exist data\processed\docs.jsonl (echo Run: make prepare-corpus && exit /b 1)
-	set HW5_CORPUS=wiki&& $(DOTNET) run -c Release --project apps\Hw5.SearchCli --no-build -- --corpus wiki
+	if not exist data\processed\articles\*.json (echo Run: make prepare-corpus & exit /b 1)
+	$(DOTNET) run -c Release --project apps\Hw5.SearchCli --no-build -- --corpus wiki --max-docs $(if $(DOCS),$(DOCS),200)
 
 profile-help:
 	@echo make profile-run MODE=and^|mmap^|bm25

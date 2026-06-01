@@ -7,7 +7,7 @@
   "iterationCount": 8,
   "coldIterationCount": 8,
   "artifactDirectory": "BenchmarkDotNet.Artifacts/hw5",
-  "wikipediaProcessedPath": "data/processed/docs.jsonl",
+  "wikipediaProcessedPath": "data/processed",
   "operationsPerInvoke": 32,
   "corpusProfiles": {
     "synthetic": {
@@ -16,7 +16,7 @@
     },
     "wikipedia": {
       "manifestPath": "data/dataset.manifest.json",
-      "processedPath": "data/processed/docs.jsonl",
+      "processedPath": "data/processed",
       "limits": [2000, 5000]
     }
   }

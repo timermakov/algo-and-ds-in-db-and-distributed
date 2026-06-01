@@ -7,26 +7,35 @@ using SharpCompress.Compressors;
 using SharpCompress.Compressors.BZip2;
 
 var root = FindHw5Root();
+var processedRoot = Path.Combine(root, "data", "processed");
 var rawPath = Path.Combine(root, "data", "raw", "enwiki-pages-articles1.xml-p1p41242.bz2");
-var outPath = Path.Combine(root, "data", "processed", "docs.jsonl");
-var manifestPath = Path.Combine(root, "data", "dataset.manifest.json");
+var datasetManifestPath = Path.Combine(root, "data", "dataset.manifest.json");
+var queriesTxtPath = Path.Combine(root, "data", "queries", "wiki-bench-queries.txt");
+var queriesJsonPath = Path.Combine(root, "data", "queries", "wiki-bench-suite.json");
 var maxDocs = ParseIntArg(args, "--max", 40000);
-var queriesPath = Path.Combine(root, "data", "queries", "wiki-bench-queries.txt");
+var sampleDocs = ParseIntArg(args, "--sample", 100);
 var useStopWords = !HasFlag(args, "--no-stopwords");
 var stopWordsPath = GetArg(args, "--stopwords-file") ?? StopWordFilter.DefaultPath(root);
 HashSet<string>? stopWords = useStopWords ? StopWordFilter.LoadFromFile(stopWordsPath) : null;
 
-if (HasFlag(args, "--queries-only"))
+if (HasFlag(args, "--help"))
 {
-    RegenerateQueriesFromJsonl(outPath, queriesPath, stopWords);
+    Console.WriteLine("Usage: Hw5.CorpusPrep [--max N] [--sample 100]");
+    Console.WriteLine("  --queries-only       rebuild query suite from processed corpus");
+    Console.WriteLine("  --to-articles-only   build articles/ from docs.jsonl");
+    Console.WriteLine("  --no-stopwords       include stopwords in DF ranking");
     return;
 }
 
-if (HasFlag(args, "--help"))
+if (HasFlag(args, "--queries-only"))
 {
-    Console.WriteLine("Usage: Hw5.CorpusPrep [--max N] [--queries-only] [--no-stopwords] [--stopwords-file path]");
-    Console.WriteLine("  --no-stopwords       top-DF query terms include stopwords (the, and, ...)");
-    Console.WriteLine("  --stopwords-file     default: data/stopwords-en.txt");
+    RegenerateQueriesFromCorpus(processedRoot, queriesTxtPath, queriesJsonPath, stopWords, root);
+    return;
+}
+
+if (HasFlag(args, "--to-articles-only"))
+{
+    await ExportCorpusAsArticlesAsync(processedRoot, sampleDocs);
     return;
 }
 
@@ -37,8 +46,8 @@ if (!File.Exists(rawPath))
     Environment.Exit(1);
 }
 
-Directory.CreateDirectory(Path.GetDirectoryName(outPath)!);
-Directory.CreateDirectory(Path.GetDirectoryName(queriesPath)!);
+Directory.CreateDirectory(processedRoot);
+Directory.CreateDirectory(Path.GetDirectoryName(queriesTxtPath)!);
 
 if (useStopWords)
 {
@@ -52,10 +61,10 @@ else
 var termDf = new Dictionary<string, int>(StringComparer.Ordinal);
 var written = 0;
 
-await using (var fileStream = File.OpenRead(rawPath))
-await using (var bz2 = new BZip2Stream(fileStream, CompressionMode.Decompress, false))
-await using (var writer = new StreamWriter(File.Create(outPath), new UTF8Encoding(false)))
+await using (var articleWriter = new CorpusArticleWriter(processedRoot, sampleDocs))
 {
+    await using var fileStream = File.OpenRead(rawPath);
+    await using var bz2 = new BZip2Stream(fileStream, CompressionMode.Decompress, false);
     using var reader = XmlReader.Create(bz2, new XmlReaderSettings { Async = true, IgnoreWhitespace = true });
     var inPage = false;
     var ns = -1;
@@ -109,7 +118,7 @@ await using (var writer = new StreamWriter(File.Create(outPath), new UTF8Encodin
                     if (plain.Length >= 40)
                     {
                         var record = new WikipediaDocumentRecord(pageId, title, plain);
-                        await writer.WriteLineAsync(JsonSerializer.Serialize(record));
+                        await articleWriter.WriteAsync(record);
                         CountTerms(plain, termDf);
                         written++;
                         if (written >= maxDocs)
@@ -124,16 +133,128 @@ await using (var writer = new StreamWriter(File.Create(outPath), new UTF8Encodin
         }
     }
 
-done:;
+done:
+    var corpusManifest = articleWriter.CompleteManifest();
+    ProcessedCorpusCatalog.WriteManifest(processedRoot, corpusManifest);
 }
 
 var sha256 = await ComputeSha256Async(rawPath);
-WriteManifest(manifestPath, rawPath, sha256, written);
-WriteQueries(queriesPath, termDf, written, stopWords);
+WriteDatasetManifest(datasetManifestPath, rawPath, sha256, written);
+WriteQueryArtifacts(queriesTxtPath, queriesJsonPath, termDf, written, stopWords);
 
-Console.WriteLine($"Prepared {written} documents -> {outPath}");
-Console.WriteLine($"Manifest -> {manifestPath}");
-Console.WriteLine($"Queries -> {queriesPath}");
+Console.WriteLine($"Prepared {written} documents -> {ProcessedCorpusCatalog.ArticlesDirectory(processedRoot)}");
+Console.WriteLine($"Sample (jsonl) -> {ProcessedCorpusCatalog.SamplePath(processedRoot)}");
+Console.WriteLine($"Corpus manifest -> {ProcessedCorpusCatalog.ManifestPath(processedRoot)}");
+Console.WriteLine($"Dataset manifest -> {datasetManifestPath}");
+Console.WriteLine($"Queries -> {queriesJsonPath}");
+
+static async Task ExportCorpusAsArticlesAsync(string processedRoot, int sampleDocs)
+{
+    var sources = ListMigrationSources(processedRoot);
+    if (sources.Count == 0)
+    {
+        Console.Error.WriteLine("No corpus source found (docs.jsonl or articles/).");
+        Environment.Exit(1);
+    }
+
+    var articlesDir = ProcessedCorpusCatalog.ArticlesDirectory(processedRoot);
+    if (Directory.Exists(articlesDir))
+    {
+        foreach (var file in Directory.EnumerateFiles(articlesDir, "*.json"))
+        {
+            File.Delete(file);
+        }
+    }
+
+    await using var writer = new CorpusArticleWriter(processedRoot, sampleDocs);
+    foreach (var source in sources)
+    {
+        foreach (var record in WikipediaJsonlReader.ReadRecords(source))
+        {
+            await writer.WriteAsync(record);
+        }
+    }
+
+    var manifest = writer.CompleteManifest();
+    ProcessedCorpusCatalog.WriteManifest(processedRoot, manifest);
+    Console.WriteLine($"Exported {manifest.ProcessedDocuments} articles -> {articlesDir}");
+}
+
+static List<string> ListMigrationSources(string processedRoot)
+{
+    var docsJsonl = ProcessedCorpusCatalog.DocsJsonlPath(processedRoot);
+    return File.Exists(docsJsonl) ? [docsJsonl] : [];
+}
+
+static void RegenerateQueriesFromCorpus(
+    string processedRoot,
+    string queriesTxtPath,
+    string queriesJsonPath,
+    HashSet<string>? stopWords,
+    string hw5Root)
+{
+    if (!ProcessedCorpusCatalog.IsCorpusAvailable(processedRoot)
+        && !ProcessedCorpusCatalog.IsCorpusAvailable(Path.Combine(hw5Root, "data", "processed")))
+    {
+        Console.Error.WriteLine("Processed corpus not found. Run: make prepare-corpus");
+        Environment.Exit(1);
+    }
+
+    var corpusPath = ProcessedCorpusCatalog.IsCorpusAvailable(processedRoot)
+        ? processedRoot
+        : Path.Combine(hw5Root, "data", "processed");
+
+    var termDf = new Dictionary<string, int>(StringComparer.Ordinal);
+    var docCount = 0;
+    foreach (var record in WikipediaJsonlReader.ReadRecords(corpusPath, int.MaxValue, hw5Root))
+    {
+        CountTerms(record.Text, termDf);
+        docCount++;
+    }
+
+    WriteQueryArtifacts(queriesTxtPath, queriesJsonPath, termDf, docCount, stopWords);
+    Console.WriteLine($"Queries from {docCount} documents -> {queriesJsonPath}");
+}
+
+static void WriteQueryArtifacts(
+    string queriesTxtPath,
+    string queriesJsonPath,
+    Dictionary<string, int> termDf,
+    int documentCount,
+    HashSet<string>? stopWords)
+{
+    var suite = WikiBenchQuerySelector.BuildSuite(termDf, documentCount, stopWords);
+    if (suite.And.Count == 0)
+    {
+        return;
+    }
+
+    Directory.CreateDirectory(Path.GetDirectoryName(queriesTxtPath)!);
+    BenchQuerySuite.SaveJson(queriesJsonPath, suite, documentCount);
+    WriteHumanQueriesFile(queriesTxtPath, suite);
+}
+
+static void WriteHumanQueriesFile(string path, BenchQuerySuite suite)
+{
+    var lines = new List<string>
+    {
+        "# HW5 wiki bench queries — same (termA, termB) per pair for AND/OR/ADJ/NEAR",
+        "# tiers: high / mid / low DF; OperatorBenchmarks cycles all lines per operator",
+        "# --- AND ---",
+    };
+    lines.AddRange(suite.And.Select(static q => $"AND\t{q}"));
+    lines.Add("# --- OR ---");
+    lines.AddRange(suite.Or.Select(static q => $"OR\t{q}"));
+    lines.Add("# --- NOT ---");
+    lines.AddRange(suite.Not.Select(static q => $"NOT\t{q}"));
+    lines.Add("# --- ADJ ---");
+    lines.AddRange(suite.Adj.Select(static q => $"ADJ\t{q}"));
+    lines.Add("# --- NEAR ---");
+    lines.AddRange(suite.Near.Select(static q => $"NEAR\t{q}"));
+    lines.Add("# --- composite ---");
+    lines.AddRange(suite.Composite);
+    File.WriteAllLines(path, lines, Encoding.UTF8);
+}
 
 static void CountTerms(string text, Dictionary<string, int> termDf)
 {
@@ -164,39 +285,7 @@ static void CountTerms(string text, Dictionary<string, int> termDf)
     }
 }
 
-static void RegenerateQueriesFromJsonl(string jsonlPath, string queriesPath, HashSet<string>? stopWords)
-{
-    if (!File.Exists(jsonlPath))
-    {
-        Console.Error.WriteLine($"Missing {jsonlPath}");
-        Environment.Exit(1);
-    }
-
-    var termDf = new Dictionary<string, int>(StringComparer.Ordinal);
-    var docCount = 0;
-    foreach (var record in WikipediaJsonlReader.ReadRecords(jsonlPath))
-    {
-        CountTerms(record.Text, termDf);
-        docCount++;
-    }
-
-    Directory.CreateDirectory(Path.GetDirectoryName(queriesPath)!);
-    WriteQueries(queriesPath, termDf, docCount, stopWords);
-    Console.WriteLine($"Queries -> {queriesPath}");
-}
-
-static void WriteQueries(string path, Dictionary<string, int> termDf, int documentCount, HashSet<string>? stopWords)
-{
-    var lines = WikiBenchQuerySelector.BuildQueries(termDf, documentCount, stopWords);
-    if (lines.Count == 0)
-    {
-        return;
-    }
-
-    File.WriteAllLines(path, lines, Encoding.UTF8);
-}
-
-static void WriteManifest(string path, string rawPath, string sha256, int docCount)
+static void WriteDatasetManifest(string path, string rawPath, string sha256, int docCount)
 {
     var manifest = new
     {

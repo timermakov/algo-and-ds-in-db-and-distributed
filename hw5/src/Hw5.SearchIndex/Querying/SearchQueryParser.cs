@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Hw5.SearchIndex.Querying.Ast;
 using Sprache;
 
@@ -23,21 +24,24 @@ public static class SearchQueryParser
     private static Parser<int> OptionalDistance(int fallback) =>
         Distance.Optional().Select(value => value.IsDefined ? value.Get() : fallback).Token();
 
+    private static Parser<string> Keyword(string text) =>
+        Parse.Regex($@"(?i)\b{Regex.Escape(text)}\b").Text().Token();
+
     private static readonly Parser<Func<QueryNode, QueryNode, QueryNode>> AdjacentOperator =
-        Parse.IgnoreCase("ADJ").Text().Token()
+        Keyword("ADJ")
             .Then(_ => OptionalDistance(1))
             .Select(distance => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new AdjacentNode(left, right, distance)));
 
     private static readonly Parser<Func<QueryNode, QueryNode, QueryNode>> NearOperator =
-        Parse.IgnoreCase("NEAR").Text().Token()
+        Keyword("NEAR")
             .Then(_ => OptionalDistance(3))
             .Select(distance => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new NearNode(left, right, distance)));
 
     private static readonly Parser<Func<QueryNode, QueryNode, QueryNode>> AndOperator =
-        Parse.IgnoreCase("AND").Text().Token().Select(_ => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new AndNode(left, right)));
+        Keyword("AND").Select(_ => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new AndNode(left, right)));
 
     private static readonly Parser<Func<QueryNode, QueryNode, QueryNode>> OrOperator =
-        Parse.IgnoreCase("OR").Text().Token().Select(_ => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new OrNode(left, right)));
+        Keyword("OR").Select(_ => (Func<QueryNode, QueryNode, QueryNode>)((left, right) => new OrNode(left, right)));
 
     public static QueryNode ParseQuery(string query)
     {
@@ -66,7 +70,7 @@ public static class SearchQueryParser
          select expr).XOr(TermNodeParser);
 
     private static Parser<QueryNode> Unary =>
-        (from not in Parse.IgnoreCase("NOT").Text().Token()
+        (from _ in Keyword("NOT")
          from operand in Parse.Ref(() => Unary)
          select (QueryNode)new NotNode(operand)).XOr(Primary);
 
@@ -74,8 +78,8 @@ public static class SearchQueryParser
         Parse.ChainOperator(AdjacentOperator.Or(NearOperator), Unary, static (op, left, right) => op(left, right));
 
     private static Parser<QueryNode> ParseAndExpression =>
-        Parse.ChainOperator(AndOperator, ParsePositionalExpression, static (op, left, right) => op(left, right));
+        Parse.XChainOperator(AndOperator, ParsePositionalExpression, static (op, left, right) => op(left, right));
 
     private static Parser<QueryNode> ParseOrExpression =>
-        Parse.ChainOperator(OrOperator, ParseAndExpression, static (op, left, right) => op(left, right));
+        Parse.XChainOperator(OrOperator, ParseAndExpression, static (op, left, right) => op(left, right));
 }

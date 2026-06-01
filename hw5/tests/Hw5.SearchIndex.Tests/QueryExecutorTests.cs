@@ -9,6 +9,17 @@ public sealed class QueryExecutorTests
     private readonly QueryExecutor _executor = new();
 
     [Fact]
+    public void ParsesAndWhenSecondTermContainsOrSubstring()
+    {
+        var index = BuildIndex(
+            new SearchDocument(1, "device network"),
+            new SearchDocument(2, "tea only"));
+
+        var result = _executor.Execute(index, "device AND network");
+        Assert.Equal([1], result.Matches.SortedDocumentIds());
+    }
+
+    [Fact]
     public void SupportsAndOrNotPrecedence()
     {
         var index = BuildIndex(
